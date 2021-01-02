@@ -148,7 +148,7 @@ router.post('/medecin_login', async (req,res) =>{
 
     // if (await bcrypt.compare(password, hashedPassword)) {
 
-      const sqlId = "SELECT id FROM admin WHERE id=$1"
+      const sqlId = "SELECT id FROM medecins WHERE id=$1"
       const result2 = await client.query({
         text: sqlId,
         values: [id]

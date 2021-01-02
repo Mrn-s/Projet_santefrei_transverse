@@ -7,7 +7,7 @@
                 <p class ="taille_moyenne" id ="sous_text_un_un">Pour tous, partout, à tout moment.</p>
                 <article id = "emplacement_bouton_un_un" class="button-container-2">
                   <p  class="mas taille_faible">Je m'inscris</p>
-                <router-link  id="bouton_un_un" class="taille_faible" to='/register'> Inscrivez-vous</router-link>
+                <router-link id="bouton_un_un" class="taille_faible" to='/register'> Inscrivez-vous</router-link>
               </article>
             </article>
 

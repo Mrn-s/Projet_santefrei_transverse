@@ -31,12 +31,12 @@
     },
     methods: {
       login () {
-        // alert("lancement de login dans login.vue")
         var email = document.getElementById("email").value
         if (email.match(/[a-z0-9_\-\.]+@[a-z0-9_\-\.]+\.[a-z]+/i) ) {
-          alert(this.editLogin.email)
-          alert(this.editLogin.password)
           this.$emit('login', this.editLogin)
+
+        } else if (email.match(/[a-z0-9_\-\.]+@(santefrei-medecins){1}+\.[a-z]+/i)) {
+          this.$emit('login_medecin', this.editLogin)
         }
     }
   }

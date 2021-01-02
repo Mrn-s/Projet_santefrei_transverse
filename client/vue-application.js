@@ -89,15 +89,27 @@ var app = new Vue({
   methods: {
 
     async login (user) {
-      console.log(this.user.id)
       await axios.post('/api/login/','email=' + user.email + '&password=' + user.password)
 
       const res = await axios.get('/api/me_patient')
-      this.user.id = res.data.user_patient
-      this.user.nom = res.data.nom
-      this.user.email = res.data.email
-      this.user.prenom = res.data.prenom
-      this.user.telephone = res.data.telephone
+      this.user_patient.id = res.data.id
+      this.user_patient.nom = res.data.nom
+      this.user_patient.email = res.data.email
+      this.user_patient.prenom = res.data.prenom
+      this.user_patient.telephone = res.data.telephone
+
+      router.push('/')
+    },
+    async medecinLogin (medecin) {
+      await axios.post('/api/medecin_login/','id=' + medecin.email + '&password=' + medecin.password)
+
+      const res = await axios.get('/api/me_medecin')
+      this.user_medecin.id = res.data.id
+      this.user_medecin.nom = res.data.nom
+      this.user_medecin.email = res.data.email
+      this.user_medecin.prenom = res.data.prenom
+      this.user_medecin.specialite = res.data.specialite
+      this.user_medecin.patients = res.data.patients
 
       router.push('/')
     },
@@ -105,7 +117,7 @@ var app = new Vue({
     async register_patient (user_patient) {
       try {
         await axios.post('/api/register_patient/','nom=' + user_patient.nom + '&email=' + user_patient.email + '&password=' + user_patient.password +  '&prenom=' + user_patient.prenom + '&telephone=' + user_patient.telephone)
-        router.push('/connexion')
+        router.push('/login')
       } catch (e) {
         asAlertMsg({
           type: "warning",
