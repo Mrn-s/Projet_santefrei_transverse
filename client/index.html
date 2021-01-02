@@ -1,0 +1,137 @@
+<!doctype>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>SANT'EFREI</title>
+        <!-- Load Vue followed by Vue Router -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/http-vue-loader/src/httpVueLoader.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue-router/dist/vue-router.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    </head>
+    <body>
+        <div id="app">
+          <header>
+            <section id="headeur_gauche">
+              <p class="taille_grande"> Sant'EFREI</p>
+            </section>
+            <section id="headeur_droite">
+              <article class="onglet">
+                <p><router-link class="lien" to='/'> Accueil </router-link></p>
+              </article>
+              <article class="onglet">
+                <p><router-link class ="lien" to='/questionnaire'> Questionnaires</router-link> </p>
+              </article>
+              <article class="onglet">
+                <p> <router-link class="lien" to='/medecins'> Nos medecins </router-link></p>
+              </article>
+              <article class="onglet">
+                <p> <router-link class="lien" to='/actualite'> Actualité Sant'EFREI </router-link></p>
+              </article>
+              <article class="onglet">
+                <p> <router-link class="lien" to='/register'> S'inscrire </router-link></p>
+              </article>
+              <article class="onglet">
+                <p> <router-link class="lien" to='/login'> Se connecter </router-link></p>
+              </article>
+
+              <!-- <article class="onglet">
+              <h3 v-if="user.id" style="color: green">Connecté</h3>
+              </article> -->
+            </section>
+          </header>
+
+          <main>
+            <router-view
+              :medecins="medecins"
+              :maladies="maladies"
+              @register="register"
+              @register_medecin="register_medecin"
+              @login="login"
+            ></router-view>
+          </main>
+
+        </div>
+        <footer>
+            <section class="taille_faible">AVERTISSEMENT : Le système SANT'EFREI que vous êtes sur le point d'utiliser est destiné à vous éclairer sur les causes possibles de vos symptômes et à vous aider dans votre orientation médicale. Les résultats et conseils qu'il vous fournira ne peuvent en aucun cas remplacer une consultation médicale et ne constituent pas un diagnostic.</section>
+        </footer>
+        <script src="/vue-application.js"></script>
+    </body>
+</html>
+<style scoped>
+
+  .taille_grande
+  {
+    font-weight: bold;
+    font-size: 2.9em;
+  }
+
+  #headeur_gauche{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex:1;
+    border-left: 3px black solid;
+    border-top: 3px black solid;
+    border-right: 3px black solid;
+    border-bottom: 2px black solid;
+    background-color: #FBFBF3;
+  }
+  #headeur_droite{
+    display: flex;
+    justify-content: flex-end;
+
+    /* align-items: center; */
+    flex:2.15;
+    background-color: #FBFBF3;
+    border-top: 3px black solid;
+    border-right: 3px black solid;
+    border-bottom: 2px black solid;
+  }
+  .onglet{
+    margin-right:2%;
+    color: black;
+    font-size: 1.5em;
+  }
+  header{
+    /* position: fixed; */
+    /* margin-top: -2.5%; */
+    display: flex;
+    color:#09371F;
+    z-index: 3;
+    width: 100%;
+    height: 9.5%;
+  }
+  body{
+    margin: 0;
+    /* font-family: "Times News Roman"; */
+    background-color: #FBFBF3;
+  }
+  .lien {
+    transition: 0.3s ease;
+    background-color: #FBFBF3;
+    color: #09371F;
+    text-decoration: none;
+    border-top: 4px solid #FBFBF3;
+    border-bottom: 4px solid #FBFBF3;
+    /* border: 4px solid #FBFBF3; */
+    padding: 20px 0;
+    /* margin: 0 20px; */
+  }
+  .lien:hover {
+    border-top: 4px solid #09371F;
+    border-bottom: 4px solid #09371F;
+    padding: 6px 0;
+  }
+  footer {
+    z-index: 5;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 10px 0;
+    color: #F2EDDB;
+    background-color: #09371F;
+    text-align: center;
+  }
+
+</style>
