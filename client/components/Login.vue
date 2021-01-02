@@ -1,28 +1,14 @@
 <template>
   <div>
         <div id="container">
-            <!-- zone de connexion -->
-
-            <!-- <form class="form-container" @submit.prevent="login">
-                <h1>Connexion</h1>
-
-                <label><b>Nom d'utilisateur</b></label>
-                <input type="text" placeholder="Entrer le nom d'utilisateur" name="username" required>
-
-                <label><b>Mot de passe</b></label>
-                <input type="password" placeholder="Entrer le mot de passe" name="password" required>
-
-                <input type="submit" id='submit' value='Je me connecte' >
-
-            </form> -->
-            <form class="form-container" @submit.prevent="Creer()">
+            <form class="form-container" @submit.prevent="login">
                 <h1>Connexion</h1>
 
                 <label><b>Email</b></label>
-                <input type="text" v-model="email" placeholder="Entrer votre email" name="username" required>
+                <input type="text" id="email" v-model="editLogin.email" placeholder="Entrer votre email" name="username" required>
 
                 <label><b>Mot de passe</b></label>
-                <input type="password" v-model="password" placeholder="Entrer votre mot de passe" name="password" required>
+                <input type="password" v-model="editLogin.password" placeholder="Entrer votre mot de passe" name="password" required>
 
                 <button id="bouton_inscription" type="submit">Je me connecte</button>
 
@@ -37,27 +23,27 @@
     },
     data () {
       return {
-        email: '',
-        password: ''
+        editLogin:{
+          email:'',
+          password:''
+        }
       }
     },
     methods: {
-      async login() {
-        this.$emit('login', {
-          email: this.email,
-          password: this.password
-        })
-      }
+      login () {
+        // alert("lancement de login dans login.vue")
+        var email = document.getElementById("email").value
+        if (email.match(/[a-z0-9_\-\.]+@[a-z0-9_\-\.]+\.[a-z]+/i) ) {
+          alert(this.editLogin.email)
+          alert(this.editLogin.password)
+          this.$emit('login', this.editLogin)
+        }
     }
   }
+}
 </script>
 
 <style scoped>
-  /* div{
-      background: #F2EDDB; */
-      /* text-align: center; */
-      /* font-family: Verdana;
-  } */
   #bouton_inscription{
     border:none;
     text-decoration: none;

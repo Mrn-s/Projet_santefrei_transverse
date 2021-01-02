@@ -91,40 +91,118 @@ router.post('/register_medecin',async (req,res) => {
     })
 // Exercice 3 : Connexion
 router.post('/login', async (req, res) => {
+
   const email = req.body.email
   const password = req.body.password
+  const hash = await bcrypt.hash(password, 10)
+  // console.log(email);
+  // alert(email)
 
-  const doublon = await client.query({
-    text: 'SELECT * FROM users WHERE email=$1',
+  const sql = "SELECT password FROM users WHERE email=$1"
+  const result = await client.query({
+    text: sql,
     values: [email]
   })
 
-  if (doublon.rows[0]) {
-    const user = doublon.rows[0]
-    if (await bcrypt.compare(password, user.password)) {
-      // connecter l'utilisateur
-      req.session.userId = user.id
-      res.json({
-        id: user.id,
-        email: user.email
+  if (result.rowCount == 1) {
+    const hashedPassword = result.rows[0].password
+
+    if (await bcrypt.compare(password, hashedPassword)) {
+
+      const sqlId = "SELECT id, nom, prenom, email, telephone FROM users WHERE email=$1"
+      const result2 = await client.query({
+        text: sqlId,
+        values: [email]
       })
-      } else {
-      res.status(401).json({
-        message: 'mdp incorrect'
-      })
-      return
-      }
+
+      req.session.userId = result2.rows[0].id
+      req.session.userName = result2.rows[0].nom
+      req.session.userEmail = result2.rows[0].email
+      req.session.userFirstName = result2.rows[0].prenom
+      req.session.userTelephone = result2.rows[0].telephone
+
+      res.status(200).json({ message: "well logged as user" })
+
+    } else {
+      res.status(400).json({ message: "wrong password" })
+    }
+  } else {
+    res.status(400).json({ message: "no such user exist" })
   }
-  else {
-    res.status(401).json({
-      message: 'l’utilisateur n’existe pas, erreur '
-    })
-    return
-}
 })
 
+router.post('/medecin_login', async (req,res) =>{
+
+
+  const id = req.body.id
+  const password = req.body.password
+
+  const sql = "SELECT password FROM medecins WHERE id=$1"
+  const result = await client.query({
+    text: sql,
+    values: [id]
+  })
+
+  if (result.rowCount == 1) {
+    const hashedPassword = result.rows[0].password
+
+    // if (await bcrypt.compare(password, hashedPassword)) {
+
+      const sqlId = "SELECT id FROM admin WHERE id=$1"
+      const result2 = await client.query({
+        text: sqlId,
+        values: [id]
+      })
+
+      req.session.medecinId = result2.rows[0].id
+      req.session.userId = null
+      req.session.userName = null
+      req.session.userEmail = null
+      req.session.userFirstName = null
+      req.session.userSpecialite = null
+
+      res.status(200).json({ message: "well logged as medecin" })
+
+  } else {
+    res.status(400).json({ message: "no such user exist" })
+  }
+})
+
+router.post('/logout', async (req, res) => {
+  req.session.userId = null
+  req.session.userName = null
+  req.session.userEmail = null
+  req.session.userFirstName = null
+  req.session.userTelephone = null
+  req.session.rapport = new Rapport()
+
+  const log = {
+    user: req.session.userId,
+    nom: req.session.userName,
+    email: req.session.userEmail,
+    prenom: req.session.userFirstName,
+    telephone: req.session.userTelephone
+  }
+  res.json(log)
+})
 // Exercice 4 : Who am I, testé uniquement sur Postman mais pas la partie vue.js
-router.get('/me', async (req, res) => {
+router.get('/me_medecin', async (req, res) => {
+
+  if (req.session.userId) {
+    const utilisateur = await client.query({
+      text: 'SELECT id, email FROM medecins WHERE id=$1',
+      values: [req.session.userId]
+    })
+    res.json(utilisateur.rows[0])
+  }
+  else
+  {
+    res.status(401).json({ message: 'not connected' })
+    return
+  }
+})
+
+router.get('/me_patient', async (req, res) => {
 
   if (req.session.userId) {
     const utilisateur = await client.query({
@@ -139,5 +217,7 @@ router.get('/me', async (req, res) => {
     return
   }
 })
+
+
 
 module.exports = router
