@@ -11,7 +11,7 @@ const symptomes = [
   },
   {
     id: 3,
-    name: 'Allergies',
+    name: 'démangeaison',
     description:'!déclenchement anormale d\'une réaction de type immunitaire suite au contact avec une substance allergènes',
   },
   {
@@ -21,9 +21,24 @@ const symptomes = [
   },
   {
     id: 5,
+    name: 'Nez qui coule',
+    description:'Infection des fosses nasales, de la bouche et de la gorge'
+  },
+  {
+    id: 6,
+    name: 'mal de gorge',
+    description:'Infection de la gorge'
+  },
+  {
+    id: 7,
+    name: 'Crampes',
+    description:'Contraction musculaire soudaine, involontaire et douloureuse duurant quelues secondes ou plusieurs minutes',
+  },
+  {
+    id: 8,
     name: 'Rhume',
     description:'Infection des fosses nasales, de la bouche et de la gorge'
-    }
+  }
 ]
 
 module.exports = symptomes

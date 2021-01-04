@@ -40,7 +40,8 @@ var app = new Vue({
   el: '#app',
   data: {
     questionnaires:[],
-    les_medecins: [],
+    symptomes:[],
+    liste_medecins: [],
     rapport: {
       createdAt: null,
       id: null,
@@ -70,11 +71,13 @@ var app = new Vue({
     // this.maladies = res_maladies.data
     const liste_des_questionnaires = await axios.get('/api/getQuestionnaire')
     this.questionnaires = liste_des_questionnaires.data
+    const liste_des_symptomes = await axios.get('/api/getLes_symptomes')
+    this.symptomes = liste_des_symptomes.data
     const liste_des_medecins = await axios.get('/api/getLes_medecins')
-    this.les_medecins = liste_des_medecins.data
-    // alert(this.les_medecins)
+    this.liste_medecins = liste_des_medecins.data
 
-    await axios.post('/api/setdatas', 'maladiesTypes=' + this.maladiesTypes)
+
+    // await axios.post('/api/setdatas', 'maladiesTypes=' + this.maladiesTypes)
 
     const res_patient = await axios.get('/api/me_patient')
     this.user_patient.id = res_patient.data.id

@@ -1,45 +1,66 @@
 <template>
-  <div>
-        <section>
-          <article id="titre_questionnaire_page">
-            <p class="titre_page">Connectez-vous pour consulter votre historique</p>
+  <div id="background_page_questionnaire">
+
+      <section class="container">
+        <article class="row" id="titre_questionnaire_page">
+          <p class="taille_5">Connectez-vous pour consulter votre historique</p>
+        </article>
+      </section>
+
+      <section class="container" v-if="questionnaire_form" >
+
+        <section  class="container" id="section_symptomes">
+          <article class="row" id="titre_section_symptome">
+            <p class="taille_3"> Trouvez vos symptomes et prennez rdv avec votre médecin</p>
+          </article>
+          <article v-for="s in symptomes" class="symptome row">
+            <p class="taille_2">{{ s.name }}</p>
           </article>
         </section>
 
-        <section v-if="questionnaire_form" id="section_questionnaires">
-
-
-
-          <article v-for="questionnaireu in questionnaires" class="questionnaire">
-            <p class="titre_questionnaire taille_moyenne" >{{ questionnaireu.titre }}</p>
-            <p> 10 min</p>
-            <button type="button" name="button" @click="changeQuestionnaire(questionnaireu.id), affichage_questionnaire()"> remplir le questionnaire</button>
+        <section id="section_questionnaires" class="container">
+          <article class="row" id="titre_section_questionnaire">
+            <p class="taille_3"> Nos questionnaires généraux</p>
           </article>
+          <article v-for="q in questionnaires" class="questionnaire row">
+            <p class="titre_questionnaire taille_moyenne col-sm-12" >{{ q.titre }}</p>
+            <p class="col-sm-12"> {{ q.duree }} min</p>
+            <div class="col-sm-12">
+              <button type="button" name="button" @click="changeQuestionnaire(q.id), affichage_questionnaire()"> remplir le questionnaire</button>
+
+            </div>
+          </article>
+        </section>
 
       </section>
+      <section class="container" v-else>
+        <button class="row" type="button" name="button" @click="affichage_questionnaire()">retour</button>
 
-      <section v-else>
-        <button type="button" name="button" @click="affichage_questionnaire()">Liste des questionnaires</button>
-
-        <article v-for="q in questionnaires" v-if="q.id == Questionnaire_actuel">
+        <articl class="row"  v-for="q in questionnaires" v-if="q.id == Questionnaire_actuel">
 
           <article class="container" id="le_questionnaire">
-            <p class="titre row">{{ q.titre }}</p>
-            <article class="row" v-for="question in q.questions"><p class="questions_questionnaire">  {{ question }}</p></article>
+            <p class="taille_3 titre_questionnaire row">{{ q.titre }}</p>
+            <article class="taille_1 row" v-for="question in q.questions"><p class="questions_questionnaire">  {{ question }}</p></article>
             <p class="photo_questionnaire row">{{ q.photo }}</p>
-            <p class="description_questionnaire row">{{ q.description }}</p>
+            <p class="taille_1 description_questionnaire row">{{ q.description }}</p>
+            <button v-if="user_medecin.id" type="button" name="button"> Modifier le questionnaire</button>
+            <button v-if="user_medecin.id" type="button" name="button"> Envoyer ce questionnaire au patient</button>
+
           </article>
 
         </article>
-
       </section>
+
   </div>
 </template>
 
 <script>
   module.exports = {
     props: {
-      questionnaires: { type: Array, default: [] }
+      user_medecin: { type: Object},
+      user_patient: { type: Object},
+      questionnaires: { type: Array, default: [] },
+      symptomes : { type : Array, default: [] },
     },
     data () {
       return {
@@ -64,10 +85,6 @@
 
 <style scoped>
 
-  .titre_page{
-    font-size: 3em;
-    color:var(--vert_fonce);
-  }
 
   #le_questionnaire{
     background-color: var(--beige_fonce_o);
@@ -81,28 +98,31 @@
   }
 
   .titre{
-    font-size: 2em;
+    /* font-size: 2em;
     font-weight: bold;
     color: var(--vert);
-    text-decoration: underline var(--vert) 3px;
+    text-decoration: underline var(--vert) 3px; */
   }
   .questions_questionnaire{
-    padding: 20px;
-    border: 2px black solid;
+    /* padding: 20px;
+    border: 2px black solid; */
   }
 
-  div{
-    margin: 0;
+  #background_page_questionnaire{
+    /* margin: 0; */
     font-family: "Times News Roman";
     background-image: url("../images/background_questionnaire.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
-    height: 100%;
+    /* height: 100%; */
+   max-height: 1660px;
+   padding-bottom: 100px;
+    /* overflow-y: scroll; */
   }
-  div{
+  /* div{
     height: 100%;
-  }
+  } */
   /* footer {
     position: fixed;
     bottom: 0;
@@ -112,47 +132,71 @@
     background-color: #09371F;
     text-align: center;
   } */
-  #section_questionnaires{
-    display: flex;
+  #section_symptomes{
+    /* display: flex;
     flex-wrap:wrap;
-    justify-content: center;
-    align-items: center;
+    justify-content: center; */
+    /* align-items: center;
     margin-left: 20%;
     margin-right: 20%;
-    background-color: #FBFBF3;
+    margin-bottom: 5%; */
+    border: 2px solid red;
+    background-color: var(--beige_fonce_o);
+  }
+  #section_questionnaires{
+    /* display: flex; */
+    /* flex-wrap:wrap; */
+    /* justify-content: center;
+    align-items: center;
+    margin-left: 20%;
+    margin-right: 20%; */
+    margin-top: 30px;
+    border: 2px solid red;
+    background-color: var(--beige_fonce_o);
 
     /* border: blue 3px solid; */
   }
 
-  .questionnaire{
-    display: flex;
+  .symptome{
+    /* display: flex;
     border: black 3px solid;
-    flex-direction: column;
+    flex-direction: column; */
     /* margin: 3%; */
-    height:200px;
+    /* height: 50px;
     width: 40%;
     padding: 2% 2% 0 2%;
-    margin: 2%;
-    background-color: #F2EDDB
+    margin: 2%; */
+    border: 2px solid black;
+    /* background-color: var(--beige_fonce_o); */
+
   }
 
-  #titre_questionnaire{
-    display: flex;
-    text-align: center;
-    /* align-items: center; */
-    /* margin-top: -50%; */
-    /* width: 100%; */
+  .questionnaire{
+    /* display: flex;
+    border: black 3px solid;
+    flex-direction: column; */
+    /* margin: 3%; */
+    /* height:200px;
+    width: 40%;
+    padding: 2% 2% 0 2%;
+    margin: 2%; */
+    border: 2px solid black;
+    /* background-color: var(--beige_fonce_o); */
+  }
+
+  .titre_questionnaire{
+    font-weight: bold;
   }
 
   #titre_questionnaire_page{
-    display: flex;
+    /* display: flex;
     justify-content: center;
-    align-content: center;
+    align-content: center; */
     /* margin-top:150px; */
   }
-  #temps_questionnaire{
+  /* #temps_questionnaire{
     display: flex;
-  }
+  } */
 
   /* button{
     width: 40%;

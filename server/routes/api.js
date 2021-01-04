@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt')
 const { Client } = require('pg')
 const questionnaires = require('../data/liste_questionnaires.js')
 const les_medecins = require('../data/medecins.js')
+const les_symptomes = require('../data/symptomes.js')
 
 
 const client = new Client({
@@ -229,8 +230,13 @@ router.get('/getQuestionnaire', (req,res) => {
 })
 
 router.get('/getLes_medecins', (req,res) => {
-  console.log(les_medecins)
+  // console.log(les_medecins)
   res.json(les_medecins)
+})
+
+router.get('/getLes_symptomes', (req,res) => {
+  // console.log(les_medecins)
+  res.json(les_symptomes)
 })
 
 router.put('/user_update_patient', async (req, res) => {

@@ -13,6 +13,22 @@
   --text2: #fff;
 }
 
+.taille_1{
+  font-size: 1.2em;
+}
+.taille_2{
+  font-size: 1.4em;
+}
+.taille_3{
+  font-size: 1.8em;
+}
+.taille_4{
+  font-size:2.2em;
+}
+.taille_5{
+  font-size:3em;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -97,7 +113,7 @@ body {
 
   footer {
     z-index: 5;
-    position: relative;
+    position: fixed;
     bottom: 0;
     width: 100%;
     padding: 10px 0;
