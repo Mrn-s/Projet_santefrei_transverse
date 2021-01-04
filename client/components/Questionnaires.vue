@@ -2,57 +2,95 @@
   <div>
         <section>
           <article id="titre_questionnaire_page">
-            <p class="taille_grande ">Connectez-vous pour consulter votre historique</p>
+            <p class="titre_page">Connectez-vous pour consulter votre historique</p>
           </article>
         </section>
 
-        <section id="section_questionnaires">
+        <section v-if="questionnaire_form" id="section_questionnaires">
 
 
 
-          <article class="questionnaire">
-            <p class="titre_questionnaire taille_moyenne" > Consultation : medecine générale</p>
+          <article v-for="questionnaireu in questionnaires" class="questionnaire">
+            <p class="titre_questionnaire taille_moyenne" >{{ questionnaireu.titre }}</p>
             <p> 10 min</p>
-            <button type="button" name="button"> remplir le questionnaire</button>
+            <button type="button" name="button" @click="changeQuestionnaire(questionnaireu.id), affichage_questionnaire()"> remplir le questionnaire</button>
           </article>
-
-
-          <article class="questionnaire">
-            <p class="titre_questionnaire taille_moyenne">Consultation allergologie</p>
-            <p> 10 min</p>
-            <button type="button" name="button"> remplir le questionnaire</button>
-          </article>
-
-          <article class="questionnaire">
-            <p class="titre_questionnaire taille_moyenne">Consultation allergologie</p>
-            <p> 10 min</p>
-            <button type="button" name="button"> remplir le questionnaire</button>
-          </article>
-
-
-          <article class="questionnaire">
-            <p class="titre_questionnaire taille_faible">Consultation allergologie</p>
-            <p> 10 min</p>
-            <button type="button" name="button"> remplir le questionnaire</button>
-          </article>
-
 
       </section>
 
-    <!-- <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br> -->
+      <section v-else>
+        <button type="button" name="button" @click="affichage_questionnaire()">Liste des questionnaires</button>
 
-    <!-- <footer>
-        <section class="taille_faible">AVERTISSEMENT : Le système SANT'EFREI que vous êtes sur le point d'utiliser est destiné à vous éclairer sur les causes possibles de vos symptômes et à vous aider dans votre orientation médicale. Les résultats et conseils qu'il vous fournira ne peuvent en aucun cas remplacer une consultation médicale et ne constituent pas un diagnostic.</section>
-    </footer> -->
+        <article v-for="q in questionnaires" v-if="q.id == Questionnaire_actuel">
+
+          <article class="container" id="le_questionnaire">
+            <p class="titre row">{{ q.titre }}</p>
+            <article class="row" v-for="question in q.questions"><p class="questions_questionnaire">  {{ question }}</p></article>
+            <p class="photo_questionnaire row">{{ q.photo }}</p>
+            <p class="description_questionnaire row">{{ q.description }}</p>
+          </article>
+
+        </article>
+
+      </section>
   </div>
 </template>
 
 <script>
-module.exports = {
-}
+  module.exports = {
+    props: {
+      questionnaires: { type: Array, default: [] }
+    },
+    data () {
+      return {
+        questionnaire_form: true,
+        Questionnaire_actuel: ""
+      }
+    },
+    methods:{
+      affichage_questionnaire() {
+        if (this.questionnaire_form == true) {
+          this.questionnaire_form = false
+        } else {
+          this.questionnaire_form = true
+        }
+      },
+      changeQuestionnaire(Questionnaire_choisis) {
+        this.Questionnaire_actuel = Questionnaire_choisis
+      }
+    }
+  }
 </script>
 
 <style scoped>
+
+  .titre_page{
+    font-size: 3em;
+    color:var(--vert_fonce);
+  }
+
+  #le_questionnaire{
+    background-color: var(--beige_fonce_o);
+    padding: 60px;
+  }
+  .description_questionnaire{
+    font-size: 1.3em;
+    background-color: var(--vert);
+    color:var(--beige_fonce);
+    padding: 20px;
+  }
+
+  .titre{
+    font-size: 2em;
+    font-weight: bold;
+    color: var(--vert);
+    text-decoration: underline var(--vert) 3px;
+  }
+  .questions_questionnaire{
+    padding: 20px;
+    border: 2px black solid;
+  }
+
   div{
     margin: 0;
     font-family: "Times News Roman";
@@ -116,7 +154,7 @@ module.exports = {
     display: flex;
   }
 
-  button{
+  /* button{
     width: 40%;
     text-decoration: none;
     padding: 10px;
@@ -124,7 +162,7 @@ module.exports = {
     background-color: #09371F;
     cursor: pointer;
     color: #fff;
-  }
+  } */
   button:hover{
     color: #09371F;
     background-color: #E8C542;

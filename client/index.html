@@ -1,10 +1,11 @@
 <!doctype>
 
-<!-- BLALBALBLALBLALDLZLDKAPOLSKMPOQKDOLAKJDAKOLJADKLJO  ZKJLAFZJ -->
 <html lang="fr">
     <head>
         <meta charset="utf-8">
         <title>SANT'EFREI</title>
+
+        <link rel="stylesheet" href="/css/style.css">
         <!-- Load Vue followed by Vue Router -->
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/http-vue-loader/src/httpVueLoader.js"></script>
@@ -12,52 +13,31 @@
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
         <!-- BootStrap -->
-        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     </head>
     <body>
         <div id="app">
-          <header>
-            <section id="headeur_gauche">
-              <p class="taille_grande"> Sant'EFREI</p>
-            </section>
-            <section id="headeur_droite">
-              <article class="onglet">
-                <p><router-link class="lien" to='/'> Accueil </router-link></p>
-              </article>
-              <article class="onglet">
-                <p><router-link class="lien" to='/questionnaire'> Questionnaires</router-link> </p>
-              </article>
-              <article class="onglet">
-                <p> <router-link class="lien" to='/medecins'> Nos medecins </router-link></p>
-              </article>
-              <article class="onglet">
-                <p> <router-link class="lien" to='/actualite'> Actualité </router-link></p>
-              </article>
-              <article class="onglet">
-                <p> <router-link v-if="(user_patient.id)"  class="lien" to='/mes_rapports'> Mes rapports </router-link></p>
-              </article>
-              <article class="onglet">
-                <p> <router-link v-if="(user_medecin.id)" class="lien" to='/mes_patients'> Mes patients </router-link></p>
-              </article>
-              <article class="onglet">
-                <p> <router-link v-if="(user_patient.id) || (user_medecin.id)" class="lien" to='/profil'> Mon profil </router-link></p>
-              </article>
-              <article class="onglet">
-                <p> <router-link v-if="!(user_patient.id) && !(user_medecin.id)" class="lien" to='/register'> S'inscrire </router-link></p>
-              </article>
-              <article class="onglet">
-                <p> <router-link v-if="!(user_patient.id) && !(user_medecin.id)" class="lien" to='/login'>Se connecter </router-link></p>
-              </article>
-              <article class="onglet">
-                <p v-if="(user_patient.id) || (user_medecin.id)"> Connecté</p>
-                <p v-else style="color:red" > deconnecté </p>
-              </article>
 
-            </section>
-          </header>
+          <div class="topnav">
+              <router-link class="btn-13 custom-btn nav-link" to='/'> Accueil </router-link>
+              <router-link class="btn-13 custom-btn nav-link" to='/questionnaire'> Questionnaires</router-link>
+              <router-link class="btn-13 custom-btn nav-link" to='/medecins'> Nos medecins </router-link>
+              <router-link class="btn-13 custom-btn nav-link" to='/actualite'> Actualité </router-link>
+
+
+
+              <div class="topnav-right">
+                <router-link v-if="(user_patient.id)" class="btn-13 custom-btn nav-link" to='/mes_rapports'> Mes rapports </router-link>
+                <router-link v-if="(user_medecin.id)" class="btn-13 custom-btn nav-link" to='/mes_patients'> Mes patients </router-link>
+                <router-link class="btn-13 custom-btn nav-link" v-if="(user_patient.id) || (user_medecin.id)"  to='/profil'> Mon profil </router-link>
+                <router-link class="btn-13 custom-btn nav-link" v-if="!(user_patient.id) && !(user_medecin.id)"  to='/register'> S'inscrire </router-link>
+                <router-link class="nav-link btn-13 custom-btn " v-if="(user_patient.id) || (user_medecin.id)" to='/deconnexion'>Déconnexion</router-link>
+                <router-link class="btn-13 custom-btn nav-link" v-if="!(user_patient.id) && !(user_medecin.id)"  to='/login'>Se connecter </router-link>
+              </div>
+          </div>
 
           <main>
             <!-- dans la vue // dans vue-application -->
@@ -65,10 +45,16 @@
               :user_patient="user_patient"
               :user_medecin="user_medecin"
               :login="login"
+              :user="user"
+              :medecinLogin="medecinLogin"
+              :questionnaires="questionnaires"
+              :les_medecins="liste_medecins"
               @register_patient="register_patient"
               @register_medecin="register_medecin"
               @login="login"
-              @login_medecin="medecinLogin"
+              @medecinLogin="medecinLogin"
+              @logout="logout"
+              @update-Profile-patient="updateProfile_patient"
             ></router-view>
           </main>
 
@@ -83,93 +69,3 @@
         <script src="/vue-application.js"></script>
     </body>
 </html>
-<style scoped>
-
-:root {
-  --jaune: #E8C542;
-  --beige: #FBFBF3;
-  --vert: #09371F;
-
-  /* --rouge_o: rgba(137,27,23,0.7);
-  --beige_o: rgba(245,240,225,0.85);
-  --bleu_o: rgba(167,190,174,0.86); */
-
-  --text: #000;
-  --text2: #fff;
-}
-
-  .taille_grande
-  {
-    font-weight: bold;
-    font-size: 2.4em;
-  }
-
-  #headeur_gauche{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex:1;
-    border-left: 3px black solid;
-    border-top: 3px black solid;
-    border-right: 3px black solid;
-    border-bottom: 2px black solid;
-    background-color: var(--beige);
-  }
-  #headeur_droite{
-    display: flex;
-    justify-content: flex-end;
-
-    /* align-items: center; */
-    flex:3.15;
-    background-color: var(--beige);
-    border-top: 3px black solid;
-    border-right: 3px black solid;
-    border-bottom: 2px black solid;
-  }
-  .onglet{
-    margin-right:2%;
-    color: black;
-    font-size: 1.3em;
-  }
-  header{
-    /* position: fixed; */
-    /* margin-top: -2.5%; */
-    display: flex;
-    color:var(--vert);
-    z-index: 3;
-    width: 100%;
-    height: 9.5%;
-  }
-  body{
-    margin: 0;
-    /* font-family: "Times News Roman"; */
-    background-color: var(--beige);
-  }
-  .lien {
-    transition: 0.3s ease;
-    background-color: var(--beige);
-    color: var(--vert);
-    text-decoration: none;
-    border-top: 4px solid var(--beige);
-    border-bottom: 4px solid var(--beige);
-    /* border: 4px solid #FBFBF3; */
-    padding: 12px 0;
-    /* margin: 0 20px; */
-  }
-  .lien:hover {
-    border-top: 4px solid var(--vert);
-    border-bottom: 4px solid var(--vert);
-    padding: 4px 0;
-  }
-  footer {
-    z-index: 5;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    padding: 10px 0;
-    color: var(--beige);
-    background-color: var(--vert);
-    text-align: center;
-  }
-
-</style>

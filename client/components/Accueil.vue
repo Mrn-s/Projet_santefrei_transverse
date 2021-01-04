@@ -1,6 +1,6 @@
 <template>
-  <div>
-          <section class="ligne" id = "ligne_1">
+  <div class="container-fluid">
+          <section class="ligne row" id = "ligne_1">
 
             <article id= "un_un">
                 <p class="taille_grande" id ="text_un_un">SANT'EFREI : votre diagnostic personnalisé en quelques clics.</p>
@@ -17,7 +17,7 @@
 
           </section>
 
-          <section class ="ligne" id="ligne_2">
+          <section class ="ligne row" id="ligne_2">
 
             <article id="deux_un">
               <p id="text_deux" class="taille_grande"> Comment ça marche ? </p>
@@ -27,7 +27,7 @@
             </article>
           </section>
 
-          <section class = "ligne" id ="ligne_3">
+          <section class = "ligne row" id ="ligne_3">
             <article id="trois_un">
               <!-- <img id ="img_trois_un" src="background_deux.png" alt="Image telephone en main"> -->
             </article>
@@ -46,13 +46,13 @@
               </p>
             </article>
           </section>
-          <section class="ligne" id ="ligne_4">
+          <section class="ligne row" id ="ligne_4">
             <article id="quatre_un" class="taille_grande">
             <p> Un véritable gain de temps, pour le patient et le médecin.</p>
             </article>
           </section>
 
-          <section class="ligne" id ="ligne_5">
+          <section class="ligne row" id ="ligne_5">
             <article id="cinq_un">
               <p class="taille_grande">Témoignages </p>
               <p id ="sous_text_cinq" class="taille_faible">
@@ -83,6 +83,9 @@
 </script>
 
 <style scoped>
+ .container-fluid{
+   background-color: var(--beige);
+ }
 
   .taille_grande
   {
@@ -116,10 +119,10 @@
 
   #un_un{
     position: absolute;
-    top: 30%;
-    width: 37%;
-    padding: 1%;
-    background-color: #F2EDDB;
+    top: 200px;
+    width: 35%;
+    padding: 30px;
+    background-color: var(--beige_fonce_o);
     z-index: 2;
   }
   #un_deux{
@@ -141,92 +144,6 @@
     align-items: center;
   }
 
-
-
-  .mas {
-    position: absolute;
-    background-color: #E8C542;
-    width:28%;
-    padding-top:2%;
-    padding-bottom: 2%;
-    text-align: center;
-    font-weight: bold;
-
-
-  }
-
-  @-webkit-keyframes ani {
-    from {
-      -webkit-mask-position: 0 0;
-    }
-    to {
-      -webkit-mask-position: 100% 0;
-    }
-  }
-
-  @keyframes ani2 {
-    from {
-      -webkit-mask-position: 100% 0;
-    }
-    to {
-      -webkit-mask-position: 0 0;
-    }
-  }
-
-  .button-container-3 {
-
-    transition: 550s;
-
-  }
-  .button-container-3 router-link {
-
-    -webkit-mask: url("https://raw.githubusercontent.com/pizza3/asset/master/natureSmaller.png");
-    -webkit-mask-size: 7100% 100%;
-    border: none;
-
-    background: #09371F;
-    color: #fff;
-    cursor: pointer;
-    font-family: "Times New Roman";
-
-    animation: ani2 0.7s steps(70) forwards;
-  }
-
-  .button-container-3 router-link:hover {
-    animation: ani 0.7s steps(70) forwards;
-  }
-
-
-  .button-container-2 {
-
-    transition: 0.5s;
-
-  }
-  .button-container-2 router-link {
-    /* width: 101%; */
-    /* height: 100%; */
-
-    background: #09371F;
-    -webkit-mask: url("https://raw.githubusercontent.com/robin-dela/css-mask-animation/master/img/urban-sprite.png");
-    /* mask: url("https://raw.githubusercontent.com/robin-dela/css-mask-animation/master/img/urban-sprite.png"); */
-    -webkit-mask-size: 3000% 100%;
-    mask-size: 3000% 100%;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-    /* -webkit-animation: ani2 0.7s steps(29) forwards; */
-    animation: ani2 0.7s steps(29) forwards;
-  }
-  .button-container-2 router-link:hover {
-    /* -webkit-animation: ani 0.7s steps(29) forwards; */
-    animation: ani 0.7s steps(29) forwards;
-  }
-
-
-
-  #ligne_1{
-    margin-top: 2.5%;
-  }
 
   #ligne_2{
     display: flex;
@@ -293,10 +210,16 @@
     text-align: center;
   }
 
+  .container-fluid{
+    padding: 0 !important;
+    /* margin: 0 !important; */
+    overflow: hidden;
+  }
 
   #ligne_5{
+    margin: 0 !important;
     width:100%;
-    height: 76%;
+    height: 733px;
     display: flex;
     align-items: center;
     justify-content: center;

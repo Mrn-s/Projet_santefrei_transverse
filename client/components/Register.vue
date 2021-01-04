@@ -123,12 +123,17 @@ module.exports = {
       var email = document.getElementById("email_register").value
       if (email.match(/[a-z0-9_\-\.]+@[a-z0-9_\-\.]+\.[a-z]+/i)) {
         this.$emit('register_patient', this.editRegister_patient)
+      } else {
+        alert("Entrez une vraie adresse mail")
       }
     },
     async Creer_medecin(){
       var email = document.getElementById("email_register_medecin").value
-      if (email.match(/[a-z0-9_\-\.]+@[a-z0-9_\-\.]+\.[a-z]+/i)) {
+      // if (email.match(/[a-z0-9_\-\.]+@+(santefrei-medecin){1}+\.[a-z]+/i)) {
+      if (email.match(/(medecin-)+[a-z]+(-)+[a-z]+(-santefrei)/gm)) { //medecin-jacques-tellier-santefrei
         this.$emit('register_medecin', this.editRegister_medecin)
+      } else{
+        alert("Vous n'êtes pas médecin")
       }
     },
     openForm_register(){
@@ -144,6 +149,10 @@ module.exports = {
 </script>
 
 <style>
+
+.container{
+  height: 100%;
+}
   #popupForm_register_medecin{
     display: none;
   }

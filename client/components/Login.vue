@@ -1,5 +1,7 @@
 <template>
-  <div>
+  <div class="all">
+
+
         <div id="container">
             <form class="form-container" @submit.prevent="login">
                 <h1>Connexion</h1>
@@ -14,7 +16,7 @@
 
             </form>
         </div>
-  </div>
+      </div>
 </template>
 
 <script>
@@ -32,11 +34,12 @@
     methods: {
       login () {
         var email = document.getElementById("email").value
-        if (email.match(/[a-z0-9_\-\.]+@[a-z0-9_\-\.]+\.[a-z]+/i) ) {
+        if (email.match(/(medecin-)+[a-z]+(-)+[a-z]+(-santefrei)/gm)) {// medecin-Prenom--santefrei
+        // if (email.match(/[a-z0-9_\-\.]+@[a-z0-9_\-\.]+\.[a-z]+/i)) {
+          alert("ici")
+          this.$emit('medecinLogin', this.editLogin)
+        } else {
           this.$emit('login', this.editLogin)
-
-        } else if (email.match(/[a-z0-9_\-\.]+@(santefrei-medecins){1}+\.[a-z]+/i)) {
-          this.$emit('login_medecin', this.editLogin)
         }
     }
   }
@@ -44,6 +47,9 @@
 </script>
 
 <style scoped>
+.all{
+  background-color: var(--beige);
+}
   #bouton_inscription{
     border:none;
     text-decoration: none;
@@ -62,16 +68,16 @@
   }
 
   #container{
+    height: 100%;
       width:400px;
-      margin:0 auto;
-      margin-top:10%;
+      margin:0 auto
   }
   /* Bordered form */
   form {
       width:100%;
       padding: 30px;
       border: 1px solid #f1f1f1;
-      background: #F2EDDB;
+      background-color: var(--beige_fonce);
   }
 
   #container h1{
