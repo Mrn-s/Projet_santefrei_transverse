@@ -94,6 +94,7 @@
 
 <script>
 module.exports = {
+
   data () {
     return {
       editRegister_patient:{

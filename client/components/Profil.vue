@@ -1,85 +1,84 @@
 <template>
-<div id="page_profil">
+  <div id="background_page_profil">
 
+    <div class="container colonne_centrale">
 
-  <div class="container" >
-
-    <div class="row">
-      <div id="titre_page_info" class="col-sm-12">
-        <p class="taille_5">Mon profil</p>
+      <div class="row">
+        <div id="titre_page_info" class="col-sm-12">
+          <p class="taille_5">Mon profil</p>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div  id="mes_infos"  class="container-fluid">
+      <div class="row">
+        <div id="mes_infos"  class="container-fluid">
 
           <div class="col-sm-12">
             <div class="row">
-              <p class="taille_3">Mes infos personnelles</p>
-            </div>
+                <p class="taille_3">Mes infos personnelles</p>
+              </div>
             <div class="row">
-              <div class="col-sm-12">
-                <form id="formulaire_modification_profil" @submit.prevent="sendEditProfil">
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="taille_1">nom</p>
+                <div class="col-sm-12">
+                  <form id="formulaire_modification_profil" @submit.prevent="sendEditProfil">
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <p class="taille_1">nom</p>
+                      </div>
+
+                      <div class="col-sm-6">
+                        <input name="nom" :placeholder="user_patient.nom" type="text" v-model="editingProfile.nom">
+                      </div>
                     </div>
 
-                    <div class="col-sm-6">
-                      <input name="nom" :placeholder="user_patient.nom" type="text" v-model="editingProfile.nom">
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <p class="taille_1">prenom</p>
+                      </div>
+                      <div class="col-sm-6">
+                        <input name="prenom" :placeholder="user_patient.prenom" type="text" v-model="editingProfile.prenom">
+                      </div>
                     </div>
-                  </div>
 
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="taille_1">prenom</p>
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <p class="taille_1">email</p>
+                      </div>
+                      <div class="col-sm-6">
+                        <input id="email" name="email" :placeholder="user_patient.email" type="text" v-model="editingProfile.email">
+                      </div>
                     </div>
-                    <div class="col-sm-6">
-                      <input name="prenom" :placeholder="user_patient.prenom" type="text" v-model="editingProfile.prenom">
-                    </div>
-                  </div>
 
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="taille_1">email</p>
-                    </div>
-                    <div class="col-sm-6">
-                      <input name="email" :placeholder="user_patient.email" type="text" v-model="editingProfile.email">
-                    </div>
-                  </div>
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <p class="taille_1">telephone</p>
+                      </div>
+                      <div class="col-sm-6">
+                        <input name="telephone" :placeholder="user_patient.telephone" type="text" v-model="editingProfile.telephone">
 
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="taille_1">telephone</p>
+                      </div>
                     </div>
-                    <div class="col-sm-6">
-                      <input name="telephone" :placeholder="user_patient.telephone" type="text" v-model="editingProfile.telephone">
-
+                    <div class="row">
+                        <button type="submit">Modifier</button>
                     </div>
-                  </div>
-                  <div class="row">
-                      <button type="submit">Modifier</button>
-                  </div>
 
-                </form>
+                  </form>
+                </div>
+
               </div>
 
-            </div>
+          </div>
+        </div>
+
+        <div id="mes-rendez-vous"  class="container-fluid">
+          <div class="col-sm-12">
+
+            <p class="taille_3">ici seront affichés les rendez vous avec les médecins</p>
+          </div>
 
         </div>
       </div>
 
-      <div id="mes-rendez-vous"  class="container-fluid">
-        <div class="col-sm-12">
-
-          <p class="taille_3">ici seront affichés les rendez vous avec les médecins</p>
-        </div>
-
-      </div>
     </div>
 
-
   </div>
-</div>
 </template>
 
 <script>
@@ -128,13 +127,14 @@
 </script>
 
 <style scoped>
-  #page_profil {
-    background-color: var(--beige);
-    height: 100%;
+  #email{
+    width: 300px;
   }
-  #page_profil .container{
+    #background_page_profil {
+      background-color: var(--beige);
+      padding-bottom: 100px;
+      padding-top: 40px;
+      height: 90%;
+    }
 
-    background-color: var(--beige_fonce);
-    border: 1px black solid;
-  }
 </style>

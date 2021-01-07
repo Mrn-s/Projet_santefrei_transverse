@@ -7,6 +7,8 @@ const { Client } = require('pg')
 const questionnaires = require('../data/liste_questionnaires.js')
 const les_medecins = require('../data/medecins.js')
 const les_symptomes = require('../data/symptomes.js')
+const les_actualites = require('../data/actualite.js')
+const les_specialites = require('../data/specialites.js')
 
 
 const client = new Client({
@@ -18,20 +20,190 @@ const client = new Client({
 
 client.connect()
 
-class Rapport {
+class Panier_symptomes {
   constructor () {
     this.createdAt = new Date()
     this.updatedAt = new Date()
     this.nom =''
     this.prenom=''
-    this.maladies = []
+    this.symptomes = []
   }
 }
 
-router.post('/setdatas', (req, res) => {
-  req.session.maladiesTypes = req.body.maladiesTypes.split(',')
-  res.send()
-})
+// router.post('/setdatas', (req, res) => {
+//   req.session.symptomesTypes = req.body.symptomesTypes.split(',')
+//   res.send()
+// })
+//
+// router.get('/panier_symptome', (req, res) => {
+//   res.json(req.session.panier_symptomes)
+// })
+//
+// router.post('/panier_symptome', (req, res) => {
+//   const s_Id = parseInt(req.body.id)
+//   const s_Type = req.body.type
+//
+//   const size = parseInt(req.session.symptomeTypes.length)
+//   for (let i = 0; i != size; i++) {
+//     if (s_Type == req.session.symptomeTypes[i]) {
+//       var symptome = liste_symptomes[i].find(a => a.id === s_Id)
+//     }
+//   }
+//
+//   if (!symptome) {
+//     res.status(501).json({ message: 'symptome non existant' })
+//   } else {
+//     var newSym = {
+//       id: menuId,
+//       type: s_Type
+//     }
+//
+//     const size = parseInt(req.session.symptomeTypes.length)
+//     for (let i = 0; i != size; i++) {
+//       if (menuType == req.session.symptomeTypes[i]) {
+//         if (checkIfNotSymptomeExistInMes_symptomes(newSym.id, newSym.type, req.session.panier_symptomes.symptomes)) {
+//           req.session.panier_symptomes.symptomes.push(newSym)
+//           res.json(newSym)
+//         }
+//       }
+//     }
+//   }
+// })
+//
+// function checkIfNotSymptomeExistInMes_symptomes (id, type, symptomes) {
+//   var bool = true
+//   for (let i = 0; i != symptomes.length; i++) {
+//     if ((s_in_panier_s[i].type == type) && (s_in_panier_s[i].id == id)) {
+//         bool = false
+//     }
+//   }
+//   return bool
+// }
+//
+// router.use((req, res, next) => {
+//   if (typeof req.session.panier_symptomes === 'undefined') {
+//     req.session.panier_symptomes = new Panier_symptomes()
+//   }
+//   next()
+// })
+//
+// function parseSymptome (req, res, next) {
+//   const symptomeId = parseInt(req.params.id)
+//   const symptomeType = req.params.type
+//
+//   // si menuId n'est pas un nombre (NaN = Not A Number), alors on s'arrête
+//   if (isNaN(menuId)) {
+//     res.status(400).json({ message: 'menuId should be a number' })
+//     return
+//   }
+//   // on affecte req.menuId pour l'exploiter dans toutes les routes qui en ont besoin
+//   req.symptomeId = id_s
+//   req.symptomeType = type_s
+//
+//   const size = parseInt(req.session.menusTypes.length)
+//   for (let i = 0; i != size; i++) {
+//     if (req.symptomeType == req.session.menusTypes[i]) {
+//       const symptome = symptomes[i].find(a => a.id === req.symptomeId)
+//       req.symptome = symptome
+//       req.type = type_s
+//
+//     }
+//   }
+//
+//   if (!req.symptome) {
+//     res.status(404).json({ message: 'symptome ' + id_s + ' does not exist' })
+//     return
+//   }
+//
+//   next()
+// }
+//
+// .get(parseSymptome, (req, res) => {
+//   res.json(req.menu)
+// })
+//
+// router.delete('/panier_symptome/:type/:id', (req, res) => {
+//  const menuId = parseInt(req.params.id)
+//  const menuType = req.params.type
+//
+//  var index = null
+//  var menu = null
+//
+//  const size = parseInt(req.session.menusTypes.length)
+//  for (let i = 0; i != size; i++) {
+//     if (menuType == req.session.menusTypes[i]) {
+//       index = indexMenuInPanier (menuId, menuType, req.session.panier.menus)
+//       menu = menuInPanier (menuId, menuType, req.session.panier.menus)
+//     }
+//  }
+//
+//  if (isNaN(menuId)) {
+//     res.status(400).json({ message: 'Requête incorrecte' })
+//  } else if (index === -1) {
+//     res.status(501).json({ message: "L'menu n'est pas dans le panier" })
+//  } else {
+//     const size = parseInt(req.session.menusTypes.length)
+//     for (let i = 0; i != size; i++) {
+//       if (menuType == req.session.menusTypes[i]) {
+//         req.session.panier.menus.splice(index, 1)
+//       }
+//     }
+//
+//     req.session.panier.nb_menus = req.session.panier.nb_menus - menu.quantity
+//     req.session.panier.prix = req.session.panier.prix - (menu.quantity * menu.prix)
+//     res.json(index)
+//   }
+// })
+//
+// function menuInPanier (id, type, menus) {
+//   for (let i = 0; i != menus.length; i++) {
+//     if (menus[i].type == type) {
+//       if (menus[i].id == id) {
+//         return menus[i]
+//       }
+//     }
+//   }
+// }
+//
+// function indexMenuInPanier (id, type, menus) {
+//   var index = 0
+//   for (let i = 0; i != menus.length; i++) {
+//     if (menus[i].type == type) {
+//       if (menus[i].id == id) {
+//         return index
+//       }
+//     }
+//     index ++
+//   }
+// }
+//
+// router.put('/panier/:type/:id/:quantity', (req, res) => {
+//   const menuId = parseInt(req.params.id)
+//   const menuQte = parseInt(req.params.quantity)
+//   const menuType = req.params.type
+//
+//   var index = null
+//
+//   const size = parseInt(req.session.menusTypes.length)
+//   for (let i = 0; i != size; i++) {
+//     if (menuType == req.session.menusTypes[i]) {
+//       index = indexMenuInPanier (menuId, menuType, req.session.panier.menus)
+//     }
+//   }
+//
+//   if (isNaN(menuId)) {
+//     res.status(400).json({ message: 'Requête incorrecte' })
+//   } else if (index === -1) {
+//     res.status(501).json({ message: "L'menu n'est pas dans le panier" })
+//   } else {
+//     const size = req.session.panier.menus.length
+//     for (let i = 0; i != size; i++) {
+//       req.session.panier.menus[i].quantity = menuQte
+//     }
+//     res.send()
+//   }
+// })
+
 
 // Exercice 2 : Inscription
 router.post('/register_patient',async (req,res) => {
@@ -201,7 +373,7 @@ router.post('/logout', async (req, res) => {
 })
 // Exercice 4 : Who am I, testé uniquement sur Postman mais pas la partie vue.js
 router.get('/me_medecin', async (req, res) => {
-
+  console.log(req.session.data)
   if (req.session.medecinId) {
     const utilisateur = await client.query({
       text: 'SELECT * FROM medecins WHERE id=$1',
@@ -229,14 +401,22 @@ router.get('/getQuestionnaire', (req,res) => {
   res.json(questionnaires)
 })
 
+router.get('/getLes_spe', (req,res) => {
+  res.json(les_specialites)
+})
+
 router.get('/getLes_medecins', (req,res) => {
   // console.log(les_medecins)
   res.json(les_medecins)
 })
 
 router.get('/getLes_symptomes', (req,res) => {
-  // console.log(les_medecins)
+  // console.log(les_medecins)newSym
   res.json(les_symptomes)
+})
+
+router.get('/getLes_actualite', (req,res) => {
+  res.json(les_actualites)
 })
 
 router.put('/user_update_patient', async (req, res) => {
@@ -274,5 +454,37 @@ router.put('/user_update_patient', async (req, res) => {
 
   res.send()
   })
+
+router.post('/prendre_rendez_vous', async (req, res) => {
+
+    if (req.session.userId) {
+
+      const date = req.body.date
+      const heure = req.body.heure
+      const nom = req.body.nom
+      const prenom = req.body.prenom
+      const medecin_id = req.body.medecin
+
+      const insert = "INSERT INTO rendez_vous (date, heure, nom, prenom, medecin_id) VALUES ($1, $2, $3, $4, $5)"
+
+      await client.query({
+        text: insert,
+        values: [date, heure, nom, prenom, medecin_id]
+      })
+
+      const rdv = {
+        date: date,
+        heure: heure,
+        nom: nom,
+        prenom: prenom,
+        medecin_id: medecin_id
+      }
+
+      res.status(200).json(rdv)
+    } else {
+      res.status(401).json({ message: "not logged" })
+    }
+
+})
 
 module.exports = router

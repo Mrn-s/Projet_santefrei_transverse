@@ -1,74 +1,161 @@
 <template>
   <div id="background_page_questionnaire">
+      <!-- <p>{{user_patient}}</p> -->
+      <section v-if ="!(user_patient.id)" class="section_principale container">
 
-      <section class="container">
         <article class="row" id="titre_questionnaire_page">
-          <p class="taille_5">Connectez-vous pour consulter votre historique</p>
+          <article class="col-sm-2">
+
+          </article>
+          <router-link class="col-sm-8  taille_3 lien_connexion" to='/login'> Connectez-vous et envoyez vos symptomes à votre médecin </router-link>
+          <article class="col-sm-2">
+
+          </article>
         </article>
+
       </section>
 
-      <section class="container" v-if="questionnaire_form" >
+      <section v-if ="user_patient.id" class="section_principale container">
 
-        <section  class="container" id="section_symptomes">
-          <article class="row" id="titre_section_symptome">
-            <p class="taille_3"> Trouvez vos symptomes et prennez rdv avec votre médecin</p>
-          </article>
-          <article v-for="s in symptomes" class="symptome row">
-            <p class="taille_2">{{ s.name }}</p>
+        <section class="container" v-if="questionnaire_form" >
+
+          <section class="container">
+            <article class="row" id="titre_section_symptome">
+              <p class="taille_3"> Trouvez vos symptomes et prennez rdv avec votre médecin</p>
+            </article>
+            <section class="row d-flex justify-content-center">
+              <div class="col-sm-2">
+                <button @click="changeTypeSymptome('type_1')">Type 1</button>
+              </div>
+              <div class="col-sm-2">
+                <button @click="changeTypeSymptome('type_2')">Type 2</button>
+              </div>
+              <div class="col-sm-2">
+                <button @click="changeTypeSymptome('type_3')">Type 3</button>
+              </div>
+              <div class="col-sm-2">
+                <button @click="changeTypeSymptome('type_4')">Type 4</button>
+              </div>
+              <div class="col-sm-2">
+                <button @click="changeTypeSymptome('type_5')">Type 5</button>
+              </div>
+              <div class="col-sm-2">
+                <button @click="changeTypeSymptome('type_6')">Type 6</button>
+              </div>
+            </section>
+          </section>
+
+          <section  class="container-fluid" id="section_symptomes">
+
+            <article class="row">
+
+              <article id="colonne_gauche" class="col-sm-9">
+                <article class="row">
+                  <article v-for="s in symptomes" v-if="s.type == symptomeType" class="symptome col-sm-4">
+                    <p class="taille_3">{{ s.name }}</p>
+                    <p class="taille_1">{{ s.description }}</p>
+                    <div>
+                      <button @click="addToListeMesSymptomes(s.type,s.id,s.name)" type="button" name="button">Je ressens ce symptome</button>
+                    </div>
+                  </article>
+                </article>
+
+              </article>
+
+              <article id="colonne_droite" class="col-sm-3">
+                <p class="taille_3 row">Vos symptomes</p>
+                <!-- <div class="chaque_symptome" v-for="s in panier_symptomes.menus" :key="menu.id">
+
+                </div> -->
+                <select  v-model="editListe_symptomes.medecin" class="col-sm-12">
+                  <option  value="" disabled selected>Choisissez votre médecin</option>
+                  <option  v-for="m in les_medecins" v-bind:value="m.nom">{{ m.nom }}</option>
+                </select>
+                <span>Sélectionné : {{ editListe_symptomes.medecin }}</span>
+              </article>
+
+            </article>
+
+          </section>
+
+          <section id="section_questionnaires" class="container">
+
+            <article class="row" id="titre_section_questionnaire">
+              <p class="taille_3"> Nos questionnaires généraux</p>
+            </article>
+            <article class="row">
+              <article v-for="q in questionnaires" class=" questionnaire col-sm-4">
+                <div class="uneclasse row card-1">
+                  <p class=" titre_questionnaire taille_moyenne col-sm-12" >{{ q.titre }}</p>
+                  <p class=" col-sm-12"> {{ q.duree }} min</p>
+                  <div class="col-sm-12">
+                    <button type="button" name="button" @click="changeQuestionnaire(q.id), affichage_questionnaire()"> remplir le questionnaire</button>
+                  </div>
+                </div>
+
+
+              </article>
+            </article>
+
+          </section>
+
+        </section>
+
+        <section class="container" v-else>
+          <button class="row" type="button" name="button" @click="affichage_questionnaire()">retour</button>
+
+          <article class="row"  v-for="q in questionnaires" v-if="q.id == Questionnaire_actuel">
+
+            <article class="container" id="le_questionnaire">
+
+              <p class="taille_3 titre_questionnaire row">{{ q.titre }}</p>
+              <article class="taille_1 row" v-for="question in q.questions"><p class="questions_questionnaire">  {{ question }}</p></article>
+              <p class="photo_questionnaire row">{{ q.photo }}</p>
+              <p class="taille_1 description_questionnaire row">{{ q.description }}</p>
+              <button v-if="user_medecin.id" type="button" name="button"> Modifier le questionnaire</button>
+              <button v-if="user_medecin.id" type="button" name="button"> Envoyer ce questionnaire au patient</button>
+
+            </article>
+
           </article>
         </section>
 
-        <section id="section_questionnaires" class="container">
-          <article class="row" id="titre_section_questionnaire">
-            <p class="taille_3"> Nos questionnaires généraux</p>
-          </article>
-          <article v-for="q in questionnaires" class="questionnaire row">
-            <p class="titre_questionnaire taille_moyenne col-sm-12" >{{ q.titre }}</p>
-            <p class="col-sm-12"> {{ q.duree }} min</p>
-            <div class="col-sm-12">
-              <button type="button" name="button" @click="changeQuestionnaire(q.id), affichage_questionnaire()"> remplir le questionnaire</button>
-
-            </div>
-          </article>
-        </section>
-
       </section>
-      <section class="container" v-else>
-        <button class="row" type="button" name="button" @click="affichage_questionnaire()">retour</button>
-
-        <articl class="row"  v-for="q in questionnaires" v-if="q.id == Questionnaire_actuel">
-
-          <article class="container" id="le_questionnaire">
-            <p class="taille_3 titre_questionnaire row">{{ q.titre }}</p>
-            <article class="taille_1 row" v-for="question in q.questions"><p class="questions_questionnaire">  {{ question }}</p></article>
-            <p class="photo_questionnaire row">{{ q.photo }}</p>
-            <p class="taille_1 description_questionnaire row">{{ q.description }}</p>
-            <button v-if="user_medecin.id" type="button" name="button"> Modifier le questionnaire</button>
-            <button v-if="user_medecin.id" type="button" name="button"> Envoyer ce questionnaire au patient</button>
-
-          </article>
-
-        </article>
-      </section>
-
   </div>
 </template>
 
 <script>
   module.exports = {
     props: {
-      user_medecin: { type: Object},
-      user_patient: { type: Object},
+      les_medecins: { type: Array, default: [] },
+      user_medecin: { type: Object },
+      user_patient: { type: Object },
       questionnaires: { type: Array, default: [] },
       symptomes : { type : Array, default: [] },
+      panier_symptomes: { type: Object }
     },
     data () {
       return {
+        editListe_symptomes: {
+          id: '',
+          nom:'',
+          description:'',
+          medecin:'',
+          type:''
+        },
         questionnaire_form: true,
-        Questionnaire_actuel: ""
+        Questionnaire_actuel: "",
+        symptomeType: "type_1"
       }
     },
     methods:{
+      // addToListeMesSymptomes (type_symptome, id_symptome, nom_symptome) {
+      //   let content = {
+      //     type: type_symptome,
+      //     id: id_symptome
+      //   }
+      //   this.$emit('add-to-liste_mes_symptomes', content)
+      // },
       affichage_questionnaire() {
         if (this.questionnaire_form == true) {
           this.questionnaire_form = false
@@ -78,6 +165,9 @@
       },
       changeQuestionnaire(Questionnaire_choisis) {
         this.Questionnaire_actuel = Questionnaire_choisis
+      },
+      changeTypeSymptome(nv_type_symptome){
+        this.symptomeType = nv_type_symptome
       }
     }
   }
@@ -85,27 +175,39 @@
 
 <style scoped>
 
+.card-1 {
+box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
 
-  #le_questionnaire{
+.card-1:hover {
+background-color: var(--violet_o);
+color: var(--beige);
+box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+/* background-color: var(--beige_fonce_o); */
+}
+
+  .uneclasse{
+    margin: 15px 10px;
+  }
+  .section_principale{
     background-color: var(--beige_fonce_o);
-    padding: 60px;
+    margin-top: 40px;
+    padding:20px;
+    text-align: center;
   }
-  .description_questionnaire{
-    font-size: 1.3em;
-    background-color: var(--vert);
-    color:var(--beige_fonce);
-    padding: 20px;
+  .lien_connexion{
+    text-decoration: none;
+
+    color:var(--vert);
+    font-weight: bold;
+  }
+  .lien_connexion:hover{
+    background-color: var(--violet_o);
   }
 
-  .titre{
-    /* font-size: 2em;
-    font-weight: bold;
-    color: var(--vert);
-    text-decoration: underline var(--vert) 3px; */
-  }
-  .questions_questionnaire{
-    /* padding: 20px;
-    border: 2px black solid; */
+  #colonne_droite{
+    border:2px black solid;
   }
 
   #background_page_questionnaire{
@@ -115,98 +217,24 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
-    /* height: 100%; */
+    height: 100%;
    max-height: 1660px;
    padding-bottom: 100px;
-    /* overflow-y: scroll; */
-  }
-  /* div{
-    height: 100%;
-  } */
-  /* footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    padding: 10px 0;
-    color: #F2EDDB;
-    background-color: #09371F;
-    text-align: center;
-  } */
-  #section_symptomes{
-    /* display: flex;
-    flex-wrap:wrap;
-    justify-content: center; */
-    /* align-items: center;
-    margin-left: 20%;
-    margin-right: 20%;
-    margin-bottom: 5%; */
-    border: 2px solid red;
-    background-color: var(--beige_fonce_o);
-  }
-  #section_questionnaires{
-    /* display: flex; */
-    /* flex-wrap:wrap; */
-    /* justify-content: center;
-    align-items: center;
-    margin-left: 20%;
-    margin-right: 20%; */
-    margin-top: 30px;
-    border: 2px solid red;
-    background-color: var(--beige_fonce_o);
-
-    /* border: blue 3px solid; */
+   padding-top: 40px;
+  overflow-y: scroll;
   }
 
   .symptome{
-    /* display: flex;
-    border: black 3px solid;
-    flex-direction: column; */
-    /* margin: 3%; */
-    /* height: 50px;
-    width: 40%;
-    padding: 2% 2% 0 2%;
-    margin: 2%; */
-    border: 2px solid black;
-    /* background-color: var(--beige_fonce_o); */
+    border: 1px solid black;
 
+    padding: 20px;
   }
 
-  .questionnaire{
-    /* display: flex;
-    border: black 3px solid;
-    flex-direction: column; */
-    /* margin: 3%; */
-    /* height:200px;
-    width: 40%;
-    padding: 2% 2% 0 2%;
-    margin: 2%; */
-    border: 2px solid black;
-    /* background-color: var(--beige_fonce_o); */
-  }
 
   .titre_questionnaire{
     font-weight: bold;
   }
 
-  #titre_questionnaire_page{
-    /* display: flex;
-    justify-content: center;
-    align-content: center; */
-    /* margin-top:150px; */
-  }
-  /* #temps_questionnaire{
-    display: flex;
-  } */
-
-  /* button{
-    width: 40%;
-    text-decoration: none;
-    padding: 10px;
-    border-radius: 40px 40px;
-    background-color: #09371F;
-    cursor: pointer;
-    color: #fff;
-  } */
   button:hover{
     color: #09371F;
     background-color: #E8C542;

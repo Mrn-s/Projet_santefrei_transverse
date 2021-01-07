@@ -34,10 +34,10 @@
     methods: {
       login () {
         var email = document.getElementById("email").value
-        if (email.match(/(medecin-)+[a-z]+(-)+[a-z]+(-santefrei)/gm)) {// medecin-Prenom--santefrei
+        if (email.match(/(medecin-)+[a-z]+(-)+[a-z]+(-santefrei)/gm)) {// medecin-Prenom-Nom-santefrei
         // if (email.match(/[a-z0-9_\-\.]+@[a-z0-9_\-\.]+\.[a-z]+/i)) {
           alert("ici")
-          this.$emit('medecinLogin', this.editLogin)
+          this.$emit('medecin_Login', this.editLogin)
         } else {
           this.$emit('login', this.editLogin)
         }
@@ -47,9 +47,9 @@
 </script>
 
 <style scoped>
-.all{
-  background-color: var(--beige);
-}
+  .all{
+    background-color: var(--beige);
+  }
   #bouton_inscription{
     border:none;
     text-decoration: none;

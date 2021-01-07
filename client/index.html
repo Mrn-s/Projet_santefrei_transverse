@@ -27,8 +27,6 @@
               <router-link class="btn-13 custom-btn nav-link" to='/medecins'> Nos medecins </router-link>
               <router-link class="btn-13 custom-btn nav-link" to='/actualite'> Actualité </router-link>
 
-
-
               <div class="topnav-right">
                 <router-link v-if="(user_patient.id)" class="btn-13 custom-btn nav-link" to='/mes_rapports'> Mes rapports </router-link>
                 <router-link v-if="(user_medecin.id)" class="btn-13 custom-btn nav-link" to='/mes_patients'> Mes patients </router-link>
@@ -42,18 +40,23 @@
           <main>
             <!-- dans la vue // dans vue-application -->
             <router-view
+
               :user_patient="user_patient"
               :user_medecin="user_medecin"
+
               :login="login"
               :user="user"
               :medecinLogin="medecinLogin"
               :questionnaires="questionnaires"
               :symptomes="symptomes"
               :les_medecins="liste_medecins"
+              :les_actus="liste_actualite"
+              :les_spe="liste_specialites"
+              @add_rdv="prendre_rdv"
               @register_patient="register_patient"
               @register_medecin="register_medecin"
               @login="login"
-              @medecinLogin="medecinLogin"
+              @medecin_Login="medecinLogin"
               @logout="logout"
               @update-Profile-patient="updateProfile_patient"
             ></router-view>

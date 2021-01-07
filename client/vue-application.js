@@ -8,9 +8,10 @@ const Actualite = window.httpVueLoader('./components/Actualite.vue')
 const Mes_rapports = window.httpVueLoader('./components/mes_rapports_client.vue')
 const Mes_patients = window.httpVueLoader('./components/mes_patients.vue')
 const Profil = window.httpVueLoader('./components/Profil.vue')
-
+const Rdv = window.httpVueLoader('./components/Rendez_vous.vue')
 
 const routes = [
+  // à gauche le chemin pour acceder à la vue // à droite la vue en elle-même
   { path: '/', component: Accueil },
   { path: '/questionnaire', component: Questionnaires},
   { path: '/register', component: Register},
@@ -20,8 +21,8 @@ const routes = [
   { path: '/medecins', component: Medecins },
   { path: '/mes_rapports', component: Mes_rapports},
   { path: '/mes_patients', component: Mes_patients},
-  { path: '/profil', component: Profil }
-
+  { path: '/profil', component: Profil },
+  { path: '/rdv', component: Rdv }
 ]
 
 const router = new VueRouter({
@@ -39,9 +40,18 @@ var app = new Vue({
   router,
   el: '#app',
   data: {
+
     questionnaires:[],
     symptomes:[],
+    liste_specialites:[],
+    liste_actualite:[],
     liste_medecins: [],
+    liste_symptomes_patient: {
+      createdAt: null,
+      updatedAt: null,
+      nb_symptomes: 0,
+      symptomes: []
+    },
     rapport: {
       createdAt: null,
       id: null,
@@ -62,7 +72,8 @@ var app = new Vue({
       specialite: null,
       id: null
     },
-    maladiesTypes: ['tete', 'bras_droit', 'bras_gauche', 'jambe_droite', 'jambe_gauche', 'torse', 'cou', 'epaule_droite', 'epaule_gauche']
+    maladiesTypes: ['tete', 'bras_droit', 'bras_gauche', 'jambe_droite', 'jambe_gauche', 'torse', 'cou', 'epaule_droite', 'epaule_gauche'],
+    symptomeTypes: ['type_1','type_2','type_3','type_4','type_5','type_6']
   },
   async mounted () {
     // const res_medecins = await axios.get('/api/medecins')
@@ -75,7 +86,12 @@ var app = new Vue({
     this.symptomes = liste_des_symptomes.data
     const liste_des_medecins = await axios.get('/api/getLes_medecins')
     this.liste_medecins = liste_des_medecins.data
-
+    const liste_des_actualite = await axios.get('/api/getLes_actualite')
+    this.liste_actualite = liste_des_actualite.data
+    const liste_des_spe = await axios.get('/api/getLes_spe')
+    this.liste_specialites = liste_des_spe.data
+    // const res_liste_s = await axios.get('/api/Liste_mes_symptomes')
+    // this.liste_symptomes_patient = res_liste_s.data
 
     // await axios.post('/api/setdatas', 'maladiesTypes=' + this.maladiesTypes)
 
@@ -95,6 +111,17 @@ var app = new Vue({
 
   },
   methods: {
+
+    async addToListeMesSymptomes (liste_de_symptomes) {
+      for (let i = 0; i != this.symptomeTypes.length; i++) {
+        if (liste_de_symptomes.type == this.symptomeTypes[i]) {
+          const res = await axios.post('/api/panier_symptome','id=' + liste_de_symptomes.id + '&type=' + liste_de_symptomes.type)
+          this.liste_symptomes_patient.symptomes.push(res.data)
+
+          this.liste_symptomes_patient.nb_symptomes = this.liste_symptomes_patient.nb_symptomes + 1
+        }
+      }
+    },
 
     async logout () {
       const res = await axios.post('/api/logout/')
@@ -173,6 +200,11 @@ var app = new Vue({
       this.user_patient.email = res.data.email
       this.user_patient.prenom = res.data.prenom
       this.user_patient.telephone = res.data.telephone
+    },
+
+    async prendre_rdv (nv_rendez_vous) {
+      await axios.put('/api/prendre_rendez_vous/', 'nom=' + nv_rendez_vous.nom + '&prenom=' + nv_rendez_vous.prenom + '&heure=' + nv_rendez_vous.heure + '&date=' + nv_rendez_vous.date + '&medecin=' + nv_rendez_vous.medecin_id)
     }
+
   }
 })

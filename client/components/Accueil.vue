@@ -1,12 +1,14 @@
 <template>
   <div class="container-fluid">
-          <section class="ligne row" id = "ligne_1">
+
+          <section class="ligne" id = "ligne_1">
 
             <article id= "un_un">
-                <p class="taille_5" id ="text_un_un">SANT'EFREI : votre diagnostic personnalisé en quelques clics.</p>
+                <p class="taille_5 bold" id ="text_un_un">SANT'EFREI : votre diagnostic personnalisé en quelques clics.</p>
                 <p class ="taille_3" id ="sous_text_un_un">Pour tous, partout, à tout moment.</p>
+                <p class ="taille_3"> Inscrivez-vous et trouvez les solutions à vos problèmes </p>
                 <article id = "emplacement_bouton_un_un" class="button-container-2">
-                  <p  class="mas taille_2">Je m'inscris</p>
+                  <p class="mas taille_2"> Je m'inscris </p>
                 <router-link id="bouton_un_un" class="taille_2" to='/register'> Inscrivez-vous</router-link>
               </article>
             </article>
@@ -17,48 +19,55 @@
 
           </section>
 
-          <section class ="ligne row" id="ligne_2">
+          <section class ="ligne container" id="ligne_2">
 
-            <article id="deux_un">
-              <p id="text_deux" class="taille_5"> Comment ça marche ? </p>
-              <p id ="sous_text_deux" class="taille_2">En quelques clics,
+            <article id="deux_un" class=" row">
+              <p id="text_deux" class="taille_5 col-sm-12 bold"> Comment ça marche ? </p>
+              <p id ="sous_text_deux" class="taille_2 col-sm-12">
+                En quelques clics,
                 créez votre compte et remplissez le questionnaire médical selon le spécialiste que vous souhaitez consultez.
-                Téléchargez-le, et décidez ou non de le partager avec votre médecin. C'est facile !</p>
+                Téléchargez-le, et décidez ou non de le partager avec votre médecin. C'est facile !
+              </p>
+            </article>
+
+          </section>
+
+          <section class = "ligne container-fluid" >
+            <article id ="ligne_3" class="row">
+              <article class="col-sm-4" id="trois_un">
+              </article>
+              <article class="col-sm-8" id="trois_deux">
+                <div id="contenu_trois">
+                  <p class="taille_3 bold col-sm-12">Communiquer</p>
+                  <p class="taille_1 col-sm-12">
+                    Vous pouvez envoyer le rapport de vos symptômes directement à votre médecin.
+                  </p>
+                  <p class="taille_3 bold col-sm-12">Remplir un questionnaire </p>
+                  <p class="taille_1 col-sm-12">
+                    Selon vos maux, sélectionnez le type de spécialiste que vous souhaitez consulter et remplissez le questionnaire adéquat.
+                  </p>
+                  <p class="taille_3 bold col-sm-12">Prendre rendez-vous </p>
+                  <p class="taille_1 col-sm-12">
+                    Une fois votre rapport envoyé, fixez un rendez-vous avec votre médecin.
+                  </p>
+                </div>
+              </article>
             </article>
           </section>
 
-          <section class = "ligne row" id ="ligne_3">
-            <article id="trois_un">
-              <!-- <img id ="img_trois_un" src="background_deux.png" alt="Image telephone en main"> -->
-            </article>
-            <article id="trois_deux">
-              <p class="mini_titre taille_3">Communiquer </p>
-              <p class="sous_text_trois_deux taille_1">
-                Vous pouvez envoyer le rapport de vos symptômes directement à votre médecin.
-              </p>
-              <p class="mini_titre taille_3">Remplir un questionnaire </p>
-              <p class="sous_text_trois_deux taille_1">
-                Selon vos maux, sélectionnez le type de spécialiste que vous souhaitez consulter et remplissez le questionnaire adéquat.
-              </p>
-              <p class="mini_titre taille_3">Prendre rendez-vous </p>
-              <p class="sous_text_trois_deux taille_1">
-                Une fois votre rapport envoyé, fixez un rendez-vous avec votre médecin.
-              </p>
-            </article>
-          </section>
-          <section class="ligne row" id ="ligne_4">
-            <article id="quatre_un" class="taille_5">
-            <p> Un véritable gain de temps, pour le patient et le médecin.</p>
+          <section class="ligne container">
+            <article id="text_quatre" class="taille_5 row bold">
+              <p > Un véritable gain de temps, pour le patient et le médecin.</p>
             </article>
           </section>
 
-          <section class="ligne row" id ="ligne_5">
-            <article id="cinq_un">
-              <p class="taille_5">Témoignages </p>
-              <p id ="sous_text_cinq" class="taille_1">
-               « Ce site m'a permis d'être rassuré quant à mes symptômes en attendant la consultation chez mon spécialiste.
-               De plus, le temps de consultation est réduit, et l'attente pour avoir un rendez-vous aussi,
-               puisque le médecin étudie ma fiche de symptômes avant mon arrivée ! ».
+          <section class="row" id ="ligne_5">
+            <article id="cinq_un" class="container">
+              <p class="row taille_5">Témoignages </p>
+              <p id ="sous_text_cinq" class="taille_1 row">
+                 « Ce site m'a permis d'être rassuré quant à mes symptômes en attendant la consultation chez mon spécialiste.
+                 De plus, le temps de consultation est réduit, et l'attente pour avoir un rendez-vous aussi,
+                 puisque le médecin étudie ma fiche de symptômes avant mon arrivée ! ».
               </p>
               <p class="taille_2" id="noms_temoignages">Adam, 32 ans </p>
             </article>
@@ -83,31 +92,18 @@
 </script>
 
 <style scoped>
- .container-fluid{
-   background-color: var(--beige);
- }
-
-  /* .taille_grande
-  {
-    font-weight: bold;
-    font-size: 2.9em;
+  #contenu_trois{
+    padding: 5% 25% 0 25%;
+    height: 600px;
   }
-  .taille_moyenne
-  {
-    font-size: 2em;
-  }
-  .taille_faible{
-    font-size: 1.3em;
-  } */
-
-  .mini_titre{
-    /* font-size: 1.3em; */
-    width:50%;
-    font-weight: bold;
+  #text_quatre{
+    text-align: center;
   }
 
+  .container-fluid{
+    background-color: var(--beige);
+  }
   .ligne{
-    display: flex;
     margin-bottom: 4%;
     color: #09371F;
   }
@@ -119,8 +115,8 @@
 
   #un_un{
     position: absolute;
-    top: 200px;
-    width: 35%;
+    top: 15%;
+    width: 45%;
     padding: 30px;
     background-color: var(--beige_fonce_o);
     z-index: 2;
@@ -133,7 +129,6 @@
   }
   #text_un_un{
     text-align: center;
-    font-weight: bold;
   }
   #sous_text_un_un{
     text-align: center;
@@ -145,74 +140,47 @@
     align-items: center;
   }
 
-
   #ligne_2{
     display: flex;
     justify-content: center;
   }
+
   #deux_un{
       display:block;
       text-align: center;
-      width: 33%;
+      width: 70%;
       padding: 10px;
       /* justify-content: center; */
       /* align-items: center; */
       border: black 6px double;
-      /* box-shadow: 40px -10px teal; */
       box-shadow: 10px 10px 5px #09371F;;
   }
-  #text_deux{
-    font-weight: bold;
-  }
 
-
-  #ligne_3{
-    display: flex;
-    justify-content: center;
-
-  }
   #trois_un{
     border-left: 1px black solid;
     border-top: 1px black solid;
     border-bottom: 1px black solid;
-
-    background-size: cover;
+    background-size: contain;
     background-repeat: no-repeat;
     background-image: url("../images/background_deux.png");
-    /* background-attachment: fixed; */
-    width:30%;
-    height: 500px;
+    background-attachment: fixed;
+    /* width:30%; */
+    height: 600px;
   }
   #trois_deux{
     border-left: 1px black solid;
     border-top: 1px black solid;
     border-bottom: 1px black solid;
     border-right: 1px solid black;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     padding-left: 2%;
     padding-right: 2%;
   }
-  /* #img_trois_un{
-    background-size: cover;
-    background-image: url("background_deux.png");
-    background-attachment: fixed;
-  } */
+  #ligne_3{
+    margin: 0 7%;
+  }
 
   .sous_text_trois_deux{
     width: 50%;
-  }
-
-  #ligne_4{
-      display: flex;
-      justify-content: center;
-  }
-  #quatre_un{
-    width: 40%;
-    text-align: center;
-    font-weight: bold;
   }
 
   .container-fluid{
