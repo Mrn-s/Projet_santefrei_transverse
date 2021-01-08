@@ -60,6 +60,11 @@ module.exports = {
 
 #background_page_actualite{
   background-color: var(--beige);
+  height: 100%;
+  max-height: 1660px;
+  padding-top: 40px;
+  padding-bottom: 150px;
+  overflow-y: scroll;
 }
 
 </style>

@@ -1,61 +1,62 @@
 <template>
   <div id="background_page_questionnaire">
       <!-- <p>{{user_patient}}</p> -->
-      <section v-if ="!(user_patient.id)" class="section_principale container">
+      <section v-if ="!(user_patient.id)" class=" container">
 
         <article class="row" id="titre_questionnaire_page">
-          <article class="col-sm-2">
+          <article class="col-sm-1">
 
           </article>
-          <router-link class="col-sm-8  taille_3 lien_connexion" to='/login'> Connectez-vous et envoyez vos symptomes à votre médecin </router-link>
-          <article class="col-sm-2">
+          <router-link class="col-sm-10  taille_3 lien_connexion" to='/login'> Connectez-vous et envoyez vos symptomes à votre médecin </router-link>
+          <article class="col-sm-1">
 
           </article>
         </article>
 
+      </section>
+      <section v-else class="container">
+        <article class="row" id="titre_section_symptome">
+          <p class="taille_4 col-sm-12"> Trouvez vos symptomes et prennez rdv avec votre médecin</p>
+        </article>
       </section>
 
       <section v-if ="user_patient.id" class="section_principale container">
 
         <section class="container" v-if="questionnaire_form" >
 
-          <section class="container">
-            <article class="row" id="titre_section_symptome">
-              <p class="taille_3"> Trouvez vos symptomes et prennez rdv avec votre médecin</p>
-            </article>
+          <section  class="container-fluid" id="section_symptomes">
             <section class="row d-flex justify-content-center">
               <div class="col-sm-2">
-                <button @click="changeTypeSymptome('type_1')">Type 1</button>
+                <button class="col-sm-12" @click="changeTypeSymptome('type_1')">Type 1</button>
               </div>
               <div class="col-sm-2">
-                <button @click="changeTypeSymptome('type_2')">Type 2</button>
+                <button class="col-sm-12" @click="changeTypeSymptome('type_2')">Type 2</button>
               </div>
               <div class="col-sm-2">
-                <button @click="changeTypeSymptome('type_3')">Type 3</button>
+                <button class="col-sm-12" @click="changeTypeSymptome('type_3')">Type 3</button>
               </div>
               <div class="col-sm-2">
-                <button @click="changeTypeSymptome('type_4')">Type 4</button>
+                <button class="col-sm-12" @click="changeTypeSymptome('type_4')">Type 4</button>
               </div>
               <div class="col-sm-2">
-                <button @click="changeTypeSymptome('type_5')">Type 5</button>
+                <button class="col-sm-12" @click="changeTypeSymptome('type_5')">Type 5</button>
               </div>
               <div class="col-sm-2">
-                <button @click="changeTypeSymptome('type_6')">Type 6</button>
+                <button class="col-sm-12" @click="changeTypeSymptome('type_6')">Type 6</button>
               </div>
             </section>
-          </section>
-
-          <section  class="container-fluid" id="section_symptomes">
-
             <article class="row">
 
               <article id="colonne_gauche" class="col-sm-9">
+
                 <article class="row">
                   <article v-for="s in symptomes" v-if="s.type == symptomeType" class="symptome col-sm-4">
-                    <p class="taille_3">{{ s.name }}</p>
-                    <p class="taille_1">{{ s.description }}</p>
-                    <div>
-                      <button @click="addToListeMesSymptomes(s.type,s.id,s.name)" type="button" name="button">Je ressens ce symptome</button>
+                    <div class="chaque_s row card-2">
+                      <p class="col-sm-12 taille_2">{{ s.name }}</p>
+                      <p class="col-sm-12 taille_1">{{ s.description }}</p>
+                      <div class="col-sm-12">
+                        <button @click="addToListeMesSymptomes(s.type,s.id,s.name)" type="button" name="button">Je ressens ce symptome</button>
+                      </div>
                     </div>
                   </article>
                 </article>
@@ -63,14 +64,13 @@
               </article>
 
               <article id="colonne_droite" class="col-sm-3">
-                <p class="taille_3 row">Vos symptomes</p>
-                <!-- <div class="chaque_symptome" v-for="s in panier_symptomes.menus" :key="menu.id">
+                <p class="taille_2 col-sm-12">Vos symptomes</p>
 
-                </div> -->
                 <select  v-model="editListe_symptomes.medecin" class="col-sm-12">
                   <option  value="" disabled selected>Choisissez votre médecin</option>
                   <option  v-for="m in les_medecins" v-bind:value="m.nom">{{ m.nom }}</option>
                 </select>
+
                 <span>Sélectionné : {{ editListe_symptomes.medecin }}</span>
               </article>
 
@@ -84,16 +84,14 @@
               <p class="taille_3"> Nos questionnaires généraux</p>
             </article>
             <article class="row">
-              <article v-for="q in questionnaires" class=" questionnaire col-sm-4">
-                <div class="uneclasse row card-1">
+              <article v-for="q in questionnaires" class="questionnaire col-sm-4">
+                <div class="chaque_q row card-1">
                   <p class=" titre_questionnaire taille_moyenne col-sm-12" >{{ q.titre }}</p>
                   <p class=" col-sm-12"> {{ q.duree }} min</p>
                   <div class="col-sm-12">
                     <button type="button" name="button" @click="changeQuestionnaire(q.id), affichage_questionnaire()"> remplir le questionnaire</button>
                   </div>
                 </div>
-
-
               </article>
             </article>
 
@@ -109,8 +107,20 @@
             <article class="container" id="le_questionnaire">
 
               <p class="taille_3 titre_questionnaire row">{{ q.titre }}</p>
-              <article class="taille_1 row" v-for="question in q.questions"><p class="questions_questionnaire">  {{ question }}</p></article>
-              <p class="photo_questionnaire row">{{ q.photo }}</p>
+              <form @submit.prevent="addReponseQuestionnaire">
+              <article class="taille_1 row"  v-for="question in q.questions">
+                <p class="questions_questionnaire col-sm-7">  {{ question }}</p>
+                  <div v-for="r in l_reponse" :key="r" class="">
+                    <input type="radio" :name="r" :value="r">
+                    <label :for="r"></label>
+                  </div>
+
+              </article>
+              <div>
+                <button type="submit">Valider</button>
+              </div>
+            </form>
+
               <p class="taille_1 description_questionnaire row">{{ q.description }}</p>
               <button v-if="user_medecin.id" type="button" name="button"> Modifier le questionnaire</button>
               <button v-if="user_medecin.id" type="button" name="button"> Envoyer ce questionnaire au patient</button>
@@ -136,6 +146,11 @@
     },
     data () {
       return {
+        l_r :{
+          id:'',
+          liste:['t','b','a'],
+          nom:'t'
+        },
         editListe_symptomes: {
           id: '',
           nom:'',
@@ -156,6 +171,9 @@
       //   }
       //   this.$emit('add-to-liste_mes_symptomes', content)
       // },
+      // addToList(){
+      //
+      // }
       affichage_questionnaire() {
         if (this.questionnaire_form == true) {
           this.questionnaire_form = false
@@ -174,31 +192,55 @@
 </script>
 
 <style scoped>
+  /* #titre_colonne_droite{
+    text-align: center;
+    width: 100%;
+  } */
+  #titre_section_symptome{
+    text-align: center;
+  }
 
-.card-1 {
-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-}
+  .card-1 {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  }
 
-.card-1:hover {
-background-color: var(--violet_o);
-color: var(--beige);
-box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-/* background-color: var(--beige_fonce_o); */
-}
+  .card-1:hover {
+  background-color: var(--vert_o);
+  color: var(--beige);
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  /* background-color: var(--beige_fonce_o); */
+  }
 
-  .uneclasse{
+  .card-2 {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  }
+
+  .card-2:hover {
+  background-color: var(--violet_o);
+  color: var(--beige);
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  /* background-color: var(--beige_fonce_o); */
+  }
+
+  .chaque_s{
     margin: 15px 10px;
+    padding: 20px 0;
+  }
+
+  .chaque_q{
+    margin: 15px 10px;
+    padding: 20px 0;
   }
   .section_principale{
     background-color: var(--beige_fonce_o);
-    margin-top: 40px;
+    margin-top: 20px;
     padding:20px;
     text-align: center;
   }
   .lien_connexion{
     text-decoration: none;
-
     color:var(--vert);
     font-weight: bold;
   }
@@ -218,21 +260,18 @@ box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
     background-size: cover;
     background-attachment: fixed;
     height: 100%;
-   max-height: 1660px;
-   padding-bottom: 100px;
-   padding-top: 40px;
-  overflow-y: scroll;
+    max-height: 1660px;
+    padding-bottom: 150px;
+    padding-top: 40px;
+    overflow-y: scroll;
   }
-
-  .symptome{
-    border: 1px solid black;
-
-    padding: 20px;
-  }
-
 
   .titre_questionnaire{
     font-weight: bold;
+  }
+  #titre_questionnaire_page{
+    margin-top: 50px;
+    text-align: center;
   }
 
   button:hover{

@@ -6,7 +6,7 @@ const medecins = [
     photo: 'https://img.icons8.com/material-sharp/96/000000/user-male-circle.png',
     region:'Paris',
     numero : '0107080910',
-    specialite:'chirurgie thoracique'
+    specialite:'allergologie'
   },
   {
     id: 2,
@@ -15,7 +15,7 @@ const medecins = [
     photo: 'https://img.icons8.com/material-sharp/96/000000/user-male-circle.png',
     region:'Paris',
     numero : '0102030405',
-    specialite:'chirurgie vasculaire'
+    specialite:'allergologie'
   },
   {
     id: 3,
@@ -24,7 +24,7 @@ const medecins = [
     photo: 'https://img.icons8.com/material-sharp/96/000000/user-male-circle.png',
     region:'Paris',
     numero : '0033333333',
-    specialite:'chirurgie viscérale'
+    specialite:'allergologie'
   },
   {
     id: 4,
@@ -33,7 +33,7 @@ const medecins = [
     photo: 'https://img.icons8.com/material-sharp/96/000000/user-male-circle.png',
     region:'Paris',
     numero : '004444444',
-    specialite:'andrologie'
+    specialite:'allergologie'
   },
   {
     id: 5,

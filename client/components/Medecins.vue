@@ -9,9 +9,7 @@
       </article>
       <div class="row">
         <section class="col-sm-12 d-flex flex-wrap justify-content-around">
-
             <button v-for="s in les_spe" type="button" name="button" @click="changeTypeSpecialite(s.nom)">{{ s.nom }}</button>
-
         </section>
         <article class="col-sm-3 chaque_medecin" v-for="m in les_medecins" v-if="m.specialite == medSpe">
 
@@ -35,10 +33,8 @@
 
               </div>
             </div>
-
         </article>
       </div>
-
     </article>
 
   </div>
@@ -105,8 +101,11 @@ box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 
 #background_page_medecins{
   background-color: var(--beige);
-  padding-bottom: 100px;
+  height: 100%;
+  max-height: 1660px;
   padding-top: 40px;
+  padding-bottom: 150px;
+  overflow-y: scroll;
 }
 /* .ici{
       overflow-y: scroll;

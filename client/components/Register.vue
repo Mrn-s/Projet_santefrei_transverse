@@ -31,8 +31,9 @@
             <input type="text" v-model="editRegister_medecin.nom" placeholder="nom">
             <label><b>Prenom</b></label>
             <input type="text" v-model="editRegister_medecin.prenom" placeholder="prenom">
+            <label><b>Telephone</b></label>
+            <input type="text" v-model="editRegister_medecin.telephone" placeholder="telephone">
             <label><b>Specialite</b></label>
-            <!-- <input type="text" v-model="prenom" placeholder="specialite"> -->
             <select id="heure_select" v-model="editRegister_medecin.specialite">
               <option value="" disabled selected>Specialite</option>
               <option value="allergologie">allergologie</option>
@@ -60,8 +61,6 @@
               <option value="hépatologie">hépatologie</option>
               <option value="immunologie">immunologie</option>
               <option value="infectiologie">infectiologie</option>
-              <option value="médecine du travail">médecine du travail</option>
-              <option value="médecine d'urgence">médecine d'urgence</option>
               <option value="médecine générale">médecine générale</option>
               <option value="médecine interne">médecine interne</option>
               <option value="médecine physique et de réadaptation">médecine physique et de réadaptation</option>

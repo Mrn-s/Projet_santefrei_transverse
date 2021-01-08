@@ -97,7 +97,7 @@ const spe = [
   },
   {
     id: 17,
-    nom: ' dermatologie',
+    nom: 'dermatologie',
     photo: '',
     description: ''
   },
@@ -145,13 +145,13 @@ const spe = [
   },
   {
     id: 25,
-    nom: 'médecine du travail',
+    nom: 'médecine générale',
     photo: '',
     description: ''
   },
   {
     id: 26,
-    nom: 'médecine d\'urgence',
+    nom: 'dermatologie',
     photo: '',
     description: ''
   },
@@ -188,6 +188,84 @@ const spe = [
   {
     id: 32,
     nom: 'neurologie',
+    photo: '',
+    description: ''
+  },
+  {
+    id: 33,
+    nom: 'obstétrique',
+    photo: '',
+    description: ''
+  },
+  {
+    id: 34,
+    nom: 'odontologie',
+    photo: '',
+    description: ''
+  },
+  {
+    id: 35,
+    nom: 'oncologie',
+    photo: '',
+    description: ''
+  },
+  {
+    id: 36,
+    nom: 'ophtalmologie',
+    photo: '',
+    description: ''
+  },
+  {
+    id: 37,
+    nom: 'orthopédie',
+    photo: '',
+    description: ''
+  },
+  {
+    id: 38,
+    nom: 'otorhinolaryngologie',
+    photo: '',
+    description: ''
+  },
+  {
+    id: 39,
+    nom: 'pédiatrie',
+    photo: '',
+    description: ''
+  },
+  {
+    id: 40,
+    nom: 'pneumologie',
+    photo: '',
+    description: ''
+  },
+  {
+    id: 41,
+    nom: 'podologie',
+    photo: '',
+    description: ''
+  },
+  {
+    id: 42,
+    nom: 'psychiatrie',
+    photo: '',
+    description: ''
+  },
+  {
+    id: 43,
+    nom: 'radiologie',
+    photo: '',
+    description: ''
+  },
+  {
+    id: 44,
+    nom: 'rhumatologie',
+    photo: '',
+    description: ''
+  },
+  {
+    id: 45,
+    nom: 'urologie',
     photo: '',
     description: ''
   }

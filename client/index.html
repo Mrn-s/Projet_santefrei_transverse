@@ -43,22 +43,23 @@
 
               :user_patient="user_patient"
               :user_medecin="user_medecin"
-
               :login="login"
-              :user="user"
-              :medecinLogin="medecinLogin"
+              :medecinlogin="medecinLogin"
               :questionnaires="questionnaires"
               :symptomes="symptomes"
               :les_medecins="liste_medecins"
               :les_actus="liste_actualite"
               :les_spe="liste_specialites"
+
+
               @add_rdv="prendre_rdv"
               @register_patient="register_patient"
               @register_medecin="register_medecin"
               @login="login"
-              @medecin_Login="medecinLogin"
+              @medecin_login="medecinLogin"
               @logout="logout"
-              @update-Profile-patient="updateProfile_patient"
+              @update-profile-patient="updateProfile_patient"
+              @update-profile-medecin="updateProfile_medecin"
             ></router-view>
           </main>
 

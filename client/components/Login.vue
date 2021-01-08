@@ -35,9 +35,7 @@
       login () {
         var email = document.getElementById("email").value
         if (email.match(/(medecin-)+[a-z]+(-)+[a-z]+(-santefrei)/gm)) {// medecin-Prenom-Nom-santefrei
-        // if (email.match(/[a-z0-9_\-\.]+@[a-z0-9_\-\.]+\.[a-z]+/i)) {
-          alert("ici")
-          this.$emit('medecin_Login', this.editLogin)
+          this.$emit('medecin_login', this.editLogin)
         } else {
           this.$emit('login', this.editLogin)
         }

@@ -69,6 +69,7 @@ var app = new Vue({
       nom: null,
       prenom: null,
       email: null,
+      telephone: null,
       specialite: null,
       id: null
     },
@@ -94,21 +95,22 @@ var app = new Vue({
     // this.liste_symptomes_patient = res_liste_s.data
 
     // await axios.post('/api/setdatas', 'maladiesTypes=' + this.maladiesTypes)
-
-    const res_patient = await axios.get('/api/me_patient')
-    this.user_patient.id = res_patient.data.id
-    this.user_patient.nom = res_patient.data.nom
-    this.user_patient.email = res_patient.data.email
-    this.user_patient.prenom = res_patient.data.prenom
-    this.user_patient.telephone = res_patient.data.telephone
-
-    const res_medecin = await axios.get('/api/me_medecin')
-    this.user_medecin.id = res_medecin.data.id
-    this.user_medecin.nom = res_medecin.data.nom
-    this.user_medecin.email = res_medecin.data.email
-    this.user_medecin.prenom = res_medecin.data.prenom
-    this.user_medecin.specialite = res_medecin.data.specialite
-
+    try {
+      const res_patient = await axios.get('/api/me_patient')
+      this.user_patient.id = res_patient.data.id
+      this.user_patient.nom = res_patient.data.nom
+      this.user_patient.email = res_patient.data.email
+      this.user_patient.prenom = res_patient.data.prenom
+      this.user_patient.telephone = res_patient.data.telephone
+    } catch(e) {
+      const res_medecin = await axios.get('/api/me_medecin')
+      this.user_medecin.id = res_medecin.data.id
+      this.user_medecin.nom = res_medecin.data.nom
+      this.user_medecin.email = res_medecin.data.email
+      this.user_medecin.prenom = res_medecin.data.prenom
+      this.user_medecin.telephone = res_medecin.data.telephone
+      this.user_medecin.specialite = res_medecin.data.specialite
+    }
   },
   methods: {
 
@@ -129,6 +131,7 @@ var app = new Vue({
       this.user_medecin.email = res.data.email_medecin
       this.user_medecin.prenom = res.data.prenom_medecin
       this.user_medecin.specialite = res.data.specialite
+      this.user_medecin.telephone = res.data.telephone_medecin
       this.user_medecin.id = res.data.user_medecin
 
       this.user_patient.nom = res.data.nom_patient
@@ -161,6 +164,7 @@ var app = new Vue({
       this.user_medecin.nom = res.data.nom
       this.user_medecin.email = res.data.email
       this.user_medecin.prenom = res.data.prenom
+      this.user_medecin.telephone = res.data.telephone
       this.user_medecin.specialite = res.data.specialite
       // this.user_medecin.patients = res.data.patients
 
@@ -169,7 +173,7 @@ var app = new Vue({
 
     async register_patient (user_patient) {
       try {
-        await axios.post('/api/register_patient/','nom=' + user_patient.nom + '&email=' + user_patient.email + '&password=' + user_patient.password +  '&prenom=' + user_patient.prenom + '&telephone=' + user_patient.telephone)
+        await axios.post('/api/register_patient/','nom=' + user_patient.nom + '&email=' + user_patient.email + '&password=' + user_patient.password +  '&prenom=' + user_patient.prenom +'&telephone=' + user_patient.telephone)
         router.push('/login')
       } catch (e) {
         asAlertMsg({
@@ -182,8 +186,8 @@ var app = new Vue({
 
     async register_medecin (user_medecin) {
       try {
-        await axios.post('/api/register_medecin/','nom=' + user_medecin.nom + '&email=' + user_medecin.email + '&password=' + user_medecin.password +  '&prenom=' + user_medecin.prenom + '&specialite=' + user_medecin.specialite)
-        router.push('/connexion')
+        await axios.post('/api/register_medecin/','nom=' + user_medecin.nom + '&email=' + user_medecin.email + '&password=' + user_medecin.password +  '&prenom=' + user_medecin.prenom + '&specialite=' + user_medecin.specialite + '&telephone=' + user_medecin.telephone)
+        router.push('/login')
       } catch (e) {
         asAlertMsg({
           type: "warning",
@@ -200,6 +204,17 @@ var app = new Vue({
       this.user_patient.email = res.data.email
       this.user_patient.prenom = res.data.prenom
       this.user_patient.telephone = res.data.telephone
+
+    },
+    async updateProfile_medecin (nv_profil) {
+      await axios.put('/api/user_update_medecin/', 'nom=' + nv_profil.nom + '&prenom=' + nv_profil.prenom + '&email=' + nv_profil.email +'&specialite=' +  nv_profil.specialite + '&telephone=' + nv_profil.telephone)
+      const res = await axios.get('/api/me_medecin')
+      this.user_medecin.nom = res.data.nom
+      this.user_medecin.email = res.data.email
+      this.user_medecin.prenom = res.data.prenom
+      this.user_medecin.telephone = res.data.telephone
+      this.user_medecin.specialite = res.data.specialite
+
     },
 
     async prendre_rdv (nv_rendez_vous) {

@@ -14,7 +14,7 @@ const les_specialites = require('../data/specialites.js')
 const client = new Client({
  user: 'postgres',
  host: 'localhost',
- password: 'landry',
+ password: 'Tellier_Souadji',
  database: 'Projet_transverse'
 })
 
@@ -241,6 +241,7 @@ router.post('/register_medecin',async (req,res) => {
     const password = req.body.password
     const prenom = req.body.prenom
     const nom = req.body.nom
+    const telephone = req.body.telephone
     const specialite = req.body.specialite
 
     const sql = "SELECT * FROM medecins WHERE email=$1"
@@ -254,11 +255,11 @@ router.post('/register_medecin',async (req,res) => {
       res.status(400).json({ message: "this user already exist" })
     } else {
       const hash = await bcrypt.hash(password, 10)
-      const insert = "INSERT INTO medecins (nom ,prenom, email, specialite, password) VALUES ($1, $2, $3, $4, $5)"
+      const insert = "INSERT INTO medecins (nom ,prenom, email, specialite, password, telephone) VALUES ($1, $2, $3, $4, $5, $6)"
 
       const result2 = await client.query({
         text: insert,
-        values: [nom, prenom, email, specialite, hash]
+        values: [nom, prenom, email, specialite, hash, telephone]
       })
       res.send()
     }
@@ -313,13 +314,10 @@ router.post('/medecin_login', async (req,res) =>{
     values: [email]
   })
 
-  console.log(result.rowcount)
-
   if (result.rowCount == 1) {
       const hashedPassword = result.rows[0].password
 
       if (await bcrypt.compare(password, hashedPassword)) {
-
         const sqlId = "SELECT * FROM medecins WHERE email=$1"
         const result2 = await client.query({
           text: sqlId,
@@ -330,6 +328,7 @@ router.post('/medecin_login', async (req,res) =>{
         req.session.medecinName = result2.rows[0].nom
         req.session.medecinEmail = result2.rows[0].email
         req.session.medecinFirstName = result2.rows[0].prenom
+        req.session.medecinTelephone = result2.rows[0].telephone
         req.session.medecinSpecialite = result2.rows[0].specialite
 
         res.status(200).json({ message: "well logged as medecin" })
@@ -343,6 +342,7 @@ router.post('/medecin_login', async (req,res) =>{
 })
 
 router.post('/logout', async (req, res) => {
+
   req.session.userId = null
   req.session.userName = null
   req.session.userEmail = null
@@ -359,6 +359,7 @@ router.post('/logout', async (req, res) => {
   const log = {
     user_patient: req.session.userId,
     user_medecin: req.session.medecinId,
+
     nom_patient: req.session.userName,
     email_patient: req.session.userEmail,
     prenom_patient: req.session.userFirstName,
@@ -367,19 +368,22 @@ router.post('/logout', async (req, res) => {
     nom_medecin: req.session.medecinName,
     email_medecin: req.session.medecinEmail,
     prenom_medecin: req.session.medecinFirstName,
+    telephone_medecin: req.session.medecinTelephone,
     specialite: req.session.medecinSpecialite
   }
   res.json(log)
 })
 // Exercice 4 : Who am I, testé uniquement sur Postman mais pas la partie vue.js
 router.get('/me_medecin', async (req, res) => {
-  console.log(req.session.data)
+  console.log(req.session.medecinId)
+
   if (req.session.medecinId) {
     const utilisateur = await client.query({
       text: 'SELECT * FROM medecins WHERE id=$1',
       values: [req.session.medecinId]
     })
     res.json(utilisateur.rows[0])
+    console.log(utilisateur.rows[0])
   } else {
     res.status(401).json({ message: 'not connected' })
   }
@@ -406,12 +410,10 @@ router.get('/getLes_spe', (req,res) => {
 })
 
 router.get('/getLes_medecins', (req,res) => {
-  // console.log(les_medecins)
   res.json(les_medecins)
 })
 
 router.get('/getLes_symptomes', (req,res) => {
-  // console.log(les_medecins)newSym
   res.json(les_symptomes)
 })
 
@@ -425,8 +427,6 @@ router.put('/user_update_patient', async (req, res) => {
   var prenom = req.body.prenom
   var email = req.body.email
   var telephone = req.body.telephone
-  // console.log(nom)
-  // console.log(prenom)
 
   if (!nom) {
     nom = req.session.userName
@@ -455,36 +455,75 @@ router.put('/user_update_patient', async (req, res) => {
   res.send()
   })
 
-router.post('/prendre_rendez_vous', async (req, res) => {
+router.put('/user_update_medecin', async (req, res) => {
 
-    if (req.session.userId) {
+    var nom = req.body.nom
+    var prenom = req.body.prenom
+    var email = req.body.email
+    var telephone = req.body.telephone
+    var specialite = req.body.specialite
 
-      const date = req.body.date
-      const heure = req.body.heure
-      const nom = req.body.nom
-      const prenom = req.body.prenom
-      const medecin_id = req.body.medecin
-
-      const insert = "INSERT INTO rendez_vous (date, heure, nom, prenom, medecin_id) VALUES ($1, $2, $3, $4, $5)"
-
-      await client.query({
-        text: insert,
-        values: [date, heure, nom, prenom, medecin_id]
-      })
-
-      const rdv = {
-        date: date,
-        heure: heure,
-        nom: nom,
-        prenom: prenom,
-        medecin_id: medecin_id
-      }
-
-      res.status(200).json(rdv)
-    } else {
-      res.status(401).json({ message: "not logged" })
+    if (!nom) {
+      nom = req.session.medecinName
+    }
+    if (!prenom) {
+      prenom = req.session.medecinFirstName
+    }
+    if (!email) {
+      email = req.session.medecinEmail
+    }
+    if (!telephone) {
+      telephone = req.session.medecinTelephone
+    }
+    if (!specialite) {
+      specialite = req.session.medecinSpecialite
     }
 
-})
+    req.session.medecinName = nom
+    req.session.medecinFirstName = prenom
+    req.session.medecinEmail = email
+    req.session.medecinTelephone = telephone
+    req.session.medecinSpecialite = specialite
+
+    const update = "UPDATE medecins SET nom = $1, prenom = $2, email = $3, specialite = $4, telephone = $5 WHERE email=$3"
+    const result = await client.query({
+      text: update,
+      values: [nom, prenom, email, specialite, telephone]
+    })
+
+    res.send()
+    })
+
+// router.post('/prendre_rendez_vous', async (req, res) => {
+//
+//     if (req.session.userId) {
+//
+//       const date = req.body.date
+//       const heure = req.body.heure
+//       const nom = req.body.nom
+//       const prenom = req.body.prenom
+//       const medecin_id = req.body.medecin
+//
+//       const insert = "INSERT INTO rendez_vous (date, heure, nom, prenom, medecin_id) VALUES ($1, $2, $3, $4, $5)"
+//
+//       await client.query({
+//         text: insert,
+//         values: [date, heure, nom, prenom, medecin_id]
+//       })
+//
+//       const rdv = {
+//         date: date,
+//         heure: heure,
+//         nom: nom,
+//         prenom: prenom,
+//         medecin_id: medecin_id
+//       }
+//
+//       res.status(200).json(rdv)
+//     } else {
+//       res.status(401).json({ message: "not logged" })
+//     }
+//
+// })
 
 module.exports = router

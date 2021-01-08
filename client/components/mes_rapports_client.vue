@@ -17,10 +17,12 @@ module.exports = {
 
 <style scoped>
 #background_page_medecins{
-  padding-bottom: 100px;
-  padding-top: 40px;
   background-color: var(--beige);
-  height: 90%;
+  height: 100%;
+  max-height: 1660px;
+  padding-top: 40px;
+  padding-bottom: 150px;
+  overflow-y: scroll;
 }
 
 </style>
