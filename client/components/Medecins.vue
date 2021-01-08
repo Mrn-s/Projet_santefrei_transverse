@@ -4,8 +4,10 @@
     <article class="colonne_centrale container">
       <article class="row">
         <p class="col-sm-12  taille_5">Decouvrez l'ensemble de nos médecins</p>
+        <div class="col-sm-12" id="lien_vers_connexion">
+          <router-link class="col-sm-12  taille_3" v-if="!(user_patient.id) && !(user_medecin.id)"  to='/login'> Connectez-vous et prenez rendez-vous </router-link>
+        </div>
 
-        <router-link class="col-sm-12  taille_3" v-if="!(user_patient.id) && !(user_medecin.id)"  to='/login'> Connectez-vous et prenez rendez-vous </router-link>
       </article>
       <div class="row">
         <section class="col-sm-12 d-flex flex-wrap justify-content-around">
@@ -79,6 +81,11 @@
 </script>
 
 <style scoped>
+#lien_vers_connexion{
+  text-align: center;
+  padding: 0 15px 25px 15px;
+}
+
 .infos_medecin{
   height: 530px;
 }
@@ -104,7 +111,7 @@ box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   height: 100%;
   max-height: 1660px;
   padding-top: 40px;
-  padding-bottom: 150px;
+  padding-bottom: 124px;
   overflow-y: scroll;
 }
 /* .ici{

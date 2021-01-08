@@ -63,7 +63,7 @@ module.exports = {
   height: 100%;
   max-height: 1660px;
   padding-top: 40px;
-  padding-bottom: 150px;
+  padding-bottom: 124px;
   overflow-y: scroll;
 }
 

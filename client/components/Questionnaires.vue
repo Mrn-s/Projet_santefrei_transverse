@@ -1,9 +1,9 @@
 <template>
   <div id="background_page_questionnaire">
       <!-- <p>{{user_patient}}</p> -->
-      <section v-if ="!(user_patient.id)" class=" container">
+      <section v-if ="!(user_patient.id) " class=" container">
 
-        <article class="row" id="titre_questionnaire_page">
+        <article v-if="!(user_medecin.id)" class="row" id="titre_questionnaire_page">
           <article class="col-sm-1">
 
           </article>
@@ -20,11 +20,11 @@
         </article>
       </section>
 
-      <section v-if ="user_patient.id" class="section_principale container">
+      <section v-if ="user_patient.id || user_medecin.id" class="section_principale container">
 
         <section class="container" v-if="questionnaire_form" >
 
-          <section  class="container-fluid" id="section_symptomes">
+          <section v-if ="user_patient.id"  class="container-fluid" id="section_symptomes">
             <section class="row d-flex justify-content-center">
               <div class="col-sm-2">
                 <button class="col-sm-12" @click="changeTypeSymptome('type_1')">Type 1</button>
@@ -261,7 +261,7 @@
     background-attachment: fixed;
     height: 100%;
     max-height: 1660px;
-    padding-bottom: 150px;
+    padding-bottom: 124px;
     padding-top: 40px;
     overflow-y: scroll;
   }

@@ -62,7 +62,7 @@
                   <form v-else  @submit.prevent="sendEditProfil_medecin">
                     <div class="row">
                       <div class="col-sm-3">
-                        <p class="taille_1">nom</p>
+                        <p class="taille_1">Nom</p>
                       </div>
 
                       <div class="col-sm-6">
@@ -72,7 +72,7 @@
 
                     <div class="row">
                       <div class="col-sm-3">
-                        <p class="taille_1">prenom</p>
+                        <p class="taille_1">Prenom</p>
                       </div>
                       <div class="col-sm-6">
                         <input name="prenom" :placeholder="user_medecin.prenom" type="text" v-model="editingProfile_medecin.prenom">
@@ -81,16 +81,16 @@
 
                     <div class="row">
                       <div class="col-sm-3">
-                        <p class="taille_1">email</p>
+                        <p class="taille_1">Email</p>
                       </div>
                       <div class="col-sm-6">
-                        <input id="email_med" name="email" :placeholder="user_medecin.email" type="text" v-model="editingProfile_medecin.email">
+                        <p class="taille_1" id="med_email">{{ user_medecin.email }}</p>
                       </div>
                     </div>
 
                     <div class="row">
                       <div class="col-sm-3">
-                        <p class="taille_1">telephone</p>
+                        <p class="taille_1">Télephone</p>
                       </div>
                       <div class="col-sm-6">
                         <input name="telephone" :placeholder="user_medecin.telephone" type="text" v-model="editingProfile_medecin.telephone">
@@ -99,11 +99,12 @@
 
                     <div class="row">
                       <div class="col-sm-3">
-                        <p class="taille_1">specialite</p>
+                        <p class="taille_1">Specialité</p>
                       </div>
                       <div class="col-sm-6">
 
                       <select id="heure_select" v-model="editingProfile_medecin.specialite">
+                        <option value="" disabled selected>{{user_medecin.specialite}}</option>
                         <option value="allergologie">allergologie</option>
                         <option value="andrologie">andrologie</option>
                         <option value="anesthésiologie">anesthésiologie</option>
@@ -236,12 +237,13 @@
 </script>
 
 <style scoped>
-  #email, #email_med{
+
+  #email{
     width: 300px;
   }
     #background_page_profil {
       background-color: var(--beige);
-      padding-bottom: 100px;
+      padding-bottom: 104px;
       padding-top: 40px;
       height: 90%;
     }

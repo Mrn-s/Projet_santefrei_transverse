@@ -1,21 +1,25 @@
 <template>
-  <div class="container-fluid">
+  <div class="background_page_accueil">
+
+    <div class=" container-fluid">
 
           <section class="ligne" id = "ligne_1">
+            <article id ="background_un">
 
-            <article id= "un_un">
-                <p class="taille_5 bold" id ="text_un_un">SANT'EFREI : votre diagnostic personnalisé en quelques clics.</p>
-                <p class ="taille_3" id ="sous_text_un_un">Pour tous, partout, à tout moment.</p>
-                <p class ="taille_3"> Inscrivez-vous et trouvez les solutions à vos problèmes </p>
-                <article id = "emplacement_bouton_un_un" class="button-container-2">
-                  <p class="mas taille_2"> Je m'inscris </p>
-                <router-link id="bouton_un_un" class="taille_2" to='/register'> Inscrivez-vous</router-link>
+                <article id= "un_un">
+                    <p class="taille_5 bold" id ="text_un_un">SANT'EFREI : votre évaluation personnalisé en quelques clics.</p>
+                    <p class ="taille_3" id ="sous_text_un_un">Pour tous, partout, à tout moment.</p>
+                    <p class ="taille_3"> Inscrivez-vous et trouvez les solutions à vos problèmes </p>
+                    <article id = "emplacement_bouton_un_un" class="button-container-2">
+                      <p class="mas taille_2"> Je m'inscris </p>
+                    <router-link id="bouton_un_un" class="taille_2" to='/register'> Inscrivez-vous</router-link>
+                  </article>
+                </article>
+                <article id="equipe" class="taille_3">
+                  <p>Developpez par <strong>Merouane</strong> / <strong>Landry</strong>  / <strong>Gaowei</strong>, avec la participation de <strong>Camelia</strong> et <strong>Lihao (?)</strong></p>
+                </article>
+
               </article>
-            </article>
-
-            <article id ="un_deux">
-              <img src="../images/background_un.png" alt="photo de fond">
-            </article>
 
           </section>
 
@@ -73,6 +77,8 @@
             </article>
           </section>
    </div>
+
+</div>
 </template>
 
 <script>
@@ -92,6 +98,24 @@
 </script>
 
 <style scoped>
+
+#equipe{
+  width: 45%;
+  margin-top: 100px;
+  padding: 30px;
+  background-color: var(--beige_fonce_o);
+  z-index: 2;
+}
+
+.background_page_accueil{
+  background-color: var(--beige);
+  height: 100%;
+  max-height: 1660px;
+  /* padding-top: 40px; */
+  padding-bottom: 104px;
+  overflow-y: scroll;
+}
+
   #contenu_trois{
     padding: 5% 25% 0 25%;
     height: 600px;
@@ -112,18 +136,29 @@
     width: 30%;
     padding: 2.5%;
   }
+#ligne_1{
+  height: 1200px;
+  width: 100%;
+/* margin-left: 400px; */
+  display:flex;
+  justify-content: flex-end;
+}
 
   #un_un{
-    position: absolute;
-    top: 15%;
+    height: 400px;
     width: 45%;
+    margin-top: 140px;
     padding: 30px;
     background-color: var(--beige_fonce_o);
     z-index: 2;
   }
-  #un_deux{
-    display: flex;
-    justify-content: flex-end;
+  #background_un{
+    /* display: flex;
+    justify-content: flex-end; */
+    background-image: url("../images/background_un.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
     width: 100%;
     z-index: 1;
   }
