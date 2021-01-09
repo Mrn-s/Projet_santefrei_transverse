@@ -1,7 +1,7 @@
 const questionnaires_l = [
   {
     id: 1,
-    titre: 'Questionnaire numero 1',
+    titre: 'Questionnaire nº 1',
     duree:'10',
     questions:["Question 1", "Question 2", "Question 3", "Question 4", "Question 5"],
     photo: '',
@@ -9,7 +9,7 @@ const questionnaires_l = [
   },
   {
     id: 2,
-    titre: 'Questionnaire numero 2',
+    titre: 'Questionnaire nº 2',
     duree:'15',
     questions:["Question 1", "Question 2", "Question 3", "Question 4", "Question 5"],
     photo: '',
@@ -17,7 +17,7 @@ const questionnaires_l = [
   },
   {
     id: 3,
-    titre: 'Questionnaire numero 3',
+    titre: 'Questionnaire nº 3',
     duree:'20',
     questions:["Question 1", "Question 2", "Question 3", "Question 4", "Question 5", "Question 6"],
     photo: '',
@@ -25,7 +25,7 @@ const questionnaires_l = [
   },
   {
     id: 4,
-    titre: 'Questionnaire numero 4',
+    titre: 'Questionnaire nº 4',
     duree:'25',
     questions:["Question 1", "Question 2", "Question 3", "Question 4"],
     photo: '',
@@ -33,7 +33,7 @@ const questionnaires_l = [
   },
   {
     id: 5,
-    titre: 'Questionnaire numero 5',
+    titre: 'Questionnaire nº 5',
     duree:'10',
     questions:["Question 1", "Question 2", "Question 3", "Question 4", "Question 5"],
     photo: '',
@@ -41,7 +41,7 @@ const questionnaires_l = [
   },
   {
     id: 6,
-    titre: 'Questionnaire numero 6',
+    titre: 'Questionnaire nº 6',
     duree:'15',
     questions:["Question 1", "Question 2", "Question 3", "Question 4", "Question 5"],
     photo: '',
@@ -49,7 +49,7 @@ const questionnaires_l = [
   },
   {
     id: 7,
-    titre: 'Questionnaire numero 7',
+    titre: 'Questionnaire nº 7',
     duree:'20',
     questions:["Question 1", "Question 2", "Question 3", "Question 4", "Question 5", "Question 6"],
     photo: '',
@@ -57,7 +57,7 @@ const questionnaires_l = [
   },
   {
     id: 8,
-    titre: 'Questionnaire numero 8',
+    titre: 'Questionnaire nº 8',
     duree:'25',
     questions:["Question 1", "Question 2", "Question 3", "Question 4"],
     photo: '',
@@ -65,7 +65,7 @@ const questionnaires_l = [
   },
   {
     id: 9,
-    titre: 'Questionnaire numero 9',
+    titre: 'Questionnaire nº 9',
     duree:'10',
     questions:["Question 1", "Question 2", "Question 3", "Question 4", "Question 5"],
     photo: '',
@@ -73,7 +73,7 @@ const questionnaires_l = [
   },
   {
     id: 10,
-    titre: 'Questionnaire numero 10',
+    titre: 'Questionnaire nº 10',
     duree:'15',
     questions:["Question 1", "Question 2", "Question 3", "Question 4", "Question 5"],
     photo: '',
@@ -81,7 +81,7 @@ const questionnaires_l = [
   },
   {
     id: 11,
-    titre: 'Questionnaire numero 11',
+    titre: 'Questionnaire nº 11',
     duree:'20',
     questions:["Question 1", "Question 2", "Question 3", "Question 4", "Question 5", "Question 6"],
     photo: '',
@@ -89,7 +89,7 @@ const questionnaires_l = [
   },
   {
     id: 12,
-    titre: 'Questionnaire numero 12',
+    titre: 'Questionnaire nº 12',
     duree:'25',
     questions:["Question 1", "Question 2", "Question 3", "Question 4"],
     photo: '',

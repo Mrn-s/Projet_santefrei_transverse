@@ -14,18 +14,19 @@
         </article>
 
       </section>
-      <section v-else class="container">
-        <article class="row" id="titre_section_symptome">
-          <p class="taille_4 col-sm-12"> Trouvez vos symptomes et prennez rdv avec votre médecin</p>
-        </article>
-      </section>
 
       <section v-if ="user_patient.id || user_medecin.id" class="section_principale container">
 
-        <section class="container" v-if="questionnaire_form" >
+
+
+        <section class="container" v-if="questionnaire_form">
 
           <section v-if ="user_patient.id"  class="container-fluid" id="section_symptomes">
-            <section class="row d-flex justify-content-center">
+            <article class="row" id="titre_section_symptome">
+              <p class="taille_4 col-sm-12"> Trouvez vos symptomes et prennez rdv avec votre médecin</p>
+            </article>
+
+            <section id="typeSymptome" class="row d-flex justify-content-center">
               <div class="col-sm-2">
                 <button class="col-sm-12" @click="changeTypeSymptome('type_1')">Type 1</button>
               </div>
@@ -52,7 +53,7 @@
                 <article class="row">
                   <article v-for="s in symptomes" v-if="s.type == symptomeType" class="symptome col-sm-4">
                     <div class="chaque_s row card-2">
-                      <p class="col-sm-12 taille_2">{{ s.name }}</p>
+                      <p class="bold col-sm-12 taille_2">{{ s.name }}</p>
                       <p class="col-sm-12 taille_1">{{ s.description }}</p>
                       <div class="col-sm-12">
                         <button @click="addToListeMesSymptomes(s.type,s.id,s.name)" type="button" name="button">Je ressens ce symptome</button>
@@ -80,13 +81,13 @@
 
           <section id="section_questionnaires" class="container">
 
-            <article class="row" id="titre_section_questionnaire">
-              <p class="taille_3"> Nos questionnaires généraux</p>
+            <article class="row">
+              <p id="titre_section_questionnaire" class="taille_4 col-sm-12"> Nos questionnaires généraux</p>
             </article>
             <article class="row">
               <article v-for="q in questionnaires" class="questionnaire col-sm-4">
                 <div class="chaque_q row card-1">
-                  <p class=" titre_questionnaire taille_moyenne col-sm-12" >{{ q.titre }}</p>
+                  <p class=" titre_questionnaire taille_2 col-sm-12" >{{ q.titre }}</p>
                   <p class=" col-sm-12"> {{ q.duree }} min</p>
                   <div class="col-sm-12">
                     <button type="button" name="button" @click="changeQuestionnaire(q.id), affichage_questionnaire()"> remplir le questionnaire</button>
@@ -99,12 +100,13 @@
 
         </section>
 
-        <section class="container" v-else>
+        <section class="container le_questionnaire" v-else>
+
           <button class="row" type="button" name="button" @click="affichage_questionnaire()">retour</button>
 
           <article class="row"  v-for="q in questionnaires" v-if="q.id == Questionnaire_actuel">
 
-            <article class="container" id="le_questionnaire">
+            <article class="container ">
 
               <p class="taille_3 titre_questionnaire row">{{ q.titre }}</p>
               <form @submit.prevent="addReponseQuestionnaire">
@@ -128,6 +130,7 @@
             </article>
 
           </article>
+
         </section>
 
       </section>
@@ -192,10 +195,30 @@
 </script>
 
 <style scoped>
-  /* #titre_colonne_droite{
-    text-align: center;
-    width: 100%;
-  } */
+.le_questionnaire{
+  background-color: var(--beige_fonce_o);
+  padding: 10px 40px;
+  border: solid black 1px;
+}
+
+#section_questionnaires{
+  background-color: var(--beige_fonce_o);
+  border: 1px solid black;
+  margin-top: 50px;
+}
+#section_symptomes{
+  padding: 15px 30px;
+  border: 1px solid black;
+  background-color: var(--beige_fonce_o);
+}
+#titre_section_questionnaire{
+  text-align: center;
+}
+
+#typeSymptome{
+  margin: 15px 0;
+}
+
   #titre_section_symptome{
     text-align: center;
   }
@@ -206,7 +229,7 @@
   }
 
   .card-1:hover {
-  background-color: var(--vert_o);
+  background-color: var(--vert_o2);
   color: var(--beige);
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   /* background-color: var(--beige_fonce_o); */
@@ -234,7 +257,7 @@
     padding: 20px 0;
   }
   .section_principale{
-    background-color: var(--beige_fonce_o);
+
     margin-top: 20px;
     padding:20px;
     text-align: center;
@@ -249,7 +272,7 @@
   }
 
   #colonne_droite{
-    border:2px black solid;
+    border:1px black solid;
   }
 
   #background_page_questionnaire{

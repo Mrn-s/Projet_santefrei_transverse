@@ -10,13 +10,12 @@
                     <p class="taille_5 bold" id ="text_un_un">SANT'EFREI : votre évaluation personnalisé en quelques clics.</p>
                     <p class ="taille_3" id ="sous_text_un_un">Pour tous, partout, à tout moment.</p>
                     <p class ="taille_3"> Inscrivez-vous et trouvez les solutions à vos problèmes </p>
-                    <article id = "emplacement_bouton_un_un" class="button-container-2">
-                      <p class="mas taille_2"> Je m'inscris </p>
+                    <article v-if ="!user_medecin.id && !user_patient.id" id = "emplacement_bouton_un_un" class="button-container-2">
                     <router-link id="bouton_un_un" class="taille_2" to='/register'> Inscrivez-vous</router-link>
                   </article>
                 </article>
                 <article id="equipe" class="taille_3">
-                  <p>Developpez par <strong>Merouane</strong> / <strong>Landry</strong>  / <strong>Gaowei</strong>, avec la participation de <strong>Camelia</strong> et <strong>Lihao (?)</strong></p>
+                  <p>Developpé par <strong>Merouane</strong> / <strong>Landry</strong>  / <strong>Gaowei</strong>, avec la participation de <strong>Camelia</strong> et <strong>Lihao</strong></p>
                 </article>
 
               </article>
@@ -84,9 +83,9 @@
 <script>
 
   module.exports = {
-    components: {
-    },
     props: {
+      user_medecin: { type: Object },
+      user_patient: { type: Object }
     },
     data () {
       return {

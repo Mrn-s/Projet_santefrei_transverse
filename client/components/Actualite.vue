@@ -55,7 +55,12 @@ module.exports = {
 }
 .chaque-actu{
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+
   margin:15px 0;
+}
+.chaque-actu:hover{
+    background-color: var(--bleu_ciel_o);
+    cursor: pointer;
 }
 
 #background_page_actualite{

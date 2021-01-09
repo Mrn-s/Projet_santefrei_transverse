@@ -285,7 +285,7 @@ const medecins = [
   photo: 'https://img.icons8.com/material-sharp/96/000000/user-male-circle.png',
   region:'Paris',
   numero : '3011111111',
-  specialite:'médecine physique et de réadaptation'
+  specialite:'médecine de réadaptation'
   },
   {
   id: 32,
@@ -744,7 +744,7 @@ const medecins = [
   photo: 'https://img.icons8.com/material-sharp/96/000000/user-male-circle.png',
   region:'Paris',
   numero : '8011111111',
-  specialite:'médecine physique et de réadaptation'
+  specialite:'médecine de réadaptation'
   },
   {
   id: 82,

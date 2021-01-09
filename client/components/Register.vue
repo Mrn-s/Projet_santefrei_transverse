@@ -130,7 +130,7 @@ module.exports = {
     async Creer_medecin(){
       var email = document.getElementById("email_register_medecin").value
       // if (email.match(/[a-z0-9_\-\.]+@+(santefrei-medecin){1}+\.[a-z]+/i)) {
-      if (email.match(/(medecin-)+[a-z]+(-)+[a-z]+(-santefrei)/gm)) { //medecin-jacques-tellier-santefrei
+      if (email.match(/(medecin-)+[a-z]+(-)+[a-z]+(-santefrei)$/gm)) { //medecin-jacques-tellier-santefrei
         this.$emit('register_medecin', this.editRegister_medecin)
       } else{
         alert("Vous n'êtes pas médecin")
