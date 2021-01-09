@@ -99,7 +99,7 @@
 <style scoped>
 
 #equipe{
-  width: 45%;
+  width: 50%;
   margin-top: 100px;
   padding: 30px;
   background-color: var(--beige_fonce_o);
@@ -144,18 +144,18 @@
 }
 
   #un_un{
-    height: 400px;
-    width: 45%;
+    width: 50%;
     margin-top: 140px;
     padding: 30px;
     background-color: var(--beige_fonce_o);
     z-index: 2;
   }
+
   #background_un{
     /* display: flex;
     justify-content: flex-end; */
     background-image: url("../images/background_un.png");
-    background-size: cover;
+    background-size: contain;
     background-repeat: no-repeat;
     height: 100%;
     width: 100%;
@@ -184,8 +184,6 @@
       text-align: center;
       width: 70%;
       padding: 10px;
-      /* justify-content: center; */
-      /* align-items: center; */
       border: black 6px double;
       box-shadow: 10px 10px 5px #09371F;;
   }

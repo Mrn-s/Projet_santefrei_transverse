@@ -11,8 +11,10 @@
 
       <div class="container">
         <section class="row d-flex flex-wrap justify-content-around">
-          <div class="col-sm-12">
-            <button class="col-sm-3" v-for="s in les_spe" type="button" name="button" @click="changeTypeSpecialite(s.nom)">{{ s.nom }}</button>
+          <div class="row">
+            <div class="col-sm-4" v-for="s in les_spe">
+              <button class="col-sm-12 action-button shadow animate blue chaque_specialite"  type="button" name="button" @click="changeTypeSpecialite(s.nom)">{{ s.nom }}</button>
+            </div>
           </div>
         </section>
         <article  class="taille_4 row">
@@ -222,4 +224,40 @@ box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 /* .ici{
       overflow-y: scroll;
 } */
+.animate
+{
+	transition: all 0.1s;
+	-webkit-transition: all 0.1s;
+}
+
+.action-button
+{
+	position: relative;
+	padding: 10px 40px;
+    margin: 0px 10px 10px 0px;
+    float: left;
+	border-radius: 3px;
+	font-family: 'Lato', sans-serif;
+	font-size: 18px;
+	color: #FFF;
+	text-decoration: none;
+}
+
+.blue
+{
+	background-color: #3498db;
+	border-bottom: 5px solid #2980B9;
+	text-shadow: 0px -2px #2980B9;
+}
+
+.action-button:active
+{
+	transform: translate(5px,5px);
+  -webkit-transform: translate(5px,5px);
+	border-bottom: 1px solid;
+}
+
+.chaque_specialite{
+  margin:10px 0;
+}
 </style>
