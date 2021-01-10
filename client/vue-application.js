@@ -42,11 +42,11 @@ var app = new Vue({
   data: {
 
     questionnaires:[],
-    symptomes:[],
+    l_symptomes:[],
     liste_specialites:[],
     liste_actualite:[],
     liste_medecins: [],
-    liste_symptomes_patient: {
+    panier_symptomes: {
       createdAt: null,
       updatedAt: null,
       nb_symptomes: 0,
@@ -63,7 +63,8 @@ var app = new Vue({
       prenom: null,
       email: null,
       telephone: null,
-      id: null
+      id: null,
+      rdv_patient: []
     },
     user_medecin: {
       nom: null,
@@ -71,7 +72,8 @@ var app = new Vue({
       email: null,
       telephone: null,
       specialite: null,
-      id: null
+      id: null,
+      demande_de_rdv: []
     },
     maladiesTypes: ['tete', 'bras_droit', 'bras_gauche', 'jambe_droite', 'jambe_gauche', 'torse', 'cou', 'epaule_droite', 'epaule_gauche'],
     symptomeTypes: ['type_1','type_2','type_3','type_4','type_5','type_6']
@@ -81,46 +83,57 @@ var app = new Vue({
     // this.medecins = res_medecins.data
     // const res_maladies = await axios.get('/api/maladies')
     // this.maladies = res_maladies.data
+    const res_panier_symptome = await axios.get('/api/GetPanierSymptomes')
+    this.panier_symptomes = res_panier_symptome.data
     const liste_des_questionnaires = await axios.get('/api/getQuestionnaire')
     this.questionnaires = liste_des_questionnaires.data
     const liste_des_symptomes = await axios.get('/api/getLes_symptomes')
-    this.symptomes = liste_des_symptomes.data
+    this.l_symptomes = liste_des_symptomes.data
     const liste_des_medecins = await axios.get('/api/getLes_medecins')
     this.liste_medecins = liste_des_medecins.data
     const liste_des_actualite = await axios.get('/api/getLes_actualite')
     this.liste_actualite = liste_des_actualite.data
     const liste_des_spe = await axios.get('/api/getLes_spe')
     this.liste_specialites = liste_des_spe.data
-    // const res_liste_s = await axios.get('/api/Liste_mes_symptomes')
-    // this.liste_symptomes_patient = res_liste_s.data
 
-    // await axios.post('/api/setdatas', 'maladiesTypes=' + this.maladiesTypes)
-    try {
+    await axios.post('/api/setdatas', 'symptomeTypes=' + this.symptomeTypes)
+
       const res_patient = await axios.get('/api/me_patient')
-      this.user_patient.id = res_patient.data.id
-      this.user_patient.nom = res_patient.data.nom
-      this.user_patient.email = res_patient.data.email
-      this.user_patient.prenom = res_patient.data.prenom
-      this.user_patient.telephone = res_patient.data.telephone
-    } catch(e) {
+      this.user_patient = res_patient.data
+
       const res_medecin = await axios.get('/api/me_medecin')
-      this.user_medecin.id = res_medecin.data.id
-      this.user_medecin.nom = res_medecin.data.nom
-      this.user_medecin.email = res_medecin.data.email
-      this.user_medecin.prenom = res_medecin.data.prenom
-      this.user_medecin.telephone = res_medecin.data.telephone
-      this.user_medecin.specialite = res_medecin.data.specialite
-    }
+      this.user_medecin = res_medecin.data
+
+
   },
   methods: {
 
-    async addToListeMesSymptomes (liste_de_symptomes) {
+    async removeFromPanier_symptomes (s) {
+      // alert("Vue APP 1")
       for (let i = 0; i != this.symptomeTypes.length; i++) {
-        if (liste_de_symptomes.type == this.symptomeTypes[i]) {
-          const res = await axios.post('/api/panier_symptome','id=' + liste_de_symptomes.id + '&type=' + liste_de_symptomes.type)
-          this.liste_symptomes_patient.symptomes.push(res.data)
+        // alert("Vue APP 2 for")
+        if (s.type == this.symptomeTypes[i]) {
+          // alert("test 1")
+          const indexS = await axios.delete('/api/panier_s/' + s.type + '/' + s.id)
+          // alert("test 2")
+          this.panier_symptomes.symptomes.splice(indexS.data, 1)
+        }
+      }
 
-          this.liste_symptomes_patient.nb_symptomes = this.liste_symptomes_patient.nb_symptomes + 1
+      this.panier_symptomes.nb_symptomes = this.panier_symptomes.nb_symptomes - 1
+    },
+
+    async add_to_panier_symptomes (symptome) {
+      // alert("vue app ETAPE 1")
+      for (let i = 0; i != this.symptomeTypes.length; i++) {
+        // alert("vue app ETAPE 2")
+        if (symptome.type == this.symptomeTypes[i]) {
+          // alert("vue app ETAPE 3")
+          const res = await axios.post('/api/panier_s','id=' + symptome.id + '&type=' + symptome.type + '&nom=' + symptome.nom)
+
+          this.panier_symptomes.symptomes.push(res.data)
+
+          this.panier_symptomes.nb_symptomes = this.panier_symptomes.nb_symptomes + 1
         }
       }
     },
@@ -140,6 +153,16 @@ var app = new Vue({
       this.user_patient.telephone = res.data.telephone
       this.user_patient.id = res.data.user_patient
       router.push('/')
+    },
+
+    async prendre_rdv (rdv) {
+        alert("rdv.patient de vue app : " + rdv.patient + rdv.medecin + rdv.heure + rdv.date + rdv.description)
+
+        const res = await axios.post('/api/rdv','date=' + rdv.date + '&heure=' + rdv.heure + '&description=' + rdv.description + '&pid=' + rdv.patient + '&mid=' + rdv.medecin)
+        this.user_patient.rdv_patient.push(res.data)
+        alert(this.user_patient.rdv_patient)
+        this.user_medecin.demande_de_rdv.push(res.data)
+        alert(this.user_medecin.demande_de_rdv)
     },
 
     async login (user) {
@@ -206,6 +229,7 @@ var app = new Vue({
       this.user_patient.telephone = res.data.telephone
 
     },
+
     async updateProfile_medecin (nv_profil) {
       await axios.put('/api/user_update_medecin/', 'nom=' + nv_profil.nom + '&prenom=' + nv_profil.prenom + '&email=' + nv_profil.email +'&specialite=' +  nv_profil.specialite + '&telephone=' + nv_profil.telephone)
       const res = await axios.get('/api/me_medecin')
@@ -215,10 +239,6 @@ var app = new Vue({
       this.user_medecin.telephone = res.data.telephone
       this.user_medecin.specialite = res.data.specialite
 
-    },
-
-    async prendre_rdv (nv_rendez_vous) {
-      await axios.put('/api/prendre_rendez_vous/', 'nom=' + nv_rendez_vous.nom + '&prenom=' + nv_rendez_vous.prenom + '&heure=' + nv_rendez_vous.heure + '&date=' + nv_rendez_vous.date + '&medecin=' + nv_rendez_vous.medecin_id)
     }
 
   }

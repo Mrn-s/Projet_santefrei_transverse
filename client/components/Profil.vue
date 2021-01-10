@@ -163,10 +163,19 @@
         </div>
 
         <div id="mes-rendez-vous"  class="container-fluid">
-          <div class="col-sm-12">
 
-            <p class="taille_3">ici seront affichés les rendez vous avec les médecins</p>
-          </div>
+            <p class="row taille_3">ici seront affichés les rendez vous avec les médecins</p>
+            <section class="row" v-for="r in user_patient.rdv_patient">
+              <section class="col-sm-12">
+                <p> Date : {{ r.date }} </p>
+              </section>
+              <section class="col-sm-12">
+                <p> Heure : {{ r.heure }} </p>
+              </section>
+              <section class="col-sm-12">
+                <p> Nom du medecin : {{ r.medecin_id }} </p>
+              </section>
+            </section>
 
         </div>
       </div>
@@ -177,6 +186,7 @@
 </template>
 
 <script>
+
   module.exports = {
     props: {
       user_patient: {type: Object },

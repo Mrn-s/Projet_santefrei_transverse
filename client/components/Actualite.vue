@@ -59,7 +59,8 @@ module.exports = {
   margin:15px 0;
 }
 .chaque-actu:hover{
-    background-color: var(--bleu_ciel_o);
+    background-color: var(--cam_color2_o) ;
+    /* var(--bleu_ciel_o) */
     cursor: pointer;
 }
 

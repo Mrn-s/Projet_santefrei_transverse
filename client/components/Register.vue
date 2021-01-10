@@ -1,6 +1,6 @@
 <template>
   <div id="background_page_register">
-    <div class="container" id="ici">
+    <div class="container colonne_centrale" id="ici">
 
         <div class="container" id="popupForm_register">
           <form class="row"  @submit.prevent="Creer_patient">
@@ -180,25 +180,12 @@
     display: none;
   }
 
-  /* #container{
-      width:400px;
-      margin:0 auto;
-      margin-top:2%;
-  } */
-  /* Bordered form */
   form {
       width:100%;
       padding: 30px;
       border: 1px solid #f1f1f1;
   }
 
-  /* #container h1{
-      display:flex;
-      justify-content: space-around;
-      height:6%;
-      margin: 0 auto;
-      padding-bottom: 10px;
-  } */
 
   /* Full-width inputs */
   input[type=text], input[type=password] {
@@ -231,6 +218,9 @@
     background-color: #09371F;
     color:#fff;
     font-size: 1.3em;
+  }
+  .btn_inscription{
+    padding: 20px;
   }
   .bouton_inscription:hover{
     background-color: #E8C542;

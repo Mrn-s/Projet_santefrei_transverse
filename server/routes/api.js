@@ -14,7 +14,7 @@ const les_specialites = require('../data/specialites.js')
 const client = new Client({
  user: 'postgres',
  host: 'localhost',
- password: 'landry',
+ password: 'Tellier_Souadji',
  database: 'Projet_transverse'
 })
 
@@ -24,188 +24,252 @@ class Panier_symptomes {
   constructor () {
     this.createdAt = new Date()
     this.updatedAt = new Date()
-    this.nom =''
-    this.prenom=''
+    this.nb_symptomes = 0
     this.symptomes = []
   }
 }
 
-// router.post('/setdatas', (req, res) => {
-//   req.session.symptomesTypes = req.body.symptomesTypes.split(',')
-//   res.send()
-// })
 //
-// router.get('/panier_symptome', (req, res) => {
-//   res.json(req.session.panier_symptomes)
-// })
-//
-// router.post('/panier_symptome', (req, res) => {
-//   const s_Id = parseInt(req.body.id)
-//   const s_Type = req.body.type
-//
+// .delete(parseMenu, (req, res) => {
 //   const size = parseInt(req.session.symptomeTypes.length)
 //   for (let i = 0; i != size; i++) {
-//     if (s_Type == req.session.symptomeTypes[i]) {
-//       var symptome = liste_symptomes[i].find(a => a.id === s_Id)
+//     if (req.menuType == req.session.symptomeTypes[i]) {
+//       const index = symptomes[i].findIndex(a => a.id === req.menuId)
+//       menus[i].splice(index, 1)
 //     }
 //   }
 //
-//   if (!symptome) {
-//     res.status(501).json({ message: 'symptome non existant' })
-//   } else {
-//     var newSym = {
-//       id: menuId,
-//       type: s_Type
-//     }
-//
-//     const size = parseInt(req.session.symptomeTypes.length)
-//     for (let i = 0; i != size; i++) {
-//       if (menuType == req.session.symptomeTypes[i]) {
-//         if (checkIfNotSymptomeExistInMes_symptomes(newSym.id, newSym.type, req.session.panier_symptomes.symptomes)) {
-//           req.session.panier_symptomes.symptomes.push(newSym)
-//           res.json(newSym)
-//         }
-//       }
-//     }
-//   }
-// })
-//
-// function checkIfNotSymptomeExistInMes_symptomes (id, type, symptomes) {
-//   var bool = true
-//   for (let i = 0; i != symptomes.length; i++) {
-//     if ((s_in_panier_s[i].type == type) && (s_in_panier_s[i].id == id)) {
-//         bool = false
-//     }
-//   }
-//   return bool
-// }
-//
-// router.use((req, res, next) => {
-//   if (typeof req.session.panier_symptomes === 'undefined') {
-//     req.session.panier_symptomes = new Panier_symptomes()
-//   }
-//   next()
-// })
-//
-// function parseSymptome (req, res, next) {
-//   const symptomeId = parseInt(req.params.id)
-//   const symptomeType = req.params.type
-//
-//   // si menuId n'est pas un nombre (NaN = Not A Number), alors on s'arrête
-//   if (isNaN(menuId)) {
-//     res.status(400).json({ message: 'menuId should be a number' })
-//     return
-//   }
-//   // on affecte req.menuId pour l'exploiter dans toutes les routes qui en ont besoin
-//   req.symptomeId = id_s
-//   req.symptomeType = type_s
-//
-//   const size = parseInt(req.session.menusTypes.length)
-//   for (let i = 0; i != size; i++) {
-//     if (req.symptomeType == req.session.menusTypes[i]) {
-//       const symptome = symptomes[i].find(a => a.id === req.symptomeId)
-//       req.symptome = symptome
-//       req.type = type_s
-//
-//     }
-//   }
-//
-//   if (!req.symptome) {
-//     res.status(404).json({ message: 'symptome ' + id_s + ' does not exist' })
-//     return
-//   }
-//
-//   next()
-// }
-//
-// .get(parseSymptome, (req, res) => {
-//   res.json(req.menu)
-// })
-//
-// router.delete('/panier_symptome/:type/:id', (req, res) => {
-//  const menuId = parseInt(req.params.id)
-//  const menuType = req.params.type
-//
-//  var index = null
-//  var menu = null
-//
-//  const size = parseInt(req.session.menusTypes.length)
-//  for (let i = 0; i != size; i++) {
-//     if (menuType == req.session.menusTypes[i]) {
-//       index = indexMenuInPanier (menuId, menuType, req.session.panier.menus)
-//       menu = menuInPanier (menuId, menuType, req.session.panier.menus)
-//     }
-//  }
-//
-//  if (isNaN(menuId)) {
-//     res.status(400).json({ message: 'Requête incorrecte' })
-//  } else if (index === -1) {
-//     res.status(501).json({ message: "L'menu n'est pas dans le panier" })
-//  } else {
-//     const size = parseInt(req.session.menusTypes.length)
-//     for (let i = 0; i != size; i++) {
-//       if (menuType == req.session.menusTypes[i]) {
-//         req.session.panier.menus.splice(index, 1)
-//       }
-//     }
-//
-//     req.session.panier.nb_menus = req.session.panier.nb_menus - menu.quantity
-//     req.session.panier.prix = req.session.panier.prix - (menu.quantity * menu.prix)
-//     res.json(index)
-//   }
-// })
-//
-// function menuInPanier (id, type, menus) {
-//   for (let i = 0; i != menus.length; i++) {
-//     if (menus[i].type == type) {
-//       if (menus[i].id == id) {
-//         return menus[i]
-//       }
-//     }
-//   }
-// }
-//
-// function indexMenuInPanier (id, type, menus) {
-//   var index = 0
-//   for (let i = 0; i != menus.length; i++) {
-//     if (menus[i].type == type) {
-//       if (menus[i].id == id) {
-//         return index
-//       }
-//     }
-//     index ++
-//   }
-// }
-//
-// router.put('/panier/:type/:id/:quantity', (req, res) => {
-//   const menuId = parseInt(req.params.id)
-//   const menuQte = parseInt(req.params.quantity)
-//   const menuType = req.params.type
-//
-//   var index = null
-//
-//   const size = parseInt(req.session.menusTypes.length)
-//   for (let i = 0; i != size; i++) {
-//     if (menuType == req.session.menusTypes[i]) {
-//       index = indexMenuInPanier (menuId, menuType, req.session.panier.menus)
-//     }
-//   }
-//
-//   if (isNaN(menuId)) {
-//     res.status(400).json({ message: 'Requête incorrecte' })
-//   } else if (index === -1) {
-//     res.status(501).json({ message: "L'menu n'est pas dans le panier" })
-//   } else {
-//     const size = req.session.panier.menus.length
-//     for (let i = 0; i != size; i++) {
-//       req.session.panier.menus[i].quantity = menuQte
-//     }
-//     res.send()
-//   }
+//   res.send()
 // })
 
+router.delete('/panier_s/:type/:id', (req, res) => {
+  // console.log("API 1")
+ const s_Id = parseInt(req.params.id)
+ const s_Type = req.params.type
+// console.log("API 2 " + s_Id)
+ var index = null
+ var symp = null
 
-// Exercice 2 : Inscription
+ const size = parseInt(req.session.symptomeTypes.length)
+ for (let i = 0; i != size; i++) {
+   // console.log("API 3")
+    if (s_Type == req.session.symptomeTypes[i]) {
+      // console.log("API 4")
+      index = indexSympInPanier (s_Id, s_Type, req.session.panier_symptomes.symptomes)
+      symp = sympInPanier (s_Id, s_Type, req.session.panier_symptomes.symptomes)
+        // console.log("API 5 " + index + " " + symp)
+    }
+ }
+
+ if (isNaN(s_Id)) {
+   // console.log("API 6 1 ")
+    res.status(400).json({ message: 'Requête incorrecte' })
+ } else if (index === -1) {
+   // console.log("API 6 2 ")
+    res.status(501).json({ message: "Le symptome n'est pas dans le panier" })
+ } else {
+   // console.log("API 6 3 ")
+    const size = parseInt(req.session.symptomeTypes.length)
+    for (let i = 0; i != size; i++) {
+      if (s_Type == req.session.symptomeTypes[i]) {
+        // console.log("API 7 ")
+        req.session.panier_symptomes.symptomes.splice(index, 1)
+        // console.log("API 8 ")
+      }
+    }
+    // console.log("API 9 ")
+    req.session.panier_symptomes.nb_symptomes = req.session.panier_symptomes.nb_symptomes - 1
+    // console.log("API 10 ")
+    res.json(index)
+  }
+})
+
+function sympInPanier (id, type, symptomes) {
+  for (let i = 0; i != symptomes.length; i++) {
+    if (symptomes[i].type == type) {
+      if (symptomes[i].id == id) {
+        return symptomes[i]
+      }
+    }
+  }
+}
+// Cette fonction
+function indexSympInPanier (id, type, symptomes) {
+  var index = 0
+  for (let i = 0; i != symptomes.length; i++) {
+    if (symptomes[i].type == type) {
+      if (symptomes[i].id == id) {
+        return index
+      }
+    }
+    index ++
+  }
+}
+
+
+router.post('/setdatas', (req, res) => {
+  req.session.symptomeTypes = req.body.symptomeTypes.split(',')
+  res.send()
+})
+
+router.use((req, res, next) => {
+  // l'utilisateur n'est pas reconnu, lui attribuer un panier dans req.session
+  if (typeof req.session.panier_symptomes === 'undefined') {
+    console.log(" on reset dans api ")
+    req.session.panier_symptomes = new Panier_symptomes()
+  }
+  next()
+})
+
+
+router.post('/panier_s', (req, res) => {
+  const s_id = parseInt(req.body.id)
+  const s_nom = req.body.nom
+  const s_type = req.body.type
+  // console.log("ETAPE 1 : " + s_id + " " + s_nom + " " + s_type)
+
+  const size = parseInt(req.session.symptomeTypes.length)
+
+  // for (let i = 0; i != size; i++) {
+  //   console.log("ETAPE 3 ! ")
+  //   if (s_type == req.session.symptomeTypes[i]) {
+  //     console.log("ETAPE 3 bis ! " + symptomes[i].data )
+  //     var s_existant = symptomes[i].find(a => a.id === s_id)
+  //   }
+  // }
+  // console.log("ETAPE 4 !")
+  // if (!s_existant) {
+  //   console.log("ETAPE 5 ! ")
+  //   res.status(501).json({ message: 'symptome non existant' })
+  // } else {
+    // console.log("ETAPE 5 bis ! ")
+    var newSymptome_dans_panier = {
+      id: s_id,
+      type: s_type,
+      nom: s_nom
+    }
+    // console.log("ETAPE 6 ! " + newSymptome_dans_panier.id + " " + newSymptome_dans_panier.type + " " + newSymptome_dans_panier.nom)
+    req.session.panier_symptomes.nb_symptomes = req.session.panier_symptomes.nb_symptomes + 1
+    // console.log("ETAPE 7  : " + req.session.panier_symptomes.nb_symptomes)
+    const size_2 = parseInt(req.session.symptomeTypes.length)
+    for (let i = 0; i != size_2; i++) {
+      // console.log("ETPAE 8 : " + (s_type == req.session.symptomeTypes[i]) + " " + checkIfNotMenuExistInPanier_s(newSymptome_dans_panier.id, newSymptome_dans_panier.type, req.session.panier_symptomes.symptomes))
+      if ((s_type == req.session.symptomeTypes[i]) && (checkIfNotMenuExistInPanier_s(newSymptome_dans_panier.id, newSymptome_dans_panier.type, req.session.panier_symptomes.symptomes)))
+      {
+          req.session.panier_symptomes.symptomes.push(newSymptome_dans_panier)
+          res.json(newSymptome_dans_panier)
+      }
+    }
+  // }
+})
+function checkIfNotMenuExistInPanier_s (id, type, symptomes) {
+  var bool = true
+  for (let i = 0; i != symptomes.length; i++) {
+    if (symptomes[i].type == type) {
+      if (symptomes[i].id == id) {
+        bool = false
+      }
+    }
+  }
+  return bool
+}
+
+
+router.get('/GetPanierSymptomes', (req, res) => {
+  res.json(req.session.panier_symptomes)
+})
+
+router.post('/panier/rdv_m', (req, res) => {
+  if (req.session.userId) {
+    req.session.panier_s = new Panier_symptomes()
+    res.status(200).json(req.session.panier_s)
+  } else {
+    res.status(401).json({ message: "not logged" })
+  }
+})
+
+
+
+router.post('/rdv', async (req, res) => {
+// console.log("ICI 1")
+  if (req.session.userId) {
+    // console.log("ICI 2")
+    const date = req.body.date
+    const heure = req.body.heure
+    const description = req.body.description
+    const id_du_patient = req.body.pid
+    const id_du_medecin = req.body.mid
+
+    // console.log("date " + date + "heure :" + heure + "id_du_patient " + id_du_patient + "id_du_medecin " + id_du_medecin)
+
+    const insert = "INSERT INTO rendez_vous (date, heure, description, patient_id, medecin_id) VALUES ($1, $2, $3, $4, $5)"
+
+    // console.log("ICI 3")
+
+    await client.query({
+      text: insert,
+      values: [date, heure, description, id_du_patient, id_du_medecin]
+    })
+
+    // console.log("ICI 4")
+    const le_rdv = {
+      id: req.session.rdv_patient_Id + 1,
+      date: date,
+      heure: heure,
+      description: description,
+      id_du_patient: id_du_patient,
+      id_du_medecin: id_du_medecin
+
+    }
+    // console.log("ICI 5")
+
+
+    res.status(200).json(le_rdv)
+  } else {
+    res.status(401).json({ message: "not logged" })
+  }
+
+})
+
+router.post('/login', async (req, res) => {
+
+  const email = req.body.email
+  const password = req.body.password
+  const hash = await bcrypt.hash(password, 10)
+  const sql = "SELECT password FROM users WHERE email=$1"
+  const result = await client.query({
+    text: sql,
+    values: [email]
+  })
+
+  if (result.rowCount == 1) {
+    const hashedPassword = result.rows[0].password
+
+    if (await bcrypt.compare(password, hashedPassword)) {
+
+      const sqlId = "SELECT * FROM users WHERE email=$1"
+      const result2 = await client.query({
+        text: sqlId,
+        values: [email]
+      })
+
+      req.session.userId = result2.rows[0].id
+      req.session.userName = result2.rows[0].nom
+      req.session.userEmail = result2.rows[0].email
+      req.session.userFirstName = result2.rows[0].prenom
+      req.session.userTelephone = result2.rows[0].telephone
+      req.session.rdv_patient_Id = 0
+
+      res.status(200).json({ message: "well logged as user" })
+
+    } else {
+      res.status(400).json({ message: "wrong password" })
+    }
+  } else {
+    res.status(400).json({ message: "no such user exist" })
+  }
+})
+
 router.post('/register_patient',async (req,res) => {
 
   const email = req.body.email
@@ -265,43 +329,7 @@ router.post('/register_medecin',async (req,res) => {
     }
     })
 // Exercice 3 : Connexion
-router.post('/login', async (req, res) => {
 
-  const email = req.body.email
-  const password = req.body.password
-  const hash = await bcrypt.hash(password, 10)
-  const sql = "SELECT password FROM users WHERE email=$1"
-  const result = await client.query({
-    text: sql,
-    values: [email]
-  })
-
-  if (result.rowCount == 1) {
-    const hashedPassword = result.rows[0].password
-
-    if (await bcrypt.compare(password, hashedPassword)) {
-
-      const sqlId = "SELECT * FROM users WHERE email=$1"
-      const result2 = await client.query({
-        text: sqlId,
-        values: [email]
-      })
-
-      req.session.userId = result2.rows[0].id
-      req.session.userName = result2.rows[0].nom
-      req.session.userEmail = result2.rows[0].email
-      req.session.userFirstName = result2.rows[0].prenom
-      req.session.userTelephone = result2.rows[0].telephone
-
-      res.status(200).json({ message: "well logged as user" })
-
-    } else {
-      res.status(400).json({ message: "wrong password" })
-    }
-  } else {
-    res.status(400).json({ message: "no such user exist" })
-  }
-})
 
 router.post('/medecin_login', async (req,res) =>{
 
@@ -330,6 +358,7 @@ router.post('/medecin_login', async (req,res) =>{
         req.session.medecinFirstName = result2.rows[0].prenom
         req.session.medecinTelephone = result2.rows[0].telephone
         req.session.medecinSpecialite = result2.rows[0].specialite
+        req.session.rdv_medecin_Id = 0
 
         res.status(200).json({ message: "well logged as medecin" })
 
@@ -348,6 +377,7 @@ router.post('/logout', async (req, res) => {
   req.session.userEmail = null
   req.session.userFirstName = null
   req.session.userTelephone = null
+  req.session.panier_symptomes = new Panier_symptomes()
 
   req.session.medecinId = null
   req.session.medecinName = null
@@ -364,6 +394,7 @@ router.post('/logout', async (req, res) => {
     email_patient: req.session.userEmail,
     prenom_patient: req.session.userFirstName,
     telephone: req.session.userTelephone,
+    panier_symptomes: req.session.panier_symptomes,
 
     nom_medecin: req.session.medecinName,
     email_medecin: req.session.medecinEmail,
@@ -375,30 +406,73 @@ router.post('/logout', async (req, res) => {
 })
 // Exercice 4 : Who am I, testé uniquement sur Postman mais pas la partie vue.js
 router.get('/me_medecin', async (req, res) => {
-  console.log(req.session.medecinId)
 
-  if (req.session.medecinId) {
-    const utilisateur = await client.query({
-      text: 'SELECT * FROM medecins WHERE id=$1',
-      values: [req.session.medecinId]
-    })
-    res.json(utilisateur.rows[0])
-    console.log(utilisateur.rows[0])
-  } else {
-    res.status(401).json({ message: 'not connected' })
-  }
+    var dmd_rdv = []
+
+      const select = "SELECT * FROM rendez_vous WHERE medecin_id=$1"
+      const result_m = await client.query({
+        text: select,
+        values: [req.session.medecinId]
+      })
+
+      dmd_rdv = result_m.rows
+
+
+    const m = {
+      id: req.session.medecinId,
+      nom: req.session.medecinName,
+      email: req.session.medecinEmail,
+      prenom: req.session.medecinFirstName,
+      telephone: req.session.medecinTelephone,
+      specialite: req.session.medecinSpecialite,
+      medecin_demande_de_rdv: dmd_rdv
+    }
+
+    res.json(m)
+
+
+  // if (req.session.medecinId) {
+  //   const utilisateur = await client.query({
+  //     text: 'SELECT * FROM medecins WHERE id=$1',
+  //     values: [req.session.medecinId]
+  //   })
+  //   res.json(utilisateur.rows[0])
+  //   console.log(utilisateur.rows[0])
+  // } else {
+  //   res.status(401).json({ message: 'not connected' })
+  // }
+
   })
 
 router.get('/me_patient', async (req, res) => {
-  if (req.session.userId) {
-    const utilisateur = await client.query({
-      text: 'SELECT * FROM users WHERE id=$1',
-      values: [req.session.userId]
-    })
-    res.json(utilisateur.rows[0])
-  } else {
-    res.status(401).json({ message: 'not connected' })
-  }
+
+    var mes_rdv = []
+
+    if (req.session.userId) {
+      const select = "SELECT * FROM rendez_vous WHERE patient_id=$1"
+      const result = await client.query({
+        text: select,
+        values: [req.session.userId]
+      })
+
+      for (let i = 0; i < result.rows.length; i++) {
+        result.rows[i].date = new Date(result.rows[i].date).toString().slice(0,15)
+      }
+      mes_rdv = result.rows
+    }
+
+    const user = {
+      id: req.session.userId,
+      nom: req.session.userName,
+      email: req.session.userEmail,
+      prenom: req.session.userFirstName,
+      telephone: req.session.userTelephone,
+      patient_rdv: mes_rdv
+    }
+    // console.log(user)
+
+    res.json(user)
+
   })
 
 router.get('/getQuestionnaire', (req,res) => {
@@ -494,36 +568,5 @@ router.put('/user_update_medecin', async (req, res) => {
     res.send()
     })
 
-// router.post('/prendre_rendez_vous', async (req, res) => {
-//
-//     if (req.session.userId) {
-//
-//       const date = req.body.date
-//       const heure = req.body.heure
-//       const nom = req.body.nom
-//       const prenom = req.body.prenom
-//       const medecin_id = req.body.medecin
-//
-//       const insert = "INSERT INTO rendez_vous (date, heure, nom, prenom, medecin_id) VALUES ($1, $2, $3, $4, $5)"
-//
-//       await client.query({
-//         text: insert,
-//         values: [date, heure, nom, prenom, medecin_id]
-//       })
-//
-//       const rdv = {
-//         date: date,
-//         heure: heure,
-//         nom: nom,
-//         prenom: prenom,
-//         medecin_id: medecin_id
-//       }
-//
-//       res.status(200).json(rdv)
-//     } else {
-//       res.status(401).json({ message: "not logged" })
-//     }
-//
-// })
 
 module.exports = router

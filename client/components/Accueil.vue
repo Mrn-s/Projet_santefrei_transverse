@@ -15,7 +15,7 @@
                   </article>
                 </article>
                 <article id="equipe" class="taille_3">
-                  <p>Developpé par <strong>Merouane</strong> / <strong>Landry</strong>  / <strong>Gaowei</strong>, avec la participation de <strong>Camelia</strong> et <strong>Lihao</strong></p>
+                  <p>Developpé par <strong>Merouane</strong> / <strong>Landry</strong>  / <strong>Gaowei</strong>, rendu opérationnel grâce à <strong>Camelia</strong> et <strong>Lihao</strong></p>
                 </article>
 
               </article>

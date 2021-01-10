@@ -22,18 +22,18 @@
         <div id="app">
 
           <div class="topnav">
-              <router-link class="btn-13 custom-btn nav-link" to='/'> Accueil </router-link>
-              <router-link class="btn-13 custom-btn nav-link" to='/questionnaire'> Questionnaires</router-link>
-              <router-link class="btn-13 custom-btn nav-link" to='/medecins'> Nos medecins </router-link>
-              <router-link class="btn-13 custom-btn nav-link" to='/actualite'> Actualité </router-link>
+              <router-link class="btn-13 custom-btn-1 nav-link" to='/'> Accueil </router-link>
+              <router-link class="btn-13 custom-btn-1 nav-link" to='/questionnaire'> Questionnaires</router-link>
+              <router-link class="btn-13 custom-btn-1 nav-link" to='/medecins'> Nos medecins </router-link>
+              <router-link class="btn-13 custom-btn-1 nav-link" to='/actualite'> Actualité </router-link>
 
               <div class="topnav-right">
-                <router-link v-if="(user_patient.id)" class="btn-13 custom-btn nav-link" to='/mes_rapports'> Mes rapports </router-link>
-                <router-link v-if="(user_medecin.id)" class="btn-13 custom-btn nav-link" to='/mes_patients'> Mes patients </router-link>
-                <router-link class="btn-13 custom-btn nav-link" v-if="(user_patient.id) || (user_medecin.id)"  to='/profil'> Mon profil </router-link>
-                <router-link class="btn-13 custom-btn nav-link" v-if="!(user_patient.id) && !(user_medecin.id)"  to='/register'> S'inscrire </router-link>
-                <router-link class="nav-link btn-13 custom-btn " v-if="(user_patient.id) || (user_medecin.id)" to='/deconnexion'>Déconnexion</router-link>
-                <router-link class="btn-13 custom-btn nav-link" v-if="!(user_patient.id) && !(user_medecin.id)"  to='/login'>Se connecter </router-link>
+                <router-link v-if="(user_patient.id)" class="btn-13 custom-btn-1 nav-link" to='/mes_rapports'> Mes rapports </router-link>
+                <router-link v-if="(user_medecin.id)" class="btn-13 custom-btn-1 nav-link" to='/mes_patients'> Mes patients </router-link>
+                <router-link class="btn-13 custom-btn-1 nav-link" v-if="(user_patient.id) || (user_medecin.id)"  to='/profil'> Mon profil </router-link>
+                <router-link class="btn-13 custom-btn-1 nav-link" v-if="!(user_patient.id) && !(user_medecin.id)"  to='/register'> S'inscrire </router-link>
+                <router-link class="nav-link btn-13 custom-btn-1 " v-if="(user_patient.id) || (user_medecin.id)" to='/deconnexion'>Déconnexion</router-link>
+                <router-link class="btn-13 custom-btn-1 nav-link" v-if="!(user_patient.id) && !(user_medecin.id)"  to='/login'>Se connecter </router-link>
               </div>
           </div>
 
@@ -46,13 +46,15 @@
               :login="login"
               :medecinlogin="medecinLogin"
               :questionnaires="questionnaires"
-              :symptomes="symptomes"
+              :l_symptomes="l_symptomes"
               :les_medecins="liste_medecins"
               :les_actus="liste_actualite"
               :les_spe="liste_specialites"
+              :panier_symptomes="panier_symptomes"
 
-
-              @add_rdv="prendre_rdv"
+              @add-to-panier-symptomes="add_to_panier_symptomes"
+              @remove-from-panier-s="removeFromPanier_symptomes"
+              @prendre_rendez_vous="prendre_rdv"
               @register_patient="register_patient"
               @register_medecin="register_medecin"
               @login="login"
@@ -64,12 +66,13 @@
           </main>
 
         </div>
-        <footer>
-            <section class="taille_1">
+        <footer class="container-fluid">
+            <section class="taille_1 row">
               AVERTISSEMENT : SANT'EFREI © est destiné faciliter votre prise en charge médicale.
               Les résultats fournis ne peuvent en aucun cas remplacer une consultation chez un médecin et ne constituent pas un diagnostic.
             </section>
         </footer>
+
         <script src="/vue-application.js"></script>
     </body>
 </html>

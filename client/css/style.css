@@ -23,15 +23,21 @@
   --vert2: #57AC8A;
   --rose: #CFA0B6;
   --bleu_ciel: #73BBBC;
+  --cam_color: #C4C395;
+  --cam_color2:#BC6D3E;
 
+  --cam_color2_o: rgba(188, 109, 62, 0.25 );
+  --cam_color_o: rgba(196, 195, 149,0.8);
   --violet_o:rgba(144, 118, 157,0.65);
   --bleu_ciel_o:rgba(115, 187, 188, 0.65);
   --cyan_o:rgba(81, 169, 171,0.55);
+  --cyan_o2:rgba(81, 169, 171,0.80);
   --jaune_o: rgba(232,197,66,0.7);
   --beige_fonce_o: rgba(242,237,219,0.82);
   --vert_o: rgba(9,55,31,0.85);
   --vert_o2: rgba(9,55,31,0.65);
   --vert_clair:rgba(154, 188, 157,0.92);
+  --vert_clair_o:rgba(154, 188, 157,0.2);
 
   --text: #000;
   --text2: #fff;
@@ -56,7 +62,7 @@
 body {
   margin: 0;
   padding: 0;
-  /* height: 100%; */
+  height: 100%;
   overflow: hidden;
 
 }
@@ -112,7 +118,7 @@ body {
   left: 0;
   z-index: -1;
   background: var(--vert_o);
-  transition: all 0.3s ease;
+  transition: all 0.4s ease;
 }
 
 .btn-13:hover {
@@ -125,13 +131,13 @@ body {
   height: 100%;
 }
 
-.custom-btn {
-  padding: 10px 25px;
+.custom-btn-1 {
+  padding: 8px 20px;
   font-weight: 500;
   background: transparent;
   outline: none !important;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.4s ease;
   position: relative;
   display: inline-block;
 }

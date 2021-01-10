@@ -31,55 +31,55 @@ const symptomes = [
   },
   {
     id: 6,
-    name: 'mal de gorge',
+    name: '6',
     type:"type_2",
     description:'Infection de la gorge'
   },
   {
     id: 7,
-    name: 'Crampes',
+    name: '7',
     type:"type_2",
     description:'Contraction musculaire soudaine, involontaire et douloureuse duurant quelues secondes ou plusieurs minutes',
   },
   {
     id: 8,
-    name: 'Rhume',
+    name: '8',
     type:"type_2",
     description:'Infection des fosses nasales, de la bouche et de la gorge'
   },
   {
     id: 9,
-    name: 'Crampes',
+    name: '9',
     type:"type_2",
     description:'Contraction musculaire soudaine, involontaire et douloureuse duurant quelues secondes ou plusieurs minutes',
   },
   {
     id: 10,
-    name: 'Rhume',
+    name: '10',
     type:"type_3",
     description:'Infection des fosses nasales, de la bouche et de la gorge'
   },
   {
     id: 11,
-    name: 'Crampes',
+    name: '11',
     type:"type_3",
     description:'Contraction musculaire soudaine, involontaire et douloureuse duurant quelues secondes ou plusieurs minutes',
   },
   {
     id: 12,
-    name: 'Rhume',
+    name: '12',
     type:"type_3",
     description:'Infection des fosses nasales, de la bouche et de la gorge'
   },
   {
     id: 13,
-    name: 'Crampes',
+    name: '13',
     type:"type_3",
     description:'Contraction musculaire soudaine, involontaire et douloureuse duurant quelues secondes ou plusieurs minutes',
   },
   {
     id: 14,
-    name: 'Rhume',
+    name: '14',
     type:"type_4",
     description:'Infection des fosses nasales, de la bouche et de la gorge'
   }
