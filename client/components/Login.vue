@@ -1,20 +1,45 @@
 <template>
-  <div class="all">
+  <div class="background_page_login">
+        <div class="container" id="colonne_login">
+            <form class="container colonne_centrale" @submit.prevent="login">
+              <div class="row">
+                <div class="col-sm-12 taille_4" id="titre_onglet_connexion">
+                  Connexion
+                </div>
+              </div>
+              <div class="row">
+                <label class="col-sm-6 taille_2">Email</label>
+                <label class="col-sm-6 taille_2">Mot de passe</label>
+                <div class="col-sm-6">
+                  <input class="col-sm-12" type="text" id="email" v-model="editLogin.email" placeholder="Entrer votre email" name="username" required>
+                </div>
+                <div class="col-sm-6">
+                  <input class="col-sm-12" type="password" v-model="editLogin.password" placeholder="Entrer votre mot de passe" name="password" required>
+                </div>
+              </div>
 
-
-        <div id="container">
-            <form class="form-container" @submit.prevent="login">
-                <h1>Connexion</h1>
-
-                <label><b>Email</b></label>
-                <input type="text" id="email" v-model="editLogin.email" placeholder="Entrer votre email" name="username" required>
-
-                <label><b>Mot de passe</b></label>
-                <input type="password" v-model="editLogin.password" placeholder="Entrer votre mot de passe" name="password" required>
-
-                <button id="bouton_inscription" type="submit">Je me connecte</button>
+              <div class="row ligne_connexion">
+                <button class="col-sm-12 taille_3" id="btn-connexion" type="submit">Je me connecte</button>
+              </div>
 
             </form>
+        </div>
+        <div class="container" id="colonne_remerciements">
+          <div class="container colonne_centrale">
+            <div class="row ">
+              <div class="col-sm-12 taille_5 bold" id="titre_section_remerciements">
+                MERCI
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <p class="taille_2 bold" id="text_remerciements"> Nous aimerions remercier l'ensemble du personnel soignant pour son devouement inéstimable face à la COVID19. Nous vous remercions tout autant d'utiliser notre platforme qui constitue un véritable pont entre malades et médecins. </p>
+              </div>
+            </div>
+
+
+          </div>
+
         </div>
       </div>
 </template>
@@ -45,67 +70,51 @@
 </script>
 
 <style scoped>
-  .all{
-    background-color: var(--beige);
-  }
-  #bouton_inscription{
-    border:none;
-    text-decoration: none;
-    width: 100%;
-    background-color: #09371F;
-    padding-top: 4%;
-    padding-bottom: 4%;
-    color:#fff;
-    font-size: 1.3em;
-  }
-  #bouton_inscription:hover{
-    background-color: #E8C542;
-    color: black;
-    cursor: pointer;
+#text_remerciements{
+  padding: 19px;
+  color: var(--bleu_logo);
+}
 
-  }
+#colonne_remerciements{
+  margin-top: 15px;
+}
 
-  #container{
+#titre_section_remerciements{
+  text-align: center;
+  color: var(--bleu_logo);
+  text-decoration: underline 10px var(--bleu_logo);
+}
+
+.ligne_connexion{
+  margin: 15px 0;
+}
+#btn-connexion{
+  color: white;
+  /* padding: 20px; */
+  background-color: var(--bleu_logo);
+}
+
+  #titre_onglet_connexion{
+    text-align: center;
+    margin: 10px;
+  }
+  .background_page_login{
+    /* background-color: var(--beige_fonce_o); */
     height: 100%;
-      width:400px;
-      margin:0 auto
-  }
-  /* Bordered form */
-  form {
-      width:100%;
-      padding: 30px;
-      border: 1px solid #f1f1f1;
-      background-color: var(--beige_fonce);
-  }
-
-  #container h1{
-      display:flex;
-      justify-content: space-around;
-      height:6%;
-      margin: 0 auto;
-      padding-bottom: 10px;
+    width: 100%;
+    background-image: url("../images/background_santefrei_carre.png");
+    background-repeat:round;
   }
 
   /* Full-width inputs */
   input[type=text], input[type=password] {
-      width: 100%;
       padding: 12px 20px;
       margin: 18px 0;
-      display: inline-block;
+
       border: 1px solid #ccc;
-      box-sizing: border-box;
+
   }
 
-  /* Set a style for all buttons */
-  input[type=submit] {
-      background-color: #09371F;
-      color: white;
-      padding: 14px 20px;
-      margin: 8px 0;
-      border: none;
-      cursor: pointer;
-      width: 100%;
-  }
   input[type=submit]:hover {
       background-color: rgb(191,215,197);
       color: black;

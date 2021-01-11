@@ -1,4 +1,4 @@
-const medecins = [
+var medecins = [
   {
     id: 1,
     nom: 'Médecin 1',

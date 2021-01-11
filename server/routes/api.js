@@ -5,7 +5,7 @@ const symptomes = require('../data/symptomes.js')
 const bcrypt = require('bcrypt')
 const { Client } = require('pg')
 const questionnaires = require('../data/liste_questionnaires.js')
-const les_medecins = require('../data/medecins.js')
+var les_medecins = require('../data/medecins.js')
 const les_symptomes = require('../data/symptomes.js')
 const les_actualites = require('../data/actualite.js')
 const les_specialites = require('../data/specialites.js')
@@ -191,38 +191,35 @@ router.post('/panier/rdv_m', (req, res) => {
 
 
 router.post('/rdv', async (req, res) => {
-// console.log("ICI 1")
+  // console.log("ICI 1")
   if (req.session.userId) {
     // console.log("ICI 2")
     const date = req.body.date
     const heure = req.body.heure
     const description = req.body.description
-    const id_du_patient = req.body.pid
+    const id_du_patient = req.session.userId
     const id_du_medecin = req.body.mid
 
-    // console.log("date " + date + "heure :" + heure + "id_du_patient " + id_du_patient + "id_du_medecin " + id_du_medecin)
+    console.log("date " + date + "heure :" + heure + "id_du_patient " + id_du_patient + "id_du_medecin " + id_du_medecin)
 
     const insert = "INSERT INTO rendez_vous (date, heure, description, patient_id, medecin_id) VALUES ($1, $2, $3, $4, $5)"
 
-    // console.log("ICI 3")
 
     await client.query({
       text: insert,
-      values: [date, heure, description, id_du_patient, id_du_medecin]
+      values: [date, heure, description, req.session.userId, id_du_medecin]
     })
-
+// console.log("ICI 3")
     // console.log("ICI 4")
     const le_rdv = {
       id: req.session.rdv_patient_Id + 1,
       date: date,
       heure: heure,
       description: description,
-      id_du_patient: id_du_patient,
+      id_du_patient: req.session.userId,
       id_du_medecin: id_du_medecin
-
     }
     // console.log("ICI 5")
-
 
     res.status(200).json(le_rdv)
   } else {
@@ -305,6 +302,8 @@ router.post('/register_medecin',async (req,res) => {
     const password = req.body.password
     const prenom = req.body.prenom
     const nom = req.body.nom
+    const adresse = req.body.adresse
+    const region = req.body.region
     const telephone = req.body.telephone
     const specialite = req.body.specialite
 
@@ -319,17 +318,30 @@ router.post('/register_medecin',async (req,res) => {
       res.status(400).json({ message: "this user already exist" })
     } else {
       const hash = await bcrypt.hash(password, 10)
-      const insert = "INSERT INTO medecins (nom ,prenom, email, specialite, password, telephone) VALUES ($1, $2, $3, $4, $5, $6)"
+      const insert = "INSERT INTO medecins (nom ,prenom, email, specialite, password, telephone, region, adresse) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)"
 
       const result2 = await client.query({
         text: insert,
-        values: [nom, prenom, email, specialite, hash, telephone]
+        values: [nom, prenom, email, specialite, hash, telephone, region, adresse]
       })
+
+      var size = les_medecins.length
+      const newMedecin = {
+        id: size + 1,
+        email: email,
+        prenom: prenom,
+        nom: nom,
+        region: region,
+        photo:'https://img.icons8.com/material-sharp/96/000000/user-male-circle.png',
+        numero:telephone,
+        adresse:adresse,
+        specialite: specialite
+      }
+      les_medecins.push(newMedecin)
       res.send()
     }
     })
 // Exercice 3 : Connexion
-
 
 router.post('/medecin_login', async (req,res) =>{
 
@@ -358,6 +370,8 @@ router.post('/medecin_login', async (req,res) =>{
         req.session.medecinFirstName = result2.rows[0].prenom
         req.session.medecinTelephone = result2.rows[0].telephone
         req.session.medecinSpecialite = result2.rows[0].specialite
+        req.session.medecinRegion = result2.rows[0].region
+        req.session.medecinAdresse = result2.rows[0].adresse
         req.session.rdv_medecin_Id = 0
 
         res.status(200).json({ message: "well logged as medecin" })
@@ -405,6 +419,18 @@ router.post('/logout', async (req, res) => {
   res.json(log)
 })
 // Exercice 4 : Who am I, testé uniquement sur Postman mais pas la partie vue.js
+
+// router.get('/getLes_medecins_bdd', async (req, res) => {
+//
+//   var m_bdd = []
+//
+//   const result ="SELECT * FROM medecins"
+//   for (let i = 0; i < result.rows.length; i++) {
+//     m_bdd.push(result.rows[i])
+//   }
+//   res.json(m_bdd)
+// })
+
 router.get('/me_medecin', async (req, res) => {
 
     var dmd_rdv = []
@@ -412,7 +438,7 @@ router.get('/me_medecin', async (req, res) => {
       const select = "SELECT * FROM rendez_vous WHERE medecin_id=$1"
       const result_m = await client.query({
         text: select,
-        values: [req.session.medecinId]
+        values: [req.session.medecinName]
       })
 
       dmd_rdv = result_m.rows
@@ -425,7 +451,9 @@ router.get('/me_medecin', async (req, res) => {
       prenom: req.session.medecinFirstName,
       telephone: req.session.medecinTelephone,
       specialite: req.session.medecinSpecialite,
-      medecin_demande_de_rdv: dmd_rdv
+      adresse: req.session.medecinAdresse,
+      region: req.session.medecinRegion,
+      demande_de_rdv: dmd_rdv
     }
 
     res.json(m)
@@ -448,7 +476,6 @@ router.get('/me_patient', async (req, res) => {
 
     var mes_rdv = []
 
-    if (req.session.userId) {
       const select = "SELECT * FROM rendez_vous WHERE patient_id=$1"
       const result = await client.query({
         text: select,
@@ -459,7 +486,7 @@ router.get('/me_patient', async (req, res) => {
         result.rows[i].date = new Date(result.rows[i].date).toString().slice(0,15)
       }
       mes_rdv = result.rows
-    }
+
 
     const user = {
       id: req.session.userId,
@@ -536,6 +563,8 @@ router.put('/user_update_medecin', async (req, res) => {
     var email = req.body.email
     var telephone = req.body.telephone
     var specialite = req.body.specialite
+    var adresse = req.body.adresse
+    var region = req.body.region
 
     if (!nom) {
       nom = req.session.medecinName
@@ -552,17 +581,25 @@ router.put('/user_update_medecin', async (req, res) => {
     if (!specialite) {
       specialite = req.session.medecinSpecialite
     }
+    if (!region) {
+      region = req.session.medecinRegion
+    }
+    if (!adresse) {
+      adresse = req.session.medecinAdresse
+    }
 
     req.session.medecinName = nom
     req.session.medecinFirstName = prenom
     req.session.medecinEmail = email
     req.session.medecinTelephone = telephone
     req.session.medecinSpecialite = specialite
+    req.session.medecinRegion = region
+    req.session.medecinAdresse = adresse
 
-    const update = "UPDATE medecins SET nom = $1, prenom = $2, email = $3, specialite = $4, telephone = $5 WHERE email=$3"
+    const update = "UPDATE medecins SET nom = $1, prenom = $2, email = $3, specialite = $4, telephone = $5, adresse = $6, region = $7 WHERE email=$3"
     const result = await client.query({
       text: update,
-      values: [nom, prenom, email, specialite, telephone]
+      values: [nom, prenom, email, specialite, adresse, region, telephone]
     })
 
     res.send()

@@ -17,6 +17,9 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+        <link href="https://cdn.isfidev.net/asalertmessage/v1.0/css/as-alert-message.min.css" rel="stylesheet">
+        <script src="https://cdn.isfidev.net/asalertmessage/v1.0/js/as-alert-message.min.js"></script>
     </head>
     <body>
         <div id="app">
@@ -43,6 +46,7 @@
 
               :user_patient="user_patient"
               :user_medecin="user_medecin"
+
               :login="login"
               :medecinlogin="medecinLogin"
               :questionnaires="questionnaires"
@@ -66,11 +70,14 @@
           </main>
 
         </div>
-        <footer class="container-fluid">
-            <section class="taille_1 row">
+        <footer class="container-fluid text-align-center taille_1">
+            <!-- <section class="taille_1 row"> -->
               AVERTISSEMENT : SANT'EFREI © est destiné faciliter votre prise en charge médicale.
-              Les résultats fournis ne peuvent en aucun cas remplacer une consultation chez un médecin et ne constituent pas un diagnostic.
-            </section>
+              Les résultats fournis ne peuvent en aucun cas remplacer une consultation chez un médecin et ne constituent pas un diagnostic. <br>
+            <!-- </section> -->
+            <!-- <section class="row"> -->
+              Equipe : <strong>Merouane</strong>, <strong>Landry</strong>, <strong>Gaowei</strong>, <strong>Camelia</strong>, <strong>Lihao</strong>
+            <!-- </section> -->
         </footer>
 
         <script src="/vue-application.js"></script>

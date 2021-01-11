@@ -17,8 +17,6 @@
 
       <section v-if ="user_patient.id || user_medecin.id" class="section_principale container">
 
-
-
         <section class="container" v-if="questionnaire_form">
 
           <section v-if ="user_patient.id"  class="container-fluid" id="section_symptomes">
@@ -56,7 +54,7 @@
                       <p class="bold col-sm-12 taille_2">{{ s.name }}</p>
                       <p class="col-sm-12 taille_1">{{ s.description }}</p>
                       <div class="col-sm-12">
-                        <button class="btn-14 custom-btn" @click="addToPanierSymptomes(s.type,s.id,s.name)" type="button" name="button">Je ressens ce symptome</button>
+                        <button class="btn-14 custom-btn ressens-btn" @click="addToPanierSymptomes(s.type,s.id,s.name)" type="button" name="button">Je ressens ce symptome</button>
                       </div>
                     </div>
                   </article>
@@ -97,8 +95,6 @@
                     <button type="button" name="button"> Envoyez mes symptomes à mon médecin </button>
                   </div>
 
-
-                  <!-- <span>Sélectionné : {{ editListe_symptomes.medecin }}</span> -->
                 </div>
 
               </article>
@@ -113,7 +109,7 @@
               <p id="titre_section_questionnaire" class="taille_4 col-sm-12"> Nos questionnaires généraux</p>
             </article>
             <article class="row">
-              <article v-for="q in questionnaires" class="questionnaire col-sm-4">
+              <article v-for="q in questionnaires" class="chaque_questionnaire col-sm-4">
                 <div class="chaque_q row card-1">
                   <p class=" titre_questionnaire taille_2 col-sm-12" >{{ q.titre }}</p>
                   <p class=" col-sm-12"> {{ q.duree }} min</p>
@@ -231,6 +227,9 @@
 </script>
 
 <style scoped>
+.chaque_questionnaire{
+  letter-spacing: 1px;
+}
 
 .ligne_colonne_droite{
   margin-top: 20px;
@@ -282,12 +281,12 @@
   right: 0;
   z-index: -1;
   /* background: var(--jaune2); */
-  background: var(--vert_o2);
+  background: var(--bleu_logo);
   transition: all 0.4s ease;
 }
 .btn-13:hover{
-  transform: translate(5px,5px);
-  -webkit-transform: translate(0px,-7px);
+  /* transform: translate(5px,5px); */
+  /* -webkit-transform: translate(0px,-7px); */
 }
 
 .btn-14:hover {
@@ -338,8 +337,9 @@
   }
 
   .card-1:hover {
-  background-color: var(--vert_o2);
+  background-color: var(--bleu_logo);
   color: var(--beige);
+  transform: translate(0px,-8px);
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   /* background-color: var(--beige_fonce_o); */
   }
@@ -350,12 +350,18 @@
   }
 
   .card-2:hover {
-  background-color: var(--violet_o);
+  background-color: var(--bleu_logo);
+  transform: translate(0px,-7px);
+  /* -webkit-transform: translate(-5px,-2px); */
   color: var(--beige);
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   /* background-color: var(--beige_fonce_o); */
   }
 
+  .ressens-btn{
+    border: 1px solid #fff;
+    background-color: var(--beige_fonce);
+  }
   .chaque_s{
     margin: 10px 0px;
     padding: 20px 0;
@@ -381,6 +387,7 @@
   }
 
   #colonne_droite{
+    margin: 10px 0;
     border-left:1px black solid;
     border-right:1px black solid;
 

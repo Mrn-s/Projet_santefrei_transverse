@@ -1,19 +1,22 @@
 <template>
   <div id="background_page_profil">
 
-    <div class="container colonne_centrale">
+    <div class="container section_principale">
 
       <div class="row">
-        <div id="titre_page_info" class="col-sm-12">
-          <p class="taille_5">Mon profil</p>
+        <div  class="col-sm-12">
+          <p id="titre_page_info">Mon profil</p>
         </div>
       </div>
-      <div class="row">
-        <div id="mes_infos"  class="container-fluid">
+
+        <div id="mes_infos" class="container">
 
           <div class="col-sm-12">
             <div class="row">
-                <p class="taille_3">Mes infos personnelles</p>
+              <div class="col-sm-12">
+                <p class="taille_3 " id="titre_section_mes_infos">Mes infos personnelles</p>
+              </div>
+
               </div>
             <div class="row">
                 <div class="col-sm-12">
@@ -99,6 +102,24 @@
 
                     <div class="row">
                       <div class="col-sm-3">
+                        <p class="taille_1">Region</p>
+                      </div>
+                      <div class="col-sm-6">
+                        <input name="region" :placeholder="user_medecin.region" type="text" v-model="editingProfile_medecin.region">
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <p class="taille_1">Adresse</p>
+                      </div>
+                      <div class="col-sm-6">
+                        <input name="adresse" :placeholder="user_medecin.adresse" type="text" v-model="editingProfile_medecin.adresse">
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-sm-3">
                         <p class="taille_1">Specialité</p>
                       </div>
                       <div class="col-sm-6">
@@ -161,24 +182,64 @@
              </div>
            </div>
         </div>
+        <div class="row">
+          <div class="col-sm-7">
+             <div id="mes-rendez-vous"  class="container">
+                 <div class="row">
+                   <div class="col-sm-12">
+                       <p class="taille_3" id="titre_section_mes_rdv">Mes rendez-vous</p>
+                   </div>
+                 </div>
+                 <div class="row">
+                   <div class="col-sm-12">
+                     <button type="button" name="button">trier par date</button>
+                   </div>
 
-        <div id="mes-rendez-vous"  class="container-fluid">
+                 </div>
 
-            <p class="row taille_3">ici seront affichés les rendez vous avec les médecins</p>
-            <section class="row" v-for="r in user_patient.rdv_patient">
-              <section class="col-sm-12">
-                <p> Date : {{ r.date }} </p>
-              </section>
-              <section class="col-sm-12">
-                <p> Heure : {{ r.heure }} </p>
-              </section>
-              <section class="col-sm-12">
-                <p> Nom du medecin : {{ r.medecin_id }} </p>
-              </section>
-            </section>
+                 <section class="row chaque_rdv" v-for=" rdv_demande in user_patient.rdv_patient">
+                   <section class="col-sm-12">
+                     <p> Date : {{ rdv_demande.date }} </p>
+                   </section>
+                   <section class="col-sm-12">
+                     <p> Heure : {{ rdv_demande.heure }} </p>
+                   </section>
+                   <section class="col-sm-12">
+                     <p> Nom du medecin : {{ rdv_demande.medecin_id }} </p>
+                   </section>
+                 </section>
 
+             </div>
+         </div>
+         <div class="col-sm-5">
+           <div id="mes-rendez-vous"  class="container">
+               <div class="row">
+                 <div class="col-sm-12">
+                     <p class="taille_3" id="titre_section_mes_rdv_demandes">Mes rendez-vous demandés</p>
+                 </div>
+               </div>
+               <div class="row">
+                 <div class="col-sm-12">
+                   <button type="button" name="button">trier par date</button>
+                 </div>
+               </div>
+
+               <section class="row chaque_rdv" v-for=" rdv_demande in user_patient.rdv_patient">
+                 <section class="col-sm-12">
+                   <p> Date : {{ rdv_demande.date }} </p>
+                 </section>
+                 <section class="col-sm-12">
+                   <p> Heure : {{ rdv_demande.heure }} </p>
+                 </section>
+                 <section class="col-sm-12">
+                   <p> Nom du medecin : {{ rdv_demande.medecin_id }} </p>
+                 </section>
+               </section>
+           </div>
+         </div>
         </div>
-      </div>
+
+
 
     </div>
 
@@ -207,7 +268,9 @@
           prenom:'',
           email:'',
           telephone:'',
-          specialite:''
+          specialite:'',
+          adresse:'',
+          region:''
         }
       }
     },
@@ -238,6 +301,8 @@
             nom:'',
             prenom:'',
             email:'',
+            adresse:'',
+            region:'',
             telephone:'',
             specialite:''
           }
@@ -247,15 +312,58 @@
 </script>
 
 <style scoped>
+.chaque_rdv{
+  box-shadow: 3px 3px 3px 3px var(--bleu_logo);
+  margin: 12px 0 12px 0;
+  padding: 10px 0 10px 0;
+}
+
+#titre_section_mes_infos, #titre_section_mes_rdv_demandes{
+  text-align: center;
+  color:var(--bleu_logo);
+}
+  #titre_section_mes_rdv{
+    text-align: center;
+    color:var(--bleu_logo);
+  }
+
+  #titre_page_info{
+    background-color: var(--bleu_logo_o);
+    border: white 2px solid;
+    text-align: center;
+    color:white;
+    font-size: 3.9em;
+  }
+
+  #mes-rendez-vous{
+    border: 1px white solid;
+    background-color: var(--beige_fonce);
+    margin-top: 50px;
+  }
+  #mes_infos{
+    background-color: var(--beige_fonce);
+    border: 1px white solid;
+    margin-top: 20px;
+  }
 
   #email{
     width: 300px;
   }
+  .section_principale{
+    padding-bottom: 100px;
+    padding-top: 35px;
+
+  }
     #background_page_profil {
-      background-color: var(--beige);
-      padding-bottom: 104px;
-      padding-top: 40px;
-      height: 90%;
+      background-image: url("../images/background_santefrei_carre.png");
+      background-repeat: round;
+      /* background-color: var(--bleu_logo_o); */
+      padding-bottom: 5vh;
+      /* padding-top: 40px; */
+      height: 100%;
+      max-height: 1660px;
+      overflow: scroll;
+      /* height: 90%; */
     }
 
 </style>

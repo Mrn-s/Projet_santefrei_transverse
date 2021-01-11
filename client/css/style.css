@@ -3,7 +3,7 @@
 }
 
 .colonne_centrale{
-  background-color: var(--beige_fonce);
+  background-color: var(--beige_fonce_o);
   border:2px solid black;
 }
 .img_all{
@@ -24,9 +24,13 @@
   --rose: #CFA0B6;
   --bleu_ciel: #73BBBC;
   --cam_color: #C4C395;
+  --bleu_logo: #2E4143;
   --cam_color2:#BC6D3E;
+  --orange_logo:#B17047;
 
-  --cam_color2_o: rgba(188, 109, 62, 0.25 );
+  --orange_logo_o: rgba(177, 112, 71,0.8);
+  --bleu_logo_o: rgba(46, 65, 67,0.9);
+  --cam_color2_o: rgba(188, 109, 62, 0.25);
   --cam_color_o: rgba(196, 195, 149,0.8);
   --violet_o:rgba(144, 118, 157,0.65);
   --bleu_ciel_o:rgba(115, 187, 188, 0.65);
@@ -71,7 +75,7 @@ body {
   overflow: hidden;
   background-color: var(--beige_fonce);
   letter-spacing: 1px;
-  border-bottom: 1px black solid;
+  border-bottom: 1px var(--bleu_logo_o) solid;
 }
 
 .topnav .nav-link {
@@ -117,7 +121,7 @@ body {
   top: 0;
   left: 0;
   z-index: -1;
-  background: var(--vert_o);
+  background: var(--bleu_logo);
   transition: all 0.4s ease;
 }
 
@@ -149,7 +153,7 @@ body {
     width: 100%;
     padding: 10px;
     color: var(--beige);
-    background-color: var(--vert_o);
+    background-color: var(--bleu_logo_o);
     text-align: center;
   }
 

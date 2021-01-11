@@ -169,18 +169,17 @@
 
 <style scoped>
 #background_page_medecins::-webkit-scrollbar {
-
     display: none;
-
 }
 .menu_specialite::-webkit-scrollbar {
     display: none;
 }
 
 .ici{
-  background-color: var(--cam_color_o);
+  background-color: var(--bleu_logo_o);
   border-right: 2px solid black;
   border-left: 2px solid black;
+  color: white;
   /* var(--cyan_o2); */
   /* #DBEEE6 */
 }
@@ -250,6 +249,8 @@ transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 background-color:var(--cam_color);
 /* var(--cyan_o); */
 color: var(--beige);
+transform: translate(0px,-5px);
+
 box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 /* background-color: var(--beige_fonce_o); */
 }
@@ -258,8 +259,8 @@ box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   background-color: var(--beige);
   height: 100%;
   max-height: 1660px;
-  padding-top: 40px;
-  padding-bottom: 124px;
+  padding-top: 2%;
+  padding-bottom: 9%;
   overflow-y: scroll;
 }
 /* .ici{
@@ -286,16 +287,17 @@ box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 
 .blue
 {
-	background-color:var(--cam_color);
+	background-color:var(--bleu_logo);
   /* var(--cyan_o) */
+  color:#fff !important;
 	border-bottom: 5px solid var(--vert_o);
 	/* text-shadow: 0px -2px #2980B9; */
 }
 
 .action-button:active
 {
-	transform: translate(5px,5px);
-  -webkit-transform: translate(5px,5px);
+	transform: translate(5px,15px);
+  /* -webkit-transform: translate(5px,5px); */
 	border-bottom: 1px solid;
 }
 

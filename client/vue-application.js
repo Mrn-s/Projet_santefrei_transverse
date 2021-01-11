@@ -46,18 +46,20 @@ var app = new Vue({
     liste_specialites:[],
     liste_actualite:[],
     liste_medecins: [],
+    liste_medecins_bdd: [],
+
     panier_symptomes: {
       createdAt: null,
       updatedAt: null,
       nb_symptomes: 0,
       symptomes: []
     },
-    rapport: {
-      createdAt: null,
-      id: null,
-      maladies_rapport: [],
-      symptomes: []
-    },
+    // rapport: {
+    //   createdAt: null,
+    //   id: null,
+    //   maladies_rapport: [],
+    //   symptomes: []
+    // },
     user_patient: {
       nom: null,
       prenom: null,
@@ -73,6 +75,8 @@ var app = new Vue({
       telephone: null,
       specialite: null,
       id: null,
+      region: null,
+      adresse: null,
       demande_de_rdv: []
     },
     maladiesTypes: ['tete', 'bras_droit', 'bras_gauche', 'jambe_droite', 'jambe_gauche', 'torse', 'cou', 'epaule_droite', 'epaule_gauche'],
@@ -95,16 +99,29 @@ var app = new Vue({
     this.liste_actualite = liste_des_actualite.data
     const liste_des_spe = await axios.get('/api/getLes_spe')
     this.liste_specialites = liste_des_spe.data
+    // const liste_des_medecins_bdd = await axios.get('/api/getLes_medecins_bdd')
 
     await axios.post('/api/setdatas', 'symptomeTypes=' + this.symptomeTypes)
 
-      const res_patient = await axios.get('/api/me_patient')
-      this.user_patient = res_patient.data
+    const res_patient = await axios.get('/api/me_patient')
+    this.user_patient.id = res_patient.data.id
+    this.user_patient.email = res_patient.data.email
+    this.user_patient.nom = res_patient.data.nom
+    this.user_patient.prenom = res_patient.data.prenom
+    this.user_patient.telephone = res_patient.data.telephone
+    this.user_patient.rdv_patient = res_patient.data.patient_rdv
 
-      const res_medecin = await axios.get('/api/me_medecin')
-      this.user_medecin = res_medecin.data
-
-
+    const res_medecin = await axios.get('/api/me_medecin')
+    // this.user_medecin = res_medecin.data
+    this.user_medecin.id = res_medecin.data.id
+    this.user_medecin.email = res_medecin.data.email
+    this.user_medecin.nom = res_medecin.data.nom
+    this.user_medecin.prenom = res_medecin.data.prenom
+    this.user_medecin.telephone = res_medecin.data.telephone
+    this.user_medecin.specialite = res_medecin.data.specialite
+    this.user_medecin.region = res_medecin.data.region
+    this.user_medecin.adresse = res_medecin.data.adresse
+    this.user_medecin.demande_de_rdv = res_medecin.data.demande_de_rdv
   },
   methods: {
 
@@ -146,23 +163,32 @@ var app = new Vue({
       this.user_medecin.specialite = res.data.specialite
       this.user_medecin.telephone = res.data.telephone_medecin
       this.user_medecin.id = res.data.user_medecin
+      this.user_medecin.demande_de_rdv = []
 
       this.user_patient.nom = res.data.nom_patient
       this.user_patient.email = res.data.email_patient
       this.user_patient.prenom = res.data.prenom_patient
       this.user_patient.telephone = res.data.telephone
       this.user_patient.id = res.data.user_patient
+      this.user_patient.rdv_patient = []
       router.push('/')
     },
 
     async prendre_rdv (rdv) {
-        alert("rdv.patient de vue app : " + rdv.patient + rdv.medecin + rdv.heure + rdv.date + rdv.description)
+        alert("alert 1 : " + rdv.patient + " " + rdv.medecin + rdv.heure + rdv.date + rdv.description)
 
-        const res = await axios.post('/api/rdv','date=' + rdv.date + '&heure=' + rdv.heure + '&description=' + rdv.description + '&pid=' + rdv.patient + '&mid=' + rdv.medecin)
-        this.user_patient.rdv_patient.push(res.data)
-        alert(this.user_patient.rdv_patient)
-        this.user_medecin.demande_de_rdv.push(res.data)
-        alert(this.user_medecin.demande_de_rdv)
+        const le_rdv = await axios.post('/api/rdv','date=' + rdv.date + '&heure=' + rdv.heure + '&description=' + rdv.description + '&mid=' + rdv.medecin)
+        // alert("alert 2" + le_rdv.data)
+        this.user_patient.rdv_patient.push(le_rdv.data)
+        // alert("alert 3 " + this.user_patient.rdv_patient)
+        this.user_medecin.demande_de_rdv.push(le_rdv.data)
+        // alert("alert 4 " + this.user_medecin.demande_de_rdv)
+        asAlertMsg({
+          type: "success",
+          title: "Validé",
+          message: "Votre rendez-vous a été prit en compte M./Mme. " + this.user_patient.nom,
+          timer: 3500,
+        })
     },
 
     async login (user) {
@@ -174,6 +200,7 @@ var app = new Vue({
       this.user_patient.email = res.data.email
       this.user_patient.prenom = res.data.prenom
       this.user_patient.telephone = res.data.telephone
+
       // this.user_patient.rapports = res.data.rapports
 
       router.push('/')
@@ -197,6 +224,12 @@ var app = new Vue({
     async register_patient (user_patient) {
       try {
         await axios.post('/api/register_patient/','nom=' + user_patient.nom + '&email=' + user_patient.email + '&password=' + user_patient.password +  '&prenom=' + user_patient.prenom +'&telephone=' + user_patient.telephone)
+        asAlertMsg({
+          type: "success",
+          title: "Validé",
+          message: "Votre compte a bien été créé M./Mme. " + this.user_patient.nom,
+          timer: 3500,
+        })
         router.push('/login')
       } catch (e) {
         asAlertMsg({
@@ -209,8 +242,15 @@ var app = new Vue({
 
     async register_medecin (user_medecin) {
       try {
-        await axios.post('/api/register_medecin/','nom=' + user_medecin.nom + '&email=' + user_medecin.email + '&password=' + user_medecin.password +  '&prenom=' + user_medecin.prenom + '&specialite=' + user_medecin.specialite + '&telephone=' + user_medecin.telephone)
+        await axios.post('/api/register_medecin/','adresse=' + user_medecin.adresse + '&region=' + user_medecin.region + '&nom=' + user_medecin.nom + '&email=' + user_medecin.email + '&password=' + user_medecin.password +  '&prenom=' + user_medecin.prenom + '&specialite=' + user_medecin.specialite + '&telephone=' + user_medecin.telephone)
+        asAlertMsg({
+          type: "success",
+          title: "Validé",
+          message: "Votre compte a bien été créé Dr. " + this.user_medecin.nom,
+          timer: 3500,
+        })
         router.push('/login')
+
       } catch (e) {
         asAlertMsg({
           type: "warning",
@@ -231,13 +271,15 @@ var app = new Vue({
     },
 
     async updateProfile_medecin (nv_profil) {
-      await axios.put('/api/user_update_medecin/', 'nom=' + nv_profil.nom + '&prenom=' + nv_profil.prenom + '&email=' + nv_profil.email +'&specialite=' +  nv_profil.specialite + '&telephone=' + nv_profil.telephone)
+      await axios.put('/api/user_update_medecin/','nom=' + nv_profil.nom + '&prenom=' + nv_profil.prenom + '&email=' + nv_profil.email + '&specialite=' +  nv_profil.specialite + '&telephone=' + nv_profil.telephone + '&region=' + nv_profil.region + '&adresse=' + nv_profil.adresse)
       const res = await axios.get('/api/me_medecin')
       this.user_medecin.nom = res.data.nom
       this.user_medecin.email = res.data.email
       this.user_medecin.prenom = res.data.prenom
       this.user_medecin.telephone = res.data.telephone
       this.user_medecin.specialite = res.data.specialite
+      this.user_medecin.adresse = res.data.adresse
+      this.user_medecin.region = res.data.region
 
     }
 
