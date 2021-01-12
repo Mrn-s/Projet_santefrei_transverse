@@ -4,13 +4,9 @@
       <section v-if ="!(user_patient.id) " class=" container">
 
         <article v-if="!(user_medecin.id)" class="row" id="titre_questionnaire_page">
-          <article class="col-sm-1">
 
-          </article>
-          <router-link class="col-sm-10  taille_3 lien_connexion" to='/login'> Connectez-vous et envoyez vos symptomes à votre médecin </router-link>
-          <article class="col-sm-1">
+          <router-link class="col-sm-12 taille_4 lien_connexion" to='/login'> Veuillez vous connecter pour accéder à nos questionnaires </router-link>
 
-          </article>
         </article>
 
       </section>
@@ -379,11 +375,21 @@
   }
   .lien_connexion{
     text-decoration: none;
-    color:var(--vert);
+    padding: 20px 0;
+    color:var(--bleu_logo);
+    transition: all 1s;
     font-weight: bold;
+    border: var(--bleu_logo) 5px solid;
   }
   .lien_connexion:hover{
-    background-color: var(--violet_o);
+    transform: translate(0,-20px);
+    transition: all 1s;
+    background-color: var(--bleu_logo_o);
+    color: white;
+    /* text-decoration: underline white 5px; */
+  }
+  .lien_connexion::after{
+
   }
 
   #colonne_droite{
@@ -411,7 +417,7 @@
     font-weight: bold;
   }
   #titre_questionnaire_page{
-    margin-top: 50px;
+    margin-top: 150px;
     text-align: center;
   }
 

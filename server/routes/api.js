@@ -42,6 +42,8 @@ class Panier_symptomes {
 //   res.send()
 // })
 
+
+
 router.delete('/panier_s/:type/:id', (req, res) => {
   // console.log("API 1")
  const s_Id = parseInt(req.params.id)
@@ -175,6 +177,28 @@ function checkIfNotMenuExistInPanier_s (id, type, symptomes) {
 }
 
 
+router.delete('/refuser_le_rdv', async (req, res) => {
+  const r_id = req.body.id
+  const insert = "DELETE FROM rendez_vous WHERE id = $1"
+  await client.query({
+    text: insert,
+    values: [r_id]
+  })
+  res.send()
+})
+
+router.post('/accepter_le_rdv', async (req, res) => {
+  const r_id = req.body.id
+  const oui = 'oui'
+  const update = "UPDATE rendez_vous SET accepted = $1 WHERE id=$2"
+  const result = await client.query({
+    text: update,
+    values: [oui, r_id]
+  })
+  res.send()
+})
+
+
 router.get('/GetPanierSymptomes', (req, res) => {
   res.json(req.session.panier_symptomes)
 })
@@ -189,7 +213,6 @@ router.post('/panier/rdv_m', (req, res) => {
 })
 
 
-
 router.post('/rdv', async (req, res) => {
   // console.log("ICI 1")
   if (req.session.userId) {
@@ -199,15 +222,15 @@ router.post('/rdv', async (req, res) => {
     const description = req.body.description
     const id_du_patient = req.session.userId
     const id_du_medecin = req.body.mid
+    const accepted_ou_pas = req.body.accepted
 
-    console.log("date " + date + "heure :" + heure + "id_du_patient " + id_du_patient + "id_du_medecin " + id_du_medecin)
 
-    const insert = "INSERT INTO rendez_vous (date, heure, description, patient_id, medecin_id) VALUES ($1, $2, $3, $4, $5)"
+    const insert = "INSERT INTO rendez_vous (date, heure, description, patient_id, medecin_id, accepted) VALUES ($1, $2, $3, $4, $5, $6)"
 
 
     await client.query({
       text: insert,
-      values: [date, heure, description, req.session.userId, id_du_medecin]
+      values: [date, heure, description, req.session.userId, id_du_medecin, accepted_ou_pas]
     })
 // console.log("ICI 3")
     // console.log("ICI 4")
@@ -217,9 +240,9 @@ router.post('/rdv', async (req, res) => {
       heure: heure,
       description: description,
       id_du_patient: req.session.userId,
-      id_du_medecin: id_du_medecin
+      id_du_medecin: id_du_medecin,
+      accepted_ou_pas: accepted_ou_pas
     }
-    // console.log("ICI 5")
 
     res.status(200).json(le_rdv)
   } else {
@@ -420,17 +443,6 @@ router.post('/logout', async (req, res) => {
 })
 // Exercice 4 : Who am I, testé uniquement sur Postman mais pas la partie vue.js
 
-// router.get('/getLes_medecins_bdd', async (req, res) => {
-//
-//   var m_bdd = []
-//
-//   const result ="SELECT * FROM medecins"
-//   for (let i = 0; i < result.rows.length; i++) {
-//     m_bdd.push(result.rows[i])
-//   }
-//   res.json(m_bdd)
-// })
-
 router.get('/me_medecin', async (req, res) => {
 
     var dmd_rdv = []
@@ -457,18 +469,6 @@ router.get('/me_medecin', async (req, res) => {
     }
 
     res.json(m)
-
-
-  // if (req.session.medecinId) {
-  //   const utilisateur = await client.query({
-  //     text: 'SELECT * FROM medecins WHERE id=$1',
-  //     values: [req.session.medecinId]
-  //   })
-  //   res.json(utilisateur.rows[0])
-  //   console.log(utilisateur.rows[0])
-  // } else {
-  //   res.status(401).json({ message: 'not connected' })
-  // }
 
   })
 
@@ -604,6 +604,38 @@ router.put('/user_update_medecin', async (req, res) => {
 
     res.send()
     })
+
+router.get('/getLes_medecins_bdd', async (req, res) => {
+  var m_api_bdd = []
+
+  // const result =
+  const result2 = await client.query("SELECT * FROM medecins ORDER BY id")
+
+  for (let i = 0; i < result2.rowCount; i++) {
+    m_api_bdd.push(result2.rows[i])
+  }
+
+  const content = { m_api_bdd : m_api_bdd }
+
+  res.status(200).json(content)
+})
+
+router.get('/getLes_rdv_bdd', async (req, res) => {
+  var dmd_rdv_bdd = []
+
+  // const result =
+  const result2 = await client.query("SELECT * FROM rendez_vous")
+
+  for (let i = 0; i < result2.rowCount; i++) {
+    console.log("api " + result2.rows[i])
+    dmd_rdv_bdd.push(result2.rows[i])
+  }
+
+  const content = { dmd_rdv_bdd : dmd_rdv_bdd }
+
+  res.status(200).json(content)
+})
+
 
 
 module.exports = router

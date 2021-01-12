@@ -1,17 +1,17 @@
 <template>
   <div id="background_page_register">
-    <div class="container colonne_centrale">
+    <div class="container c_test">
 
         <div class="container" id="popupForm_register">
           <form @submit.prevent="Creer_patient">
             <div class="container">
 
-                <div class="taille_4 col-sm-12 titre_onglet_inscription">
+                <div class="taille_4 col-sm-12 bold titre_onglet_inscription">
                   <p>Inscription</p>
                 </div>
                 <div class="row">
-                  <label class="col-sm-6"><b>Email</b></label>
-                  <label class="col-sm-6" ><b>Mot de passe</b></label>
+                  <label class="col-sm-6 taille_2">Email</label>
+                  <label class="col-sm-6 taille_2">Mot de passe</label>
                   <div class="col-sm-6">
                     <input class="col-sm-12" id="email_register" type="text" v-model="editRegister_patient.email" placeholder="email">
                   </div>
@@ -21,8 +21,8 @@
 
                 </div>
                 <div class="row">
-                  <label class="col-sm-6"><b>Nom</b></label>
-                  <label class="col-sm-6"><b>Prenom</b></label>
+                  <label class="col-sm-6 taille_2">Nom</label>
+                  <label class="col-sm-6 taille_2">Prenom</label>
                   <div class="col-sm-6">
                     <input class="col-sm-12" type="text" v-model="editRegister_patient.nom" placeholder="nom">
                   </div>
@@ -32,7 +32,7 @@
 
                 </div>
 
-                <label class="col-sm-12"><b>Telephone</b></label>
+                <label class="col-sm-12 taille_2">Telephone</label>
                 <input class="col-sm-12" type="text" v-model="editRegister_patient.telephone" placeholder="telephone">
             </div>
 
@@ -52,49 +52,18 @@
         <div class="container"  id="popupForm_register_medecin">
           <form @submit.prevent="Creer_medecin">
               <div class="container">
-                <div class="taille_4 col-sm-12 titre_onglet_inscription">
+                <div class="taille_4 bold col-sm-12 titre_onglet_inscription">
                   <p>Inscription médecin</p>
                 </div>
+                <div class="row">
+                  <label class="col-sm-6 taille_2">Email</label>
+                  <label class="col-sm-6 taille_2">Specialite</label>
 
-                <label class="col-sm-12" ><b>Email</b></label>
-                <input class="col-sm-12" id="email_register_medecin" type="text" v-model="editRegister_medecin.email" placeholder="email">
-                <div class="row">
-                  <label class="col-sm-6"><b>Telephone</b></label>
-                  <label class="col-sm-6"><b>Mot de passe</b></label>
                   <div class="col-sm-6">
-                    <input  type="text" v-model="editRegister_medecin.telephone" placeholder="telephone">
+                    <input class="col-sm-12" id="email_register_medecin" type="text" v-model="editRegister_medecin.email" placeholder="email">
                   </div>
                   <div class="col-sm-6">
-                    <input type="password" v-model="editRegister_medecin.password" placeholder="mot de passe">
-                  </div>
-                </div>
-                <div class="row">
-                  <label class="col-sm-6"><b>Nom</b></label>
-                  <label class="col-sm-6" ><b>Prenom</b></label>
-                  <div class="col-sm-6">
-                    <input type="text" v-model="editRegister_medecin.nom" placeholder="nom">
-                  </div>
-                  <div class="col-sm-6">
-                    <input type="text" v-model="editRegister_medecin.prenom" placeholder="prenom">
-                  </div>
-
-                </div>
-                <div class="row">
-                  <label class="col-sm-6"><b>region</b></label>
-                  <label class="col-sm-6"><b>adresse</b></label>
-                  <div class="col-sm-6">
-                    <input type="text" v-model="editRegister_medecin.region" placeholder="region">
-                  </div>
-                  <div class="col-sm-6">
-                    <input type="text" v-model="editRegister_medecin.adresse" placeholder="adresse">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-sm-2">
-                    <label><b>Specialite</b></label>
-                  </div>
-                  <div class="col-sm-10">
-                    <select  id="heure_select" v-model="editRegister_medecin.specialite">
+                    <select  class="col-sm-12" id="spe_select" v-model="editRegister_medecin.specialite">
                       <option value="" disabled selected>Specialite</option>
                       <option value="allergologie">allergologie</option>
                       <option value="andrologie">andrologie</option>
@@ -143,6 +112,38 @@
                     </select>
                   </div>
 
+                </div>
+
+                <div class="row">
+                  <label class="col-sm-6 taille_2">Telephone</label>
+                  <label class="col-sm-6 taille_2">Mot de passe</label>
+                  <div class="col-sm-6">
+                    <input  type="text" v-model="editRegister_medecin.telephone" placeholder="telephone">
+                  </div>
+                  <div class="col-sm-6">
+                    <input type="password" v-model="editRegister_medecin.password" placeholder="mot de passe">
+                  </div>
+                </div>
+                <div class="row">
+                  <label class="col-sm-6 taille_2">Nom</label>
+                  <label class="col-sm-6 taille_2">Prenom</label>
+                  <div class="col-sm-6">
+                    <input type="text" v-model="editRegister_medecin.nom" placeholder="nom">
+                  </div>
+                  <div class="col-sm-6">
+                    <input type="text" v-model="editRegister_medecin.prenom" placeholder="prenom">
+                  </div>
+
+                </div>
+                <div class="row">
+                  <label class="col-sm-6 taille_2">region</label>
+                  <label class="col-sm-6 taille_2">adresse</label>
+                  <div class="col-sm-6">
+                    <input type="text" v-model="editRegister_medecin.region" placeholder="region">
+                  </div>
+                  <div class="col-sm-6">
+                    <input type="text" v-model="editRegister_medecin.adresse" placeholder="adresse">
+                  </div>
                 </div>
               </div>
 
@@ -224,29 +225,42 @@
 </script>
 
 <style>
-.titre_onglet_inscription{
-  margin-top: 15px;
-  text-align: center;
-}
+  #spe_select{
+    height: 60%;
+    margin-top: 18px;
+    margin-bottom: 18px;
+  }
+
+  .titre_onglet_inscription{
+    color:var(--bleu_logo);
+    margin-top: 15px;
+    text-align: center;
+  }
+  .c_test{
+    padding-top: 50px;
+  }
 
   #background_page_register{
     /* background-color: var(--beige); */
     background-image: url("../images/background_santefrei_carre.png");
     background-repeat: round;
-    height: 100%;
-    margin-bottom: 1000px;
+    max-height: 1000px;
+    overflow-y: scroll;
+    height: 100vh;
   }
-
+  #popupForm_register{
+    background-color: var(--beige_fonce_o);
+    border:2px solid black;
+  }
   #popupForm_register_medecin{
+    background-color: var(--beige_fonce_o);
+    border:2px solid black;
     display: none;
   }
 
   form {
       width:100%;
-      /* padding: 30px; */
-      /* border: 1px solid #f1f1f1; */
   }
-
 
   /* Full-width inputs */
   input[type=text], input[type=password] {

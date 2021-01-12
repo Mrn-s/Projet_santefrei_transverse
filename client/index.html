@@ -55,7 +55,11 @@
               :les_actus="liste_actualite"
               :les_spe="liste_specialites"
               :panier_symptomes="panier_symptomes"
+              :m_bdd="liste_medecins_bdd"
+              :rdv_bdd="demande_de_rdv_med"
 
+              @refuser_rdv-rdv="refuser_rdv"
+              @accepter_rdv="accepter_rdv"
               @add-to-panier-symptomes="add_to_panier_symptomes"
               @remove-from-panier-s="removeFromPanier_symptomes"
               @prendre_rendez_vous="prendre_rdv"

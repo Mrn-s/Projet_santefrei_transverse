@@ -10,7 +10,6 @@
       </div>
 
         <div id="mes_infos" class="container">
-
           <div class="col-sm-12">
             <div class="row">
               <div class="col-sm-12">
@@ -194,10 +193,9 @@
                    <div class="col-sm-12">
                      <button type="button" name="button">trier par date</button>
                    </div>
-
                  </div>
 
-                 <section class="row chaque_rdv" v-for=" rdv_demande in user_patient.rdv_patient">
+                 <section class="row chaque_rdv" v-for=" rdv_demande in user_patient.rdv_patient" v-if="user_patient.id && (rdv_demande.accepted =='oui')">
                    <section class="col-sm-12">
                      <p> Date : {{ rdv_demande.date }} </p>
                    </section>
@@ -207,15 +205,36 @@
                    <section class="col-sm-12">
                      <p> Nom du medecin : {{ rdv_demande.medecin_id }} </p>
                    </section>
+                   <section class="col-sm-12">
+                     <p> description : {{ rdv_demande.description }} </p>
+                   </section>
+                   <!-- <section class="col-sm-12">
+                     <p> accepted : {{ rdv_demande.accepted }} </p>
+                   </section> -->
+                 </section>
+                 <section class="row chaque_rdv" v-for=" r in rdv_bdd" :key="r.id" v-if="(r.medecin_id == user_medecin.nom) && user_medecin.id  && (r.accepted =='oui') ">
+                   <section class="col-sm-12">
+                     <p> Date : {{ r.date }} </p>
+                   </section>
+                   <section class="col-sm-12">
+                     <p> Heure : {{ r.heure }} </p>
+                   </section>
+                   <section class="col-sm-12">
+                     <p> Nom du patient : {{ r.patient_id }} </p>
+                   </section>
+                   <section class="col-sm-12">
+                     <p> description : {{ r.description }} </p>
+                   </section>
                  </section>
 
              </div>
          </div>
          <div class="col-sm-5">
-           <div id="mes-rendez-vous"  class="container">
+           <div id="mes-rendez-vous" class="container">
                <div class="row">
                  <div class="col-sm-12">
-                     <p class="taille_3" id="titre_section_mes_rdv_demandes">Mes rendez-vous demandés</p>
+                     <!-- <p v-if="user_patient.id" class="taille_3" id="titre_section_mes_rdv_demandes">Mes rendez-vous demandés</p> -->
+                     <p class="taille_3" id="titre_section_mes_rdv_demandes">Mes demandes de rendez-vous</p>
                  </div>
                </div>
                <div class="row">
@@ -224,7 +243,7 @@
                  </div>
                </div>
 
-               <section class="row chaque_rdv" v-for=" rdv_demande in user_patient.rdv_patient">
+               <section class="row chaque_rdv" v-if="user_patient.id && (rdv_demande.accepted == 'non') " v-for=" rdv_demande in user_patient.rdv_patient" >
                  <section class="col-sm-12">
                    <p> Date : {{ rdv_demande.date }} </p>
                  </section>
@@ -234,12 +253,36 @@
                  <section class="col-sm-12">
                    <p> Nom du medecin : {{ rdv_demande.medecin_id }} </p>
                  </section>
+                 <section class="col-sm-12">
+                   <p> description : {{ rdv_demande.description }} </p>
+                 </section>
+                 <!-- <section class="col-sm-12">
+                   <p> accepted : {{ rdv_demande.accepted }} </p>
+                 </section> -->
+               </section>
+               <section class="row chaque_rdv" v-for=" r in rdv_bdd" :key="r.id" v-if="(r.medecin_id == user_medecin.nom) && user_medecin.id && (r.accepted == 'non')">
+                 <section class="col-sm-12">
+                   <p> Date : {{ r.date }} </p>
+                 </section>
+                 <section class="col-sm-12">
+                   <p> Heure : {{ r.heure }} </p>
+                 </section>
+                 <section class="col-sm-12">
+                   <p> Nom du patient : {{ r.patient_id }} </p>
+                 </section>
+                 <section class="col-sm-12">
+                   <p> description : {{ r.description }} </p>
+                 </section>
+                 <section class="col-sm-6">
+                   <button class="col-sm-12" type="button" @click="accepter_rdv(r.id)" name="button">Accepter</button>
+                 </section>
+                 <section class="col-sm-6">
+                   <button class="col-sm-12" type="button" @click="refuser_rdv(r.id)" name="button">Refuser</button>
+                 </section>
                </section>
            </div>
          </div>
         </div>
-
-
 
     </div>
 
@@ -249,9 +292,13 @@
 <script>
 
   module.exports = {
+    components: {
+
+    },
     props: {
       user_patient: {type: Object },
-      user_medecin: {type: Object }
+      user_medecin: {type: Object },
+      rdv_bdd: { type: Array, default: [] }
     },
     data () {
       return {
@@ -275,6 +322,18 @@
       }
     },
     methods: {
+      accepter_rdv(r_id){
+        let rdv_id = {
+          id: r_id
+        }
+        this.$emit('accepter_rdv', rdv_id)
+      },
+      refuser_rdv(r_id){
+        let rdv_id = {
+          id: r_id
+        }
+        this.$emit('refuser_rdv', rdv_id)
+      },
       // Enregistre la veleur des champs du formulaire de modification du profil
       // Envoie un nouveau profil (modifié)
       sendEditProfil(){
@@ -312,16 +371,16 @@
 </script>
 
 <style scoped>
-.chaque_rdv{
-  box-shadow: 3px 3px 3px 3px var(--bleu_logo);
-  margin: 12px 0 12px 0;
-  padding: 10px 0 10px 0;
-}
+  .chaque_rdv{
+    box-shadow: 3px 3px 3px 3px var(--bleu_logo);
+    margin: 12px 0 12px 0;
+    padding: 10px 0 10px 0;
+  }
 
-#titre_section_mes_infos, #titre_section_mes_rdv_demandes{
-  text-align: center;
-  color:var(--bleu_logo);
-}
+  #titre_section_mes_infos, #titre_section_mes_rdv_demandes{
+    text-align: center;
+    color:var(--bleu_logo);
+  }
   #titre_section_mes_rdv{
     text-align: center;
     color:var(--bleu_logo);

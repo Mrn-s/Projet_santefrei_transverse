@@ -20,7 +20,7 @@
           <p id="titre_spe" class="col-sm-12">{{ medSpe }}</p>
         </article>
         <article class="row chaque_medecin">
-          <article class="col-sm-3 la " v-for="m in les_medecins" v-if="m.specialite == medSpe">
+          <!-- <article class="col-sm-3 la " v-for="m in les_medecins" v-if="m.specialite == medSpe">
 
               <div class="card-1 container infos_medecin">
                 <div class="row">
@@ -39,16 +39,35 @@
                     <button class="col-sm-12 taille_1 btn-rdv" @click="changeRdv(m.nom), affichage_rdv()">Prendre rendez-vous</button>
                 </div>
               </div>
-          </article>
+          </article> -->
+          <article class="col-sm-3 la " v-for="m in m_bdd" :key="m.id" v-if="m.specialite == medSpe">
 
+            <div class="card-1 container infos_medecin">
+              <div class="row">
+                <img class="img_all" src="https://img.icons8.com/material-sharp/96/000000/user-male-circle.png">
+              </div>
+              <div class="row nom_adresse_numero_region_medecin">
+                <p class="nom_medecin col-sm-12 taille_3"> {{ m.nom }} </p>
+                <p class="col-sm-12 taille_2"> {{ m.adresse }} </p>
+                <p class="col-sm-12 taille_2"> {{ m.numero }} </p>
+                <p class="col-sm-12 taille_2"> {{ m.region }} </p>
+              </div>
+            </div>
+
+            <div v-if="user_patient.id && !rdv_form" class="container">
+              <div class="row">
+                  <button class="col-sm-12 taille_1 btn-rdv" @click="changeRdv(m.nom), affichage_rdv()">Prendre rendez-vous</button>
+              </div>
+            </div>
+
+          </article>
         </article>
+
       </div>
     </article>
-
       <div v-if="rdv_form" class="container-fluid rdv">
         <form class=" ici container form" @submit.prevent="prendre_rdv">
 
-          <!-- <div class="row "> -->
             <div class="container">
               <p class="titre_rdv row taille_4"> Rendez-vous avec Dr. {{ rdv_actuel }} </p>
             </div>
@@ -106,8 +125,6 @@
             <div class="container">
               <button class="btn_fermer row" type="button" name="button" @click="affichage_rdv()">fermer</button>
             </div>
-          <!-- </div> -->
-
 
           </form>
       </div>
@@ -126,7 +143,8 @@
       user_patient: { type: Object },
       user_medecin: { type: Object },
       rdv_patient: {type: Array},
-      demande_de_rdv: {type: Array}
+      demande_de_rdv: {type: Array},
+      m_bdd:{ type: Array, default: [] }
     },
     data () {
       return {
@@ -137,8 +155,9 @@
           date: '',
           heure: '',
           description:'',
-          medecin:'',
-          patient: this.user_patient.id
+          medecin: this.rdv_actuel,
+          patient: this.user_patient.id,
+          accepted_or_not: 'non'
         }
       }
     },

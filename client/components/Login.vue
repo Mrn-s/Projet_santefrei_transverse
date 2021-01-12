@@ -1,15 +1,15 @@
 <template>
   <div class="background_page_login">
         <div class="container" id="colonne_login">
-            <form class="container colonne_centrale" @submit.prevent="login">
+            <form class="container" @submit.prevent="login">
               <div class="row">
-                <div class="col-sm-12 taille_4" id="titre_onglet_connexion">
+                <div class="col-sm-12 taille_4 bold" id="titre_onglet_connexion">
                   Connexion
                 </div>
               </div>
               <div class="row">
-                <label class="col-sm-6 taille_2">Email</label>
-                <label class="col-sm-6 taille_2">Mot de passe</label>
+                <label class="col-sm-6 taille_3">Email</label>
+                <label class="col-sm-6 taille_3">Mot de passe</label>
                 <div class="col-sm-6">
                   <input class="col-sm-12" type="text" id="email" v-model="editLogin.email" placeholder="Entrer votre email" name="username" required>
                 </div>
@@ -20,6 +20,7 @@
 
               <div class="row ligne_connexion">
                 <button class="col-sm-12 taille_3" id="btn-connexion" type="submit">Je me connecte</button>
+                <router-link class="col-sm-12 taille_3" id="lien_vers_inscription" to='/register'> Pas encore de compte ?</router-link>
               </div>
 
             </form>
@@ -37,7 +38,6 @@
               </div>
             </div>
 
-
           </div>
 
         </div>
@@ -47,6 +47,7 @@
 <script>
   module.exports = {
     props: {
+
     },
     data () {
       return {
@@ -70,13 +71,26 @@
 </script>
 
 <style scoped>
+#lien_vers_inscription{
+  margin: 20px 0;
+  width: 100%;
+  background-color: var(--bleu_logo);
+  color: white;
+}
+#colonne_login form{
+  background-color: var(--beige_fonce_o);
+  border:2px solid black;
+}
+#colonne_login{
+  padding-top: 70px;
+}
 #text_remerciements{
   padding: 19px;
   color: var(--bleu_logo);
 }
 
 #colonne_remerciements{
-  margin-top: 15px;
+  margin-top: 25px;
 }
 
 #titre_section_remerciements{
@@ -95,6 +109,7 @@
 }
 
   #titre_onglet_connexion{
+    color:var(--bleu_logo);
     text-align: center;
     margin: 10px;
   }
