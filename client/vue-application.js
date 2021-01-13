@@ -74,7 +74,8 @@ var app = new Vue({
     demande_de_rdv_med:null,
     maladiesTypes: ['tete', 'bras_droit', 'bras_gauche', 'jambe_droite', 'jambe_gauche', 'torse', 'cou', 'epaule_droite', 'epaule_gauche'],
     symptomeTypes: ['type_1','type_2','type_3','type_4','type_5','type_6'],
-    liste_medecins_bdd: null
+    liste_medecins_bdd: null,
+    rdv_symptome:null
   },
   async mounted () {
     // const res_medecins = await axios.get('/api/medecins')
@@ -97,6 +98,8 @@ var app = new Vue({
     this.liste_medecins_bdd = med_bdd.data.m_api_bdd
     const res_m_bdd = await axios.get('/api/getLes_rdv_bdd')
     this.demande_de_rdv_med = res_m_bdd.data.dmd_rdv_bdd
+    const res_symp_rdv = await axios.get('/api/getLes_symp_rdv_bdd')
+    this.rdv_symptome = res_symp_rdv.data.s_rdv
 
     await axios.post('/api/setdatas', 'symptomeTypes=' + this.symptomeTypes)
 
@@ -121,9 +124,39 @@ var app = new Vue({
     this.user_medecin.demande_de_rdv = res_medecin.data.demande_de_rdv
   },
   methods: {
+    // async add_to_rdv_s (liste_des_symptomes_a_ajouter_et_id){
+    //   alert("vue app 1 : " + liste_des_symptomes_a_ajouter_et_id)
+    //   const res = await axios.put('/api/add_to_rdv_api','id_du_rdv=' + liste_des_symptomes_a_ajouter_et_id.id_rdv + '&liste_s_to_add=' + liste_des_symptomes_a_ajouter_et_id.l_symptomes_to_add )
+    //   alert("vue app 2 : ")
+    //   asAlertMsg({
+    //     type: "success",
+    //     title: "Validé",
+    //     message: "Vous avez bien ajouter vos symptomes",
+    //     timer: 2500,
+    //   })
+    // },
+    async add_to_rdv_s (rdv_id){
+      alert("vue app 1 : " + this.panier_symptomes.symptomes[0].nom + "  test2  : " + this.panier_symptomes.symptomes[1].nom + "  test3  : " + this.panier_symptomes.symptomes[2].nom )
+      const res = await axios.put('/api/add_to_rdv_api','id_du_rdv=' + rdv_id.id_rdv + '&liste_s_to_add=' + this.panier_symptomes.symptomes )
+      alert("vue app 2 : test")
+      asAlertMsg({
+        type: "success",
+        title: "Validé",
+        message: "Vous avez bien ajouter vos symptomes",
+        timer: 2200,
+      })
+    },
 
     async refuser_rdv (rdv_id){
-      const res = await axios.delete('/api/refuser_le_rdv','id=' + rdv_id.id)
+
+      const res = await axios.post('/api/refuser_le_rdv','id=' + rdv_id.id)
+
+      asAlertMsg({
+        type: "success",
+        title: "Validé",
+        message: "Vous avez refusé le rdv",
+        timer: 2200,
+      })
     },
 
     async accepter_rdv (rdv_id){
@@ -132,7 +165,7 @@ var app = new Vue({
         type: "success",
         title: "Validé",
         message: "Vous avez accepté le rendez-vous",
-        timer: 3000,
+        timer: 2200,
       })
     },
 
@@ -182,6 +215,12 @@ var app = new Vue({
       this.user_patient.telephone = res.data.telephone
       this.user_patient.id = res.data.user_patient
       this.user_patient.rdv_patient = []
+      asAlertMsg({
+        type: "success",
+        title: "Validé",
+        message: "Vous avez bel et bien été deconnecté",
+        timer: 2800,
+      })
       router.push('/')
     },
 
@@ -193,13 +232,15 @@ var app = new Vue({
         this.user_patient.rdv_patient.push(le_rdv.data)
         // alert("alert 3 " + this.user_patient.rdv_patient)
         this.user_medecin.demande_de_rdv.push(le_rdv.data)
+
         // alert("alert 4 " + this.user_medecin.demande_de_rdv)
         asAlertMsg({
           type: "success",
           title: "Validé",
           message: "Votre rendez-vous a été prit en compte M./Mme. " + this.user_patient.nom,
-          timer: 3500,
+          timer: 3000,
         })
+        router.push('/questionnaire')
     },
 
     async login (user) {
@@ -211,8 +252,7 @@ var app = new Vue({
       this.user_patient.email = res.data.email
       this.user_patient.prenom = res.data.prenom
       this.user_patient.telephone = res.data.telephone
-
-      // this.user_patient.rapports = res.data.rapports
+      this.user_patient.rdv_patient = res.data.patient_rdv
 
       router.push('/')
     },
@@ -281,6 +321,12 @@ var app = new Vue({
       this.user_patient.email = res.data.email
       this.user_patient.prenom = res.data.prenom
       this.user_patient.telephone = res.data.telephone
+      asAlertMsg({
+        type: "success",
+        title: "Validé",
+        message: "Vos modifications ont été prises en compte",
+        timer: 2500,
+      })
 
     },
 
@@ -294,6 +340,12 @@ var app = new Vue({
       this.user_medecin.specialite = res.data.specialite
       this.user_medecin.adresse = res.data.adresse
       this.user_medecin.region = res.data.region
+      asAlertMsg({
+        type: "success",
+        title: "Validé",
+        message: "Vos modifications ont été prises en compte",
+        timer: 2500,
+      })
 
     }
 

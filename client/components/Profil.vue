@@ -182,7 +182,7 @@
            </div>
         </div>
         <div class="row">
-          <div class="col-sm-7">
+         <div class="col-sm-7 c_rdv">
              <div id="mes-rendez-vous"  class="container">
                  <div class="row">
                    <div class="col-sm-12">
@@ -194,42 +194,81 @@
                      <button type="button" name="button">trier par date</button>
                    </div>
                  </div>
-
+                 <!-- section gauche pour les patient -->
                  <section class="row chaque_rdv" v-for=" rdv_demande in user_patient.rdv_patient" v-if="user_patient.id && (rdv_demande.accepted =='oui')">
-                   <section class="col-sm-12">
-                     <p> Date : {{ rdv_demande.date }} </p>
+                   <section class="col-sm-12 taille_1">
+                     <p> Rendez-vous numéro : {{ rdv_demande.id }} </p>
                    </section>
                    <section class="col-sm-12">
-                     <p> Heure : {{ rdv_demande.heure }} </p>
+                     <p> <b class="titres_lignes_chaque_rdv">Date</b> : {{ rdv_demande.date }} </p>
                    </section>
                    <section class="col-sm-12">
-                     <p> Nom du medecin : {{ rdv_demande.medecin_id }} </p>
+                     <p> <b class="titres_lignes_chaque_rdv">Heure</b> : {{ rdv_demande.heure }} </p>
                    </section>
                    <section class="col-sm-12">
-                     <p> description : {{ rdv_demande.description }} </p>
+                     <p> <b class="titres_lignes_chaque_rdv"> Médecin</b> : Dr. {{ rdv_demande.medecin_id }} </p>
                    </section>
-                   <!-- <section class="col-sm-12">
-                     <p> accepted : {{ rdv_demande.accepted }} </p>
-                   </section> -->
+                   <section class="col-sm-12">
+                     <p> <b class="titres_lignes_chaque_rdv"> description</b> : {{ rdv_demande.description }} </p>
+                   </section>
+                   <section class="col-sm-12 symp taille_1">
+                     <p> Symptomes </p>
+                   </section>
+                   <div class="container">
+                     <section v-for ="liste_s_rdv in rdv_symptome" v-if="liste_s_rdv.id_rdv == rdv_demande.id" class="row l_sym">
+                       <p class="col-sm-12"> {{ liste_s_rdv.s_un }} </p>
+                       <p class="col-sm-12" v-if="liste_s_rdv.s_deux"> {{ liste_s_rdv.s_deux }} </p>
+                       <p class="col-sm-12" v-if="liste_s_rdv.s_trois"> {{ liste_s_rdv.s_trois }} </p>
+                       <p class="col-sm-12" v-if="liste_s_rdv.s_quatre"> {{ liste_s_rdv.s_quatre }} </p>
+                       <p class="col-sm-12" v-if="liste_s_rdv.s_cinq"> {{ liste_s_rdv.s_cinq }} </p>
+                       <p class="col-sm-12" v-if="liste_s_rdv.s_six"> {{ liste_s_rdv.s_six }} </p>
+                       <p class="col-sm-12" v-if="liste_s_rdv.s_sept"> {{ liste_s_rdv.s_sept }} </p>
+                       <p class="col-sm-12" v-if="liste_s_rdv.s_huit"> {{ liste_s_rdv.s_huit }} </p>
+                       <p class="col-sm-12" v-if="liste_s_rdv.s_neuf"> {{ liste_s_rdv.s_neuf }} </p>
+                       <p class="col-sm-12" v-if="liste_s_rdv.s_dix"> {{ liste_s_rdv.s_dix }} </p>
+                     </section>
+                   </div>
+
                  </section>
+                 <!-- section gauche pour les médecins -->
                  <section class="row chaque_rdv" v-for=" r in rdv_bdd" :key="r.id" v-if="(r.medecin_id == user_medecin.nom) && user_medecin.id  && (r.accepted =='oui') ">
-                   <section class="col-sm-12">
-                     <p> Date : {{ r.date }} </p>
+                   <section class="col-sm-12 taille_1">
+                     <p> Rendez-vous numéro : {{ r.id }} </p>
                    </section>
                    <section class="col-sm-12">
-                     <p> Heure : {{ r.heure }} </p>
+                     <p> <b class="titres_lignes_chaque_rdv">Date</b> : {{ r.date }} </p>
                    </section>
                    <section class="col-sm-12">
-                     <p> Nom du patient : {{ r.patient_id }} </p>
+                     <p> <b class="titres_lignes_chaque_rdv">Heure</b> : {{ r.heure }} </p>
                    </section>
                    <section class="col-sm-12">
-                     <p> description : {{ r.description }} </p>
+                     <p> <b class="titres_lignes_chaque_rdv"> Nom du patient</b> : M/Mme. {{ r.patient_id }} </p>
                    </section>
+                   <section class="col-sm-12">
+                     <p> <b class="titres_lignes_chaque_rdv"> description</b> : {{ r.description }} </p>
+                   </section>
+                   <section class="col-sm-12 symp taille_1">
+                     <p> <b>Symptomes</b> </p>
+                   </section>
+                   <div class="container">
+                     <section v-for ="liste_s_rdv in rdv_symptome" v-if="liste_s_rdv.id_rdv == r.id" class="row l_sym">
+                       <p class="col-sm-12"> {{ liste_s_rdv.s_un }} </p>
+                       <p class="col-sm-12" v-if="liste_s_rdv.s_deux"> {{ liste_s_rdv.s_deux }} </p>
+                       <p class="col-sm-12" v-if="liste_s_rdv.s_trois"> {{ liste_s_rdv.s_trois }} </p>
+                       <p class="col-sm-12" v-if="liste_s_rdv.s_quatre"> {{ liste_s_rdv.s_quatre }} </p>
+                       <p class="col-sm-12" v-if="liste_s_rdv.s_cinq"> {{ liste_s_rdv.s_cinq }} </p>
+                       <p class="col-sm-12" v-if="liste_s_rdv.s_six"> {{ liste_s_rdv.s_six }} </p>
+                       <p class="col-sm-12" v-if="liste_s_rdv.s_sept"> {{ liste_s_rdv.s_sept }} </p>
+                       <p class="col-sm-12" v-if="liste_s_rdv.s_huit"> {{ liste_s_rdv.s_huit }} </p>
+                       <p class="col-sm-12" v-if="liste_s_rdv.s_neuf"> {{ liste_s_rdv.s_neuf }} </p>
+                       <p class="col-sm-12" v-if="liste_s_rdv.s_dix"> {{ liste_s_rdv.s_dix }} </p>
+                     </section>
+                   </div>
                  </section>
 
              </div>
          </div>
-         <div class="col-sm-5">
+         <div class="col-sm-5 c_rdv">
            <div id="mes-rendez-vous" class="container">
                <div class="row">
                  <div class="col-sm-12">
@@ -244,39 +283,76 @@
                </div>
 
                <section class="row chaque_rdv" v-if="user_patient.id && (rdv_demande.accepted == 'non') " v-for=" rdv_demande in user_patient.rdv_patient" >
-                 <section class="col-sm-12">
-                   <p> Date : {{ rdv_demande.date }} </p>
+                 <section class="col-sm-12 taille_1">
+                   <p> Rendez-vous numéro : {{ rdv_demande.id }} </p>
                  </section>
                  <section class="col-sm-12">
-                   <p> Heure : {{ rdv_demande.heure }} </p>
+                   <p> <b class="titres_lignes_chaque_rdv">Date</b> : {{ rdv_demande.date }} </p>
                  </section>
                  <section class="col-sm-12">
-                   <p> Nom du medecin : {{ rdv_demande.medecin_id }} </p>
+                   <p> <b class="titres_lignes_chaque_rdv">Heure</b> : {{ rdv_demande.heure }} </p>
                  </section>
                  <section class="col-sm-12">
-                   <p> description : {{ rdv_demande.description }} </p>
+                   <p> <b class="titres_lignes_chaque_rdv"> Médecin</b> : Dr. {{ rdv_demande.medecin_id }} </p>
                  </section>
-                 <!-- <section class="col-sm-12">
-                   <p> accepted : {{ rdv_demande.accepted }} </p>
-                 </section> -->
+                 <section class="col-sm-12">
+                   <p> <b class="titres_lignes_chaque_rdv"> description</b> : {{ rdv_demande.description }} </p>
+                 </section>
+                 <section class="col-sm-12 symp taille_1">
+                   <p> Symptomes </p>
+                 </section>
+                 <div class="container">
+                   <section v-for ="liste_s_rdv in rdv_symptome" v-if="liste_s_rdv.id_rdv == rdv_demande.id" class="row l_sym">
+                     <p class="col-sm-12"> {{ liste_s_rdv.s_un }} </p>
+                     <p class="col-sm-12" v-if="liste_s_rdv.s_deux"> {{ liste_s_rdv.s_deux }} </p>
+                     <p class="col-sm-12" v-if="liste_s_rdv.s_trois"> {{ liste_s_rdv.s_trois }} </p>
+                     <p class="col-sm-12" v-if="liste_s_rdv.s_quatre"> {{ liste_s_rdv.s_quatre }} </p>
+                     <p class="col-sm-12" v-if="liste_s_rdv.s_cinq"> {{ liste_s_rdv.s_cinq }} </p>
+                     <p class="col-sm-12" v-if="liste_s_rdv.s_six"> {{ liste_s_rdv.s_six }} </p>
+                     <p class="col-sm-12" v-if="liste_s_rdv.s_sept"> {{ liste_s_rdv.s_sept }} </p>
+                     <p class="col-sm-12" v-if="liste_s_rdv.s_huit"> {{ liste_s_rdv.s_huit }} </p>
+                     <p class="col-sm-12" v-if="liste_s_rdv.s_neuf"> {{ liste_s_rdv.s_neuf }} </p>
+                     <p class="col-sm-12" v-if="liste_s_rdv.s_dix"> {{ liste_s_rdv.s_dix }} </p>
+                   </section>
+                 </div>
                </section>
                <section class="row chaque_rdv" v-for=" r in rdv_bdd" :key="r.id" v-if="(r.medecin_id == user_medecin.nom) && user_medecin.id && (r.accepted == 'non')">
-                 <section class="col-sm-12">
-                   <p> Date : {{ r.date }} </p>
+                 <section class="col-sm-12 taille_1">
+                   <p> Rendez-vous numéro : {{ r.id }} </p>
                  </section>
                  <section class="col-sm-12">
-                   <p> Heure : {{ r.heure }} </p>
+                   <p> <b class="titres_lignes_chaque_rdv">Date</b> : {{ r.date }} </p>
                  </section>
                  <section class="col-sm-12">
-                   <p> Nom du patient : {{ r.patient_id }} </p>
+                   <p> <b class="titres_lignes_chaque_rdv">Heure</b> : {{ r.heure }} </p>
                  </section>
                  <section class="col-sm-12">
-                   <p> description : {{ r.description }} </p>
+                   <p> <b class="titres_lignes_chaque_rdv"> Nom du patient</b> : M/Mme. {{ r.patient_id }} </p>
                  </section>
-                 <section class="col-sm-6">
+                 <section class="col-sm-12">
+                   <p> <b class="titres_lignes_chaque_rdv"> description</b> : {{ r.description }} </p>
+                 </section>
+                 <section class="col-sm-12 symp taille_1">
+                   <p> Symptomes </p>
+                 </section>
+                 <div class="container">
+                   <section v-for ="liste_s_rdv in rdv_symptome" v-if="liste_s_rdv.id_rdv == r.id" class="row l_sym">
+                     <p class="col-sm-12"> {{ liste_s_rdv.s_un }} </p>
+                     <p class="col-sm-12" v-if="liste_s_rdv.s_deux"> {{ liste_s_rdv.s_deux }} </p>
+                     <p class="col-sm-12" v-if="liste_s_rdv.s_trois"> {{ liste_s_rdv.s_trois }} </p>
+                     <p class="col-sm-12" v-if="liste_s_rdv.s_quatre"> {{ liste_s_rdv.s_quatre }} </p>
+                     <p class="col-sm-12" v-if="liste_s_rdv.s_cinq"> {{ liste_s_rdv.s_cinq }} </p>
+                     <p class="col-sm-12" v-if="liste_s_rdv.s_six"> {{ liste_s_rdv.s_six }} </p>
+                     <p class="col-sm-12" v-if="liste_s_rdv.s_sept"> {{ liste_s_rdv.s_sept }} </p>
+                     <p class="col-sm-12" v-if="liste_s_rdv.s_huit"> {{ liste_s_rdv.s_huit }} </p>
+                     <p class="col-sm-12" v-if="liste_s_rdv.s_neuf"> {{ liste_s_rdv.s_neuf }} </p>
+                     <p class="col-sm-12" v-if="liste_s_rdv.s_dix"> {{ liste_s_rdv.s_dix }} </p>
+                   </section>
+                 </div>
+                 <section class="col-sm-6 btn_accepter_refuser">
                    <button class="col-sm-12" type="button" @click="accepter_rdv(r.id)" name="button">Accepter</button>
                  </section>
-                 <section class="col-sm-6">
+                 <section class="col-sm-6 btn_accepter_refuser">
                    <button class="col-sm-12" type="button" @click="refuser_rdv(r.id)" name="button">Refuser</button>
                  </section>
                </section>
@@ -290,15 +366,14 @@
 </template>
 
 <script>
-
   module.exports = {
     components: {
-
     },
     props: {
       user_patient: {type: Object },
       user_medecin: {type: Object },
-      rdv_bdd: { type: Array, default: [] }
+      rdv_bdd: { type: Array, default: [] },
+      rdv_symptome : { type: Array, default: [] }
     },
     data () {
       return {
@@ -329,6 +404,7 @@
         this.$emit('accepter_rdv', rdv_id)
       },
       refuser_rdv(r_id){
+
         let rdv_id = {
           id: r_id
         }
@@ -371,9 +447,43 @@
 </script>
 
 <style scoped>
+.btn_accepter_refuser{
+  margin: 20px 0;
+}
+
+.titres_lignes_chaque_rdv{
+    padding: 10px;
+  background-color: var(--vert_o2);
+  color: white;
+}
+  .symp{
+    /* text-align:center; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .symp p{
+    padding: 10px;
+
+    background-color: var(--vert_o2);
+    color: white;
+  }
+  .l_sym{
+    border-top: 1px black solid;
+    border-bottom: 1px black solid;
+    margin:  0 15px;
+    padding: 10px 0;
+    max-height: 170px;
+    overflow-y: scroll;
+  }
+
+  .c_rdv{
+    margin-bottom: 20px;
+  }
+
   .chaque_rdv{
     box-shadow: 3px 3px 3px 3px var(--bleu_logo);
-    margin: 12px 0 12px 0;
+    margin: 15px 0 12px 0;
     padding: 10px 0 10px 0;
   }
 
@@ -398,6 +508,7 @@
     border: 1px white solid;
     background-color: var(--beige_fonce);
     margin-top: 50px;
+    padding: 15px;
   }
   #mes_infos{
     background-color: var(--beige_fonce);

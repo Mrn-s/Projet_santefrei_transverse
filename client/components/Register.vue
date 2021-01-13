@@ -5,10 +5,12 @@
         <div class="container" id="popupForm_register">
           <form @submit.prevent="Creer_patient">
             <div class="container">
-
-                <div class="taille_4 col-sm-12 bold titre_onglet_inscription">
-                  <p>Inscription</p>
+                <div class="row">
+                  <div class="taille_4 col-sm-12 bold titre_onglet_inscription">
+                    <p>Inscription</p>
+                  </div>
                 </div>
+
                 <div class="row">
                   <label class="col-sm-6 taille_2">Email</label>
                   <label class="col-sm-6 taille_2">Mot de passe</label>
@@ -31,9 +33,15 @@
                   </div>
 
                 </div>
+                <div class="row tel">
+                  <label class="col-sm-2 taille_2">Telephone</label>
+                  <div class="col-sm-10">
+                    <input class="col-sm-12" type="text" v-model="editRegister_patient.telephone" placeholder="telephone">
+                  </div>
 
-                <label class="col-sm-12 taille_2">Telephone</label>
-                <input class="col-sm-12" type="text" v-model="editRegister_patient.telephone" placeholder="telephone">
+                </div>
+
+
             </div>
 
             <article class="container btn_inscription">
@@ -225,6 +233,10 @@
 </script>
 
 <style>
+.tel{
+
+}
+
   #spe_select{
     height: 60%;
     margin-top: 18px;
@@ -237,9 +249,12 @@
     text-align: center;
   }
   .c_test{
-    padding-top: 50px;
+    padding-top: 60px;
   }
 
+  #background_page_register::-webkit-scrollbar {
+      display: none;
+  }
   #background_page_register{
     /* background-color: var(--beige); */
     background-image: url("../images/background_santefrei_carre.png");

@@ -72,8 +72,9 @@
 
 <style scoped>
 #lien_vers_inscription{
+  text-align: center;
+  padding: 5px 0;
   margin: 20px 0;
-  width: 100%;
   background-color: var(--bleu_logo);
   color: white;
 }
@@ -82,7 +83,7 @@
   border:2px solid black;
 }
 #colonne_login{
-  padding-top: 70px;
+  padding-top: 60px;
 }
 #text_remerciements{
   padding: 19px;

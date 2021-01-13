@@ -19,7 +19,7 @@
         <article  class="taille_4 row">
           <p id="titre_spe" class="col-sm-12">{{ medSpe }}</p>
         </article>
-        <article class="row chaque_medecin">
+        <article class="row">
           <!-- <article class="col-sm-3 la " v-for="m in les_medecins" v-if="m.specialite == medSpe">
 
               <div class="card-1 container infos_medecin">
@@ -40,7 +40,7 @@
                 </div>
               </div>
           </article> -->
-          <article class="col-sm-3 la " v-for="m in m_bdd" :key="m.id" v-if="m.specialite == medSpe">
+          <article class="col-sm-3  chaque_medecin " v-for="m in m_bdd" :key="m.id" v-if="m.specialite == medSpe">
 
             <div class="card-1 container infos_medecin">
               <div class="row">
@@ -52,11 +52,10 @@
                 <p class="col-sm-12 taille_2"> {{ m.numero }} </p>
                 <p class="col-sm-12 taille_2"> {{ m.region }} </p>
               </div>
-            </div>
-
-            <div v-if="user_patient.id && !rdv_form" class="container">
-              <div class="row">
-                  <button class="col-sm-12 taille_1 btn-rdv" @click="changeRdv(m.nom), affichage_rdv()">Prendre rendez-vous</button>
+              <div v-if="user_patient.id && !rdv_form" class="row">
+                <!-- <div class="col-sm-12"> -->
+                    <button class="col-sm-12 taille_1 btn-rdv" @click="changeRdv(m.nom), affichage_rdv()">Prendre rendez-vous</button>
+                <!-- </div> -->
               </div>
             </div>
 
@@ -65,69 +64,74 @@
 
       </div>
     </article>
-      <div v-if="rdv_form" class="container-fluid rdv">
-        <form class=" ici container form" @submit.prevent="prendre_rdv">
 
-            <div class="container">
-              <p class="titre_rdv row taille_4"> Rendez-vous avec Dr. {{ rdv_actuel }} </p>
+    <div v-if="rdv_form" class="container-fluid rdv">
+      <form class=" ici" @submit.prevent="prendre_rdv">
+        <div class="container form_container">
+            <div class="row">
+              <p class="titre_rdv col-sm-12 taille_4"> Rendez-vous avec Dr. {{ rdv_actuel }} </p>
             </div>
-            <div class="container">
-              <input class="row" v-model="editingRdv.date" type="date" name="date" id="select_date">
+            <div class="row ligne_rdv input_description">
+              <textarea class="col-sm-12" v-model="editingRdv.description" placeholder="ecrivez votre message" type="text"> </textarea>
             </div>
-            <div class="container">
-              <select class="row" v-model="editingRdv.heure" id="heure_select">
-                <option value="" disabled selected>Heure de rendez-vous</option>
-                <option value="10h00">10h00</option>
-                <option value="10h15">10h15</option>
-                <option value="10h30">10h30</option>
-                <option value="10h45">10h45</option>
-                <option value="11h00">11h00</option>
-                <option value="11h15">11h15</option>
-                <option value="11h30">11h30</option>
-                <option value="11h45">11h45</option>
-                <option value="12h00">12h00</option>
-                <option value="12h15">12h15</option>
-                <option value="12h30">12h30</option>
-                <option value="12h45">12h45</option>
-                <option value="13h00">13h00</option>
-                <option value="13h15">13h15</option>
-                <option value="13h30">13h30</option>
-                <option value="13h45">13h45</option>
-                <option value="14h00">14h00</option>
-                <option value="14h15">14h15</option>
-                <option value="14h30">14h30</option>
-                <option value="14h45">14h45</option>
-                <option value="15h00">15h00</option>
-                <option value="15h15">15h15</option>
-                <option value="15h30">15h30</option>
-                <option value="15h45">15h45</option>
-                <option value="16h00">16h00</option>
-                <option value="16h15">16h15</option>
-                <option value="16h30">16h30</option>
-                <option value="16h45">16h45</option>
-                <option value="17h00">17h00</option>
-                <option value="17h15">17h15</option>
-                <option value="17h30">17h30</option>
-                <option value="17h45">17h45</option>
-                <option value="18h00">18h00</option>
-                <option value="18h15">18h15</option>
-                <option value="18h30">18h30</option>
-                <option value="18h45">18h45</option>
-                <option value="19h00">19h00</option>
-              </select>
-            </div>
-            <div class="container">
-              <input class="row" v-model="editingRdv.description" placeholder="ecrivez votre message" type="text">
-            </div>
-            <div class="container">
-              <button class="row" type="submit" name="button"> Envoyer la demande de rendez-vous avec Dr. {{rdv_actuel}}</button>
-            </div>
-            <div class="container">
-              <button class="btn_fermer row" type="button" name="button" @click="affichage_rdv()">fermer</button>
+            <div class="row ligne_rdv">
+              <div class="col-sm-6">
+                <input class="col-sm-12" v-model="editingRdv.date" type="date" name="date" id="select_date">
+              </div>
+              <div class="col-sm-6">
+                <select class="col-sm-12" v-model="editingRdv.heure" id="heure_select">
+                  <option value="" disabled selected>Heure de rendez-vous</option>
+                  <option value="10h00">10h00</option>
+                  <option value="10h15">10h15</option>
+                  <option value="10h30">10h30</option>
+                  <option value="10h45">10h45</option>
+                  <option value="11h00">11h00</option>
+                  <option value="11h15">11h15</option>
+                  <option value="11h30">11h30</option>
+                  <option value="11h45">11h45</option>
+                  <option value="12h00">12h00</option>
+                  <option value="12h15">12h15</option>
+                  <option value="12h30">12h30</option>
+                  <option value="12h45">12h45</option>
+                  <option value="13h00">13h00</option>
+                  <option value="13h15">13h15</option>
+                  <option value="13h30">13h30</option>
+                  <option value="13h45">13h45</option>
+                  <option value="14h00">14h00</option>
+                  <option value="14h15">14h15</option>
+                  <option value="14h30">14h30</option>
+                  <option value="14h45">14h45</option>
+                  <option value="15h00">15h00</option>
+                  <option value="15h15">15h15</option>
+                  <option value="15h30">15h30</option>
+                  <option value="15h45">15h45</option>
+                  <option value="16h00">16h00</option>
+                  <option value="16h15">16h15</option>
+                  <option value="16h30">16h30</option>
+                  <option value="16h45">16h45</option>
+                  <option value="17h00">17h00</option>
+                  <option value="17h15">17h15</option>
+                  <option value="17h30">17h30</option>
+                  <option value="17h45">17h45</option>
+                  <option value="18h00">18h00</option>
+                  <option value="18h15">18h15</option>
+                  <option value="18h30">18h30</option>
+                  <option value="18h45">18h45</option>
+                  <option value="19h00">19h00</option>
+                </select>
+              </div>
+
             </div>
 
-          </form>
-      </div>
+            <div class="row ligne_rdv">
+              <button class="col-sm-6" type="submit" name="button"> Envoyer la demande de rendez-vous avec Dr. {{rdv_actuel}}</button>
+
+              <button class="btn_fermer col-sm-6" type="button" name="button" @click="affichage_rdv()">fermer</button>
+            </div>
+          </div>
+        </form>
+    </div>
+
   </div>
 </template>
 
@@ -187,6 +191,19 @@
 </script>
 
 <style scoped>
+.input_description{
+  height: 100px !important;
+}
+
+.form_container{
+
+  padding: 15px 0;
+}
+
+.ligne_rdv{
+  margin: 60px 0;
+}
+
 #background_page_medecins::-webkit-scrollbar {
     display: none;
 }
@@ -199,26 +216,21 @@
   border-right: 2px solid black;
   border-left: 2px solid black;
   color: white;
+  margin: 0 100px;
   /* var(--cyan_o2); */
   /* #DBEEE6 */
 }
 .menu_specialite{
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-
-  /* background-color: var(--vert_clair); */
   max-height: 300px;
   overflow-y: scroll;
-}
-
-.la{
-  margin: 11px 0;
 }
 
 .btn_fermer{
   width: 40%;
 }
 .nom_adresse_numero_region_medecin{
-  margin-top: 15px;
+  margin: 15px 0;
 }
 .nom_medecin{
   text-align: center;
@@ -236,13 +248,8 @@
   text-align: center;
 }
 .rdv{
-  /* background-color: var(--vert_clair); */
-  /* border: 1px solid black; */
   position: absolute;
   top:30%;
-  width: 100vw;
-
-  padding: 25px;
   z-index: 5;
 }
 #lien_vers_connexion{
@@ -251,12 +258,11 @@
 }
 
 .infos_medecin{
-  height: 530px;
+  height: 550px;
 }
 
 .chaque_medecin{
-
-  /* margin: 12px 0; */
+  margin: 13px 0;
 }
 
 .card-1 {

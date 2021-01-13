@@ -117,7 +117,7 @@ router.post('/setdatas', (req, res) => {
 router.use((req, res, next) => {
   // l'utilisateur n'est pas reconnu, lui attribuer un panier dans req.session
   if (typeof req.session.panier_symptomes === 'undefined') {
-    console.log(" on reset dans api ")
+
     req.session.panier_symptomes = new Panier_symptomes()
   }
   next()
@@ -177,13 +177,21 @@ function checkIfNotMenuExistInPanier_s (id, type, symptomes) {
 }
 
 
-router.delete('/refuser_le_rdv', async (req, res) => {
+router.post('/refuser_le_rdv', async (req, res) => {
+  // console.log("api 1")
   const r_id = req.body.id
-  const insert = "DELETE FROM rendez_vous WHERE id = $1"
+  // console.log("r_id : " + r_id)
+  const del = "DELETE FROM rendez_vous WHERE id = $1"
   await client.query({
-    text: insert,
+    text: del,
     values: [r_id]
   })
+  const del2 = "DELETE FROM symptomes_rdv WHERE id_rdv = $1"
+  await client.query({
+    text: del2,
+    values: [r_id]
+  })
+  // console.log("api 2")
   res.send()
 })
 
@@ -216,7 +224,8 @@ router.post('/panier/rdv_m', (req, res) => {
 router.post('/rdv', async (req, res) => {
   // console.log("ICI 1")
   if (req.session.userId) {
-    // console.log("ICI 2")
+
+    // const rdv_id
     const date = req.body.date
     const heure = req.body.heure
     const description = req.body.description
@@ -224,16 +233,27 @@ router.post('/rdv', async (req, res) => {
     const id_du_medecin = req.body.mid
     const accepted_ou_pas = req.body.accepted
 
-
     const insert = "INSERT INTO rendez_vous (date, heure, description, patient_id, medecin_id, accepted) VALUES ($1, $2, $3, $4, $5, $6)"
-
 
     await client.query({
       text: insert,
       values: [date, heure, description, req.session.userId, id_du_medecin, accepted_ou_pas]
     })
-// console.log("ICI 3")
-    // console.log("ICI 4")
+    // console.log("ICI 2")
+    const selec = "SELECT id FROM rendez_vous WHERE (date = $1 AND heure = $2 AND description = $3 AND patient_id = $4 AND medecin_id = $5 AND accepted = $6)"
+
+    const result = await client.query({
+      text: selec,
+      values: [date, heure, description, req.session.userId, id_du_medecin, accepted_ou_pas]
+    })
+    // console.log("ICI 3 " + result.rows[0].id)
+    const insert2 = "INSERT INTO symptomes_rdv (s_un, s_deux, s_trois, s_quatre, s_cinq, s_six, s_sept, s_huit, s_neuf, s_dix, id_rdv) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)"
+    await client.query({
+      text: insert2,
+      values: [null, null, null, null, null, null, null, null, null, null, result.rows[0].id]
+    })
+    // console.log("ICI 4 " + insert2)
+
     const le_rdv = {
       id: req.session.rdv_patient_Id + 1,
       date: date,
@@ -448,13 +468,14 @@ router.get('/me_medecin', async (req, res) => {
     var dmd_rdv = []
 
       const select = "SELECT * FROM rendez_vous WHERE medecin_id=$1"
-      const result_m = await client.query({
+      const resultm = await client.query({
         text: select,
         values: [req.session.medecinName]
       })
-
-      dmd_rdv = result_m.rows
-
+      for (let i = 0; i < resultm.rows.length; i++) {
+        resultm.rows[i].date = new Date(resultm.rows[i].date).toString().slice(0,15)
+      }
+      dmd_rdv = resultm.rows
 
     const m = {
       id: req.session.medecinId,
@@ -556,6 +577,8 @@ router.put('/user_update_patient', async (req, res) => {
   res.send()
   })
 
+
+
 router.put('/user_update_medecin', async (req, res) => {
 
     var nom = req.body.nom
@@ -620,6 +643,22 @@ router.get('/getLes_medecins_bdd', async (req, res) => {
   res.status(200).json(content)
 })
 
+
+router.get('/getLes_symp_rdv_bdd', async (req, res) => {
+  var s_rdv_api_bdd = []
+
+  // const result =
+  const result2 = await client.query("SELECT * FROM symptomes_rdv")
+
+  for (let i = 0; i < result2.rowCount; i++) {
+    s_rdv_api_bdd.push(result2.rows[i])
+  }
+
+  const content = { s_rdv : s_rdv_api_bdd }
+
+  res.status(200).json(content)
+})
+
 router.get('/getLes_rdv_bdd', async (req, res) => {
   var dmd_rdv_bdd = []
 
@@ -627,7 +666,7 @@ router.get('/getLes_rdv_bdd', async (req, res) => {
   const result2 = await client.query("SELECT * FROM rendez_vous")
 
   for (let i = 0; i < result2.rowCount; i++) {
-    console.log("api " + result2.rows[i])
+    // console.log("api " + result2.rows[i])
     dmd_rdv_bdd.push(result2.rows[i])
   }
 
@@ -636,6 +675,63 @@ router.get('/getLes_rdv_bdd', async (req, res) => {
   res.status(200).json(content)
 })
 
+router.put('/add_to_rdv_api', async (req, res) => {
 
+  console.log( " on arrive dans l'api ! ")
+  var id = req.body.id_du_rdv
+  var l = req.session.panier_symptomes.symptomes
+
+  var symp_un = null
+  var symp_deux = null
+  var symp_trois = null
+  var symp_quatre = null
+  var symp_cinq = null
+  var symp_six = null
+  var symp_sept = null
+  var symp_huit = null
+  var symp_neuf = null
+  var symp_dix = null
+
+  if (l[0]) {
+    var symp_un = l[0].nom
+  }
+  if (l[1]) {
+    var symp_deux = l[1].nom
+  }
+  if (l[2]){
+      var symp_trois = l[2].nom
+  }
+  if (l[3]) {
+      var symp_quatre = l[3].nom
+  }
+  if (l[4]) {
+    var symp_cinq = l[4].nom
+  }
+  if (l[5]) {
+    var symp_six = l[5].nom
+  }
+  if (l[6]) {
+    var symp_sept = l[6].nom
+  }
+  if (l[7]) {
+    var symp_huit = l[7].nom
+  }
+  if (l[8]) {
+      var symp_neuf = l[8].nom
+  }
+  if (l[9]) {
+    var symp_dix = l[9].nom
+  }
+  console.log(" l[0] : " + l[0].nom)
+
+  const update = "UPDATE symptomes_rdv SET s_un = $1, s_deux = $2, s_trois = $3, s_quatre = $4, s_cinq = $5, s_six = $6, s_sept = $7, s_huit = $8, s_neuf = $9, s_dix = $10 WHERE id_rdv=$11"
+  const result = await client.query({
+    text: update,
+    values: [symp_un, symp_deux, symp_trois, symp_quatre, symp_cinq, symp_six, symp_sept, symp_huit, symp_neuf, symp_dix, id]
+  })
+  console.log("api 2")
+
+  res.send()
+  })
 
 module.exports = router

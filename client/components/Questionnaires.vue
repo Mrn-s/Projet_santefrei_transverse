@@ -64,7 +64,7 @@
                 </div>
 
                 <div class="container">
-
+                  <p class="row ligne_colonne_droite"> Ajoutez jusqu'à 10 symptomes différents</p>
                   <p class="row ligne_colonne_droite"> Nombre de symptomes : {{ panier_symptomes.nb_symptomes }}</p>
                   <div class="row icii">
                     <article v-for="s in panier_symptomes.symptomes" :key="s.id" class="container chaque_symptome_panier">
@@ -82,15 +82,25 @@
                   </div>
 
                   <div class="row ligne_colonne_droite">
-                    <select  v-model="editListe_symptomes.medecin">
-                      <option  value="" disabled selected>Choisissez votre médecin</option>
-                      <option  v-for="m in les_medecins" v-bind:value="m.nom">{{ m.nom }}</option>
+                    <select  v-model="editListe_symptomes.rdv">
+                      <option  value="" disabled selected>Choisissez un rendez-vous</option>
+                      <option  v-for="r in rdv_bdd" v-if="r.patient_id == user_patient.id" v-bind:value="r.id">Rdv numero {{ r.id }}</option>
                     </select>
                   </div>
-                  <div class="row ligne_colonne_droite">
-                    <button type="button" name="button"> Envoyez mes symptomes à mon médecin </button>
-                  </div>
+                  <div class="row ligne_colonne_droite taille_1" v-for="r in rdv_bdd" v-if="r.id == editListe_symptomes.rdv">
+                    <div class="col-sm-12">
+                      <p>Rdv avec Dr. {{r.medecin_id}}</p>
+                      <p>Le {{r.date}} à {{r.heure}}</p>
+                    </div>
 
+                  </div>
+                  <div class="row ligne_colonne_droite">
+                    <button class="col-sm-12" @click="add_to_rdv(editListe_symptomes.rdv)" type="button" name="button"> Mettre ces symptomes à mon rendez-vous </button>
+
+                  </div>
+                  <div class="row ligne_colonne_droite">
+                    <p class="col-sm-12"> Attention : ceux-ci remplaceront entièrement les précédents</p>
+                  </div>
                 </div>
 
               </article>
@@ -165,7 +175,8 @@
       user_patient: { type: Object },
       questionnaires: { type: Array, default: [] },
       l_symptomes : { type : Array, default: [] },
-      panier_symptomes: { type: Object }
+      panier_symptomes: { type: Object },
+      rdv_bdd: { type: Array, default: [] }
     },
     data () {
       return {
@@ -178,7 +189,7 @@
           id: '',
           nom:'',
           description:'',
-          medecin:'',
+          rdv:'',
           type:''
         },
         questionnaire_form: true,
@@ -187,6 +198,14 @@
       }
     },
     methods:{
+      add_to_rdv(id_rdv){
+        let content ={
+          id_rdv: id_rdv
+        }
+        alert(content.id_rdv)
+      this.$emit('add-to-rdv-s', content)
+
+      },
       removeFromPanier_symptomes(id_s, type_s, nom_s) {
         // alert("on passe par la la vue 1")
         let content = {
@@ -223,105 +242,105 @@
 </script>
 
 <style scoped>
-.chaque_questionnaire{
-  letter-spacing: 1px;
-}
+  .chaque_questionnaire{
+    letter-spacing: 1px;
+  }
 
-.ligne_colonne_droite{
-  margin-top: 20px;
-}
+  .ligne_colonne_droite{
+    margin-top: 20px;
+  }
 
-.titre_colonne_droite{
-  /* width: 100%; */
-  text-align: center;
-}
+  .titre_colonne_droite{
+    /* width: 100%; */
+    text-align: center;
+  }
 
-.icii{
-  max-height: 380px;
-  overflow-y: scroll;
-}
-.chaque_symptome_panier{
-  /* border: 2px black solid; */
-  margin: 20px 0;
-  /* padding: 10px; */
+  .icii{
+    max-height: 380px;
+    overflow-y: scroll;
+  }
+  .chaque_symptome_panier{
+    /* border: 2px black solid; */
+    margin: 20px 0;
+    /* padding: 10px; */
 
-  color: #fff;
-}
-.infos_chaque_symptome_panier{
-  background-color: var(--vert_o2);
-}
+    color: #fff;
+  }
+  .infos_chaque_symptome_panier{
+    background-color: var(--cam_color2_o);
+  }
 
 
-.custom-btn {
-  /* padding: 10px 25px; */
-  /* font-weight: 500; */
-  /* background: transparent; */
-  outline: none !important;
-  cursor: pointer;
-  transition: all 0.4s ease;
-  position: relative;
-  display: inline-block;
-}
-.btn-14 {
-  border: 2px solid #000;
-  font-weight: bold;
-  z-index: 1;
-  padding: 2px 6px;
-}
-.btn-14:after {
-  position: absolute;
-  content: "";
-  width: 0;
-  height: 100%;
-  top: 0;
-  right: 0;
-  z-index: -1;
-  /* background: var(--jaune2); */
-  background: var(--bleu_logo);
-  transition: all 0.4s ease;
-}
-.btn-13:hover{
-  /* transform: translate(5px,5px); */
-  /* -webkit-transform: translate(0px,-7px); */
-}
+  .custom-btn {
+    /* padding: 10px 25px; */
+    /* font-weight: 500; */
+    /* background: transparent; */
+    outline: none !important;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    position: relative;
+    display: inline-block;
+  }
+  .btn-14 {
+    border: 2px solid #000;
+    font-weight: bold;
+    z-index: 1;
+    padding: 2px 6px;
+  }
+  .btn-14:after {
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 100%;
+    top: 0;
+    right: 0;
+    z-index: -1;
+    /* background: var(--jaune2); */
+    background: var(--bleu_logo);
+    transition: all 0.4s ease;
+  }
+  .btn-13:hover{
+    /* transform: translate(5px,5px); */
+    /* -webkit-transform: translate(0px,-7px); */
+  }
 
-.btn-14:hover {
-  color: #fff  ;
-  font-weight: bold;
-  /* transform: translate(5px,5px);
-  -webkit-transform: translate(0px,-7px); */
-}
-.btn-14:hover:after {
-  left: 0;
-  width: 100%;
-}
-.btn-14:active {
-  top: 2px;
-}
+  .btn-14:hover {
+    color: #fff  ;
+    font-weight: bold;
+    /* transform: translate(5px,5px);
+    -webkit-transform: translate(0px,-7px); */
+  }
+  .btn-14:hover:after {
+    left: 0;
+    width: 100%;
+  }
+  .btn-14:active {
+    top: 2px;
+  }
 
-.le_questionnaire{
-  background-color: var(--beige_fonce_o);
-  padding: 10px 40px;
-  border: solid black 1px;
-}
+  .le_questionnaire{
+    background-color: var(--beige_fonce_o);
+    padding: 10px 40px;
+    border: solid black 1px;
+  }
 
-#section_questionnaires{
-  background-color: var(--beige_fonce_o);
-  border: 1px solid black;
-  margin-top: 50px;
-}
-#section_symptomes{
-  padding: 15px 30px;
-  border: 1px solid black;
-  background-color: var(--beige_fonce_o);
-}
-#titre_section_questionnaire{
-  text-align: center;
-}
+  #section_questionnaires{
+    background-color: var(--beige_fonce_o);
+    border: 1px solid black;
+    margin-top: 50px;
+  }
+  #section_symptomes{
+    padding: 15px 30px;
+    border: 1px solid black;
+    background-color: var(--beige_fonce_o);
+  }
+  #titre_section_questionnaire{
+    text-align: center;
+  }
 
-#typeSymptome{
-  margin: 15px 0;
-}
+  #typeSymptome{
+    margin: 15px 0;
+  }
 
   #titre_section_symptome{
     text-align: center;
@@ -329,7 +348,7 @@
 
   .card-1 {
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  transition: all 0.5s cubic-bezier(.25,.8,.25,1);
   }
 
   .card-1:hover {
@@ -337,12 +356,13 @@
   color: var(--beige);
   transform: translate(0px,-8px);
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  transition: all 0.5s cubic-bezier(.25,.8,.25,1);
   /* background-color: var(--beige_fonce_o); */
   }
 
   .card-2 {
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  transition: all 1s cubic-bezier(.25,.8,.25,1);
   }
 
   .card-2:hover {
@@ -351,6 +371,7 @@
   /* -webkit-transform: translate(-5px,-2px); */
   color: var(--beige);
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  transition: all 0.5s cubic-bezier(.25,.8,.25,1);
   /* background-color: var(--beige_fonce_o); */
   }
 
@@ -388,9 +409,6 @@
     color: white;
     /* text-decoration: underline white 5px; */
   }
-  .lien_connexion::after{
-
-  }
 
   #colonne_droite{
     margin: 10px 0;
@@ -419,11 +437,6 @@
   #titre_questionnaire_page{
     margin-top: 150px;
     text-align: center;
-  }
-
-  button:hover{
-    /* color: #09371F; */
-    /* background-color: #E8C542; */
   }
 
 </style>
