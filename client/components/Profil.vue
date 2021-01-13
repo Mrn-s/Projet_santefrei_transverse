@@ -57,7 +57,7 @@
                       </div>
                     </div>
                     <div class="row">
-                        <button type="submit" >Modifier</button>
+                        <button type="submit" class="btn_profil" >Modifier</button>
                     </div>
 
                   </form>
@@ -191,7 +191,7 @@
                  </div>
                  <div class="row">
                    <div class="col-sm-12">
-                     <button type="button" name="button">trier par date</button>
+                     <button type="button" name="button" class="btn_profil">Trier par date</button>
                    </div>
                  </div>
                  <!-- section gauche pour les patient -->
@@ -245,7 +245,7 @@
                      <p> <b class="titres_lignes_chaque_rdv"> Nom du patient</b> : M/Mme. {{ r.patient_id }} </p>
                    </section>
                    <section class="col-sm-12">
-                     <p> <b class="titres_lignes_chaque_rdv"> description</b> : {{ r.description }} </p>
+                     <p> <b class="titres_lignes_chaque_rdv"> Description</b> : {{ r.description }} </p>
                    </section>
                    <section class="col-sm-12 symp taille_1">
                      <p> <b>Symptomes</b> </p>
@@ -278,7 +278,7 @@
                </div>
                <div class="row">
                  <div class="col-sm-12">
-                   <button type="button" name="button">trier par date</button>
+                   <button type="button" name="button" class="btn_profil">Trier par date</button>
                  </div>
                </div>
 
@@ -452,7 +452,7 @@
 }
 
 .titres_lignes_chaque_rdv{
-    padding: 10px;
+  padding: 10px;
   background-color: var(--vert_o2);
   color: white;
 }
@@ -535,5 +535,15 @@
       overflow: scroll;
       /* height: 90%; */
     }
+
+  .btn_profil{
+    background-color: var(--vert_o2);
+    color:white;
+    transition-duration: 0.5s;
+  }
+
+  .btn_profil:hover{
+    background-color: var(--vert_o);
+  }
 
 </style>

@@ -267,7 +267,7 @@
     align-items: center;
     justify-content: center;
     /* border: 5px blue solid; */
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
     background-image: url("../images/background_trois.png");
   }

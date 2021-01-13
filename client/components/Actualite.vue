@@ -55,11 +55,12 @@ module.exports = {
 }
 .chaque-actu{
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-
   margin:15px 0;
+  transition: transform .2s;
 }
 .chaque-actu:hover{
-    background-color: var(--cam_color2_o) ;
+    background-color: rgb(191, 187, 175) ;
+    transform: scale(1.01);
     /* var(--bleu_ciel_o) */
     cursor: pointer;
 }

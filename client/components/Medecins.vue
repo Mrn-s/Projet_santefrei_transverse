@@ -330,4 +330,28 @@ box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   margin:10px 0;
     color: black;
 }
+
+.btn-rdv {
+  color: #000;
+}
+.btn-rdv:hover {
+  color: #fff;
+  background-color: var(--vert_o)
+}
+/*.btn-rdv::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  transition: all 0.5s;
+  transform: scaleY(0);
+  z-index: -1;
+}
+.btn-rdv:hover::before {
+  transform: scaleY(1);
+}*/
+
 </style>

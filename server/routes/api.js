@@ -14,7 +14,7 @@ const les_specialites = require('../data/specialites.js')
 const client = new Client({
  user: 'postgres',
  host: 'localhost',
- password: 'Tellier_Souadji',
+ password: 'landry',
  database: 'Projet_transverse'
 })
 

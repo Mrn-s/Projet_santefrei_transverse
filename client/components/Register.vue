@@ -213,7 +213,7 @@
       async Creer_medecin(){
         var email = document.getElementById("email_register_medecin").value
         // if (email.match(/[a-z0-9_\-\.]+@+(santefrei-medecin){1}+\.[a-z]+/i)) {
-        if (email.match(/(medecin-)+[a-z]+(-)+[a-z]+(-santefrei)$/gm)) { //medecin-nom-prenom-santefrei
+        if (email.match(/(medecin-)+[a-z0-9]+(-)+[a-z0-9]+(-santefrei)$/gm)) { //medecin-nom-prenom-santefrei
           // alert("la vue 1")
           this.$emit('register_medecin', this.editRegister_medecin)
         } else{

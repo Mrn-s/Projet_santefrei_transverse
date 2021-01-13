@@ -75,7 +75,7 @@
                       </div>
 
                       <div class="row">
-                        <button class="col-sm-12" type="button" name="button" @click="removeFromPanier_symptomes(s.id, s.type, s.nom)"> Supprimer </button>
+                        <button class="col-sm-12 suppr_symptome" type="button" name="button" @click="removeFromPanier_symptomes(s.id, s.type, s.nom)"> Supprimer </button>
                       </div>
 
                     </article>
@@ -95,7 +95,7 @@
 
                   </div>
                   <div class="row ligne_colonne_droite">
-                    <button class="col-sm-12" @click="add_to_rdv(editListe_symptomes.rdv)" type="button" name="button"> Mettre ces symptomes à mon rendez-vous </button>
+                    <button class="col-sm-12 symptome_dans_rdv" @click="add_to_rdv(editListe_symptomes.rdv)" type="button" name="button"> <span>Mettre ces symptomes à mon rendez-vous</span> </button>
 
                   </div>
                   <div class="row ligne_colonne_droite">
@@ -120,7 +120,7 @@
                   <p class=" titre_questionnaire taille_2 col-sm-12" >{{ q.titre }}</p>
                   <p class=" col-sm-12"> {{ q.duree }} min</p>
                   <div class="col-sm-12">
-                    <button type="button" name="button" @click="changeQuestionnaire(q.id), affichage_questionnaire()"> remplir le questionnaire</button>
+                    <button type="button" name="button" class="btn-14 custom-btn ressens-btn" @click="changeQuestionnaire(q.id), affichage_questionnaire()"> remplir le questionnaire</button>
                   </div>
                 </div>
               </article>
@@ -267,7 +267,7 @@
     color: #fff;
   }
   .infos_chaque_symptome_panier{
-    background-color: var(--cam_color2_o);
+    background-color: rgb(191, 187, 175);
   }
 
 
@@ -438,5 +438,34 @@
     margin-top: 150px;
     text-align: center;
   }
+
+  .suppr_symptome{
+    background-color: var(--rouge_clair);
+    color: white;
+    border: 1px solid #da251f;
+    /*transition: transform .2s;*/
+    transition: all 150ms linear;
+  }
+
+  .suppr_symptome:hover{
+    background-color: var(--rouge);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    /*transform: scale(1.03);*/
+    transition: all 150ms linear;
+  }
+
+  .symptome_dans_rdv{
+    background-color:#11772D;
+    border-color: #30AD23;
+    color: white;
+    transition-duration: 0.5s;
+  }
+
+  .symptome_dans_rdv:hover{
+    background-color:#30AD23;
+
+  }
+
+
 
 </style>
