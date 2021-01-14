@@ -28,8 +28,8 @@
                     <div class="container">
                       <div class="row">
                         <p class="taille_4 bold col-sm-12" id ="titre_deux">Notre histoire</p>
-                        <p class ="taille_2 col-sm-12">Le besoin d'un site regroupant des outils performants et pertinent mis à dispositions de tous n'a jamais été aussi présent qu'en pleine épidémie mondiale. </p>
-                        <p class ="taille_2 col-sm-12"> C'est ainsi que SANT'EFREI naquit.</p>
+                        <p class ="taille_2 col-sm-12">Le besoin d'un site regroupant des outils performants et pertinents mis à dispositions de tous n'a jamais été aussi présent qu'en pleine épidémie mondiale.</p>
+                        <p class ="taille_2 col-sm-12">C'est dans ce contexte difficile que SANT'EFREI naquit.</p>
                       </div>
                     </div>
 
@@ -47,9 +47,9 @@
               <p class="taille_5 col-sm-12 bold comment_ca_marche"> Comment ça marche ? </p>
               <p class="taille_2 col-sm-12">
                 En quelques clics,
-                créez votre compte puis prenez rendez-vous avec votre médecin, choisissez ou non de lui faire part de vos symptomes.<br>
+                créez votre compte puis prenez rendez-vous avec votre médecin, choisissez ou non de lui faire part de vos symptômes.<br>
 
-                Trouvez le questionnaire de santé qui vous corresponds le plus, repondez-y et trouvez les réponses à vos questions de santé ! <br>
+                Trouvez le questionnaire de santé qui vous correspond le plus, repondez-y et trouvez les réponses à vos questions de santé ! <br>
                 Ces questionnaires classiques regroupent les problèmes de santé les plus courants et vous permettent d'avoir un aperçu des maladies qui vous touchent. <br>
                 Téléchargez le compte rendu, et décidez ou non de le partager avec votre médecin. C'est facile !
               </p>
@@ -63,36 +63,55 @@
               </article>
               <div class="col-sm-7" id="trois_deux">
                 <div class="contenu_trois">
+
+
                   <div class="row ligne_dans_l3">
                     <div class="col-sm-1">
                     </div>
-                    <div class="col-sm-3 " id="icone_1">
+                    <div class="col-sm-2" id="icone_1">
                     </div>
-                    <div class="col-sm-8">
+                    <div class="col-sm-9">
                       <p class="taille_3 bold col-sm-12">Communiquer</p>
-                      <p class="taille_1 col-sm-12 p_l3">Vous pouvez envoyer le rapport de vos symptômes directement à votre médecin.</p>
+                      <p class="taille_1 col-sm-12 p_l3">Selon vos maux, sélectionnez le type de spécialiste que vous souhaitez consulter et indiquez vos symptômes. Vous pouvez en envoyer jusqu'à 10 directement à votre médecin.</p>
                     </div>
                   </div>
+
+
                   <div class="row ligne_dans_l3">
                     <div class="col-sm-1">
                     </div>
-                    <div class="col-sm-3" id="icone_2">
+                    <div class="col-sm-2" id="icone_2">
                     </div>
-                    <div class="col-sm-8">
-                      <p class="taille_3 bold col-sm-12">Remplir un questionnaire </p>
-                      <p class="taille_1 col-sm-12 p_l3">Selon vos maux, sélectionnez le type de spécialiste que vous souhaitez consulter et remplissez le questionnaire adéquat.</p>
+                    <div class="col-sm-9">
+                      <p class="taille_3 bold col-sm-12">Proposer un rendez-vous à votre médecin </p>
+                      <p class="taille_1 col-sm-12 p_l3">Une fois vos symptômes séléctionnées, vous pouvez les envoyer à votre médecin et lui proposer un créneau de consultation.</p>
                     </div>
                   </div>
+
+
+                  <div class="row ligne_dans_l3">
+                    <div class="col-sm-1 ">
+                    </div>
+                    <div class="col-sm-2 " id="icone_3">
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="taille_3 bold col-sm-12">Répondre à une proposition de rendez-vous. </p>
+                      <p class="taille_1 col-sm-12 p_l3"> Votre médecin peut vous proposer un rendez-vous et un créneau. Le choix d'accepter ou non vous revient..</p>
+                    </div>
+                  </div>
+
+
                   <div class="row ligne_dans_l3">
                     <div class="col-sm-1">
                     </div>
-                    <div class="col-sm-3 " id="icone_3">
+                    <div class="col-sm-2 " id="icone_4">
                     </div>
-                    <div class="col-sm-8">
-                      <p class="taille_3 bold col-sm-12">Prendre rendez-vous </p>
-                      <p class="taille_1 col-sm-12 p_l3"> Une fois votre rapport envoyé, fixez un rendez-vous avec votre médecin.</p>
+                    <div class="col-sm-9">
+                      <p class="taille_3 bold col-sm-12">Se tenir à jour </p>
+                      <p class="taille_1 col-sm-12 p_l3"> Ne ratez rien des actualités du monde de la santé et rendez vous sur la rubrique Actualité.</p>
                     </div>
                   </div>
+
 
                 </div>
               </div>
@@ -109,7 +128,7 @@
             <article id="cinq_un" class="container">
               <p class="row taille_5">Témoignages </p>
               <p id ="sous_text_cinq" class="taille_1 row">
-                 « Ce site m'a permis d'être rassuré quant à mes symptômes en attendant la consultation chez mon spécialiste.
+                 « Ce site m'a permis de prendre contact rapidement avec mon médecin.
                  De plus, le temps de consultation est réduit, et l'attente pour avoir un rendez-vous aussi,
                  puisque le médecin étudie ma fiche de symptômes avant mon arrivée ! ».
               </p>
@@ -138,56 +157,80 @@
 </script>
 
 <style scoped>
-.comment_ca_marche{
-  text-align: center;
-}
-.partie_2{
-  margin-top: 80px;
-  /* margin- */
-}
+  .ligne_dans_l3{
+    margin: 30px 0;
+  }
+  #icone_3{
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url("../images/logo_calendrier.png");
+  }
+  #icone_4{
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url("../images/logo_news.png");
+  }
+  #icone_1{
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url("../images/logo_com.png");
+  }
+  #icone_2{
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url("../images/logo_pa.png");
+  }
 
-#titre_un, #titre_deux{
-  text-align:center;
-}
+  .comment_ca_marche{
+    text-align: center;
+  }
+  .partie_2{
+    margin-top: 80px;
+    /* margin- */
+  }
 
-.custom-btn-1-bis {
-  padding: 5px 20px;
-  font-weight: 500;
+  #titre_un, #titre_deux{
+    text-align:center;
+  }
 
-  outline: none !important;
-  cursor: pointer;
-  transition: all 0.4s ease;
-  position: relative;
+  .custom-btn-1-bis {
+    padding: 5px 20px;
+    font-weight: 500;
 
-}
-#btn_inscrivez_vous{
-  text-decoration: none;
-  color:var(--bleu_logo);
-}
+    outline: none !important;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    position: relative;
 
-.partie_gauche_un{
-      background-color: var(--beige_fonce_o);
-      padding: 25px 30px 10px 60px;
-}
-.partie_gauche_deux{
-      background-color: var(--bleu_logo_o);
-      color:white;
-      padding: 25px 30px 25px 60px;
-}
+  }
+  #btn_inscrivez_vous{
+    text-decoration: none;
+    color:var(--bleu_logo);
+  }
 
-.background_page_accueil::-webkit-scrollbar {
-    display: none;
-}
+  .partie_gauche_un{
+        background-color: var(--beige_fonce_o);
+        padding: 25px 30px 10px 60px;
+  }
+  .partie_gauche_deux{
+        background-color: var(--bleu_logo_o);
+        color:white;
+        padding: 25px 30px 25px 60px;
+  }
 
-.background_page_accueil{
-  background-color: var(--beige);
-  height: 100%;
-  /* max-height: 1660px; */
-  /* padding-top: 40px; */
-  padding-bottom: 54px;
-  overflow-y: scroll;
-  /* overflow-x: scroll; */
-}
+  .background_page_accueil::-webkit-scrollbar {
+      display: none;
+  }
+
+  .background_page_accueil{
+    background-color: var(--beige);
+    height: 100%;
+    /* max-height: 1660px; */
+    /* padding-top: 40px; */
+    padding-bottom: 54px;
+    overflow-y: scroll;
+    /* overflow-x: scroll; */
+  }
 
   .contenu_trois{
     margin: 0 5% 0 5%;
@@ -212,16 +255,15 @@
     height: 1200px;
     background-size: cover;
     background-repeat: no-repeat;
-    padding-top: 100px;
+    padding-top: 52px;
     /* height: 100%; */
     width: 100%;
     z-index: 1;
   }
   #emplacement_bouton_un_un{
-    padding: 15px 30px 30px 30px;
+    padding: 0 30px 0 30px;
     text-align: center;
   }
-
 
   #deux_un{
 

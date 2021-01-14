@@ -54,7 +54,7 @@ router.delete('/panier_s/:type/:id', (req, res) => {
     res.status(400).json({ message: 'Requête incorrecte' })
  } else if (index === -1) {
    // console.log("API 6 2 ")
-    res.status(501).json({ message: "Le symptome n'est pas dans le panier" })
+    res.status(501).json({ message: "Le symptôme n'est pas dans le panier" })
  } else {
    // console.log("API 6 3 ")
     const size = parseInt(req.session.symptomeTypes.length)
@@ -237,10 +237,7 @@ router.post('/accepter_le_rdv_from_m', async (req, res) => {
 })
 
 router.post('/add_responses_q', async (req, res) => {
-  // req.body.reponses
-  // console.log(req.body.questionnaire_id)
-  // console.log(req.body.reponses)
-  // console.log(req.session.userId)
+
   const insert = "INSERT INTO reponses_aux_questionnaires (reponses, id_questionnaire, id_patient) VALUES ($1, $2, $3)"
   await client.query({
     text: insert,
@@ -265,8 +262,6 @@ router.get('/getLes_responses_bdd', async (req, res) => {
 })
 
 
-
-
 router.get('/GetPanierSymptomes', (req, res) => {
   res.json(req.session.panier_symptomes)
 })
@@ -281,10 +276,7 @@ router.post('/panier/rdv_m', (req, res) => {
 })
 
 router.post('/rdv_m_to_p', async (req, res) => {
-  // console.log("ICI 1")
-  // if (req.session.medecinId) {
 
-    // const rdv_id
     const date = req.body.date
     const heure = req.body.heure
     const description = req.body.description
@@ -451,6 +443,7 @@ router.post('/register_patient',async (req,res) => {
   })
 
 router.post('/register_medecin',async (req,res) => {
+  // console.log("test1 ")
 
     const email = req.body.email
     const password = req.body.password
@@ -467,6 +460,7 @@ router.post('/register_medecin',async (req,res) => {
       text: sql,
       values: [email]
     })
+    // console.log("test2 ")
 
     if (result.rowCount == 1) {
       res.status(400).json({ message: "this user already exist" })
@@ -478,6 +472,7 @@ router.post('/register_medecin',async (req,res) => {
         text: insert,
         values: [nom, prenom, email, specialite, hash, telephone, region, adresse]
       })
+      // console.log("test3 ")
 
       var size = les_medecins.length
       const newMedecin = {
@@ -491,6 +486,7 @@ router.post('/register_medecin',async (req,res) => {
         adresse:adresse,
         specialite: specialite
       }
+      console.log("test 4")
       les_medecins.push(newMedecin)
       res.send()
     }
@@ -766,7 +762,6 @@ router.put('/user_update_medecin', async (req, res) => {
 router.get('/getLes_medecins_bdd', async (req, res) => {
   var m_api_bdd = []
 
-  // const result =
   const result2 = await client.query("SELECT * FROM medecins ORDER BY id")
 
   for (let i = 0; i < result2.rowCount; i++) {

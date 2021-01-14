@@ -12,7 +12,7 @@
                 </div>
 
                 <div class="row">
-                  <label class="col-sm-6 taille_2">Email</label>
+                  <label class="col-sm-6 taille_2">E-mail</label>
                   <label class="col-sm-6 taille_2">Mot de passe</label>
                   <div class="col-sm-6">
                     <input class="col-sm-12" id="email_register" type="text" v-model="editRegister_patient.email" placeholder="email">
@@ -20,27 +20,26 @@
                   <div class="col-sm-6">
                     <input class="col-sm-12" type="password" v-model="editRegister_patient.password" placeholder="mot de passe">
                   </div>
-
                 </div>
+
                 <div class="row">
                   <label class="col-sm-6 taille_2">Nom</label>
-                  <label class="col-sm-6 taille_2">Prenom</label>
+                  <label class="col-sm-6 taille_2">Prénom</label>
                   <div class="col-sm-6">
                     <input class="col-sm-12" type="text" v-model="editRegister_patient.nom" placeholder="nom">
                   </div>
                   <div class="col-sm-6">
                     <input class="col-sm-12" type="text" v-model="editRegister_patient.prenom" placeholder="prenom">
                   </div>
-
                 </div>
+
                 <div class="row tel">
-                  <label class="col-sm-2 taille_2">Telephone</label>
+                  <label class="col-sm-2 taille_2">Téléphone</label>
                   <div class="col-sm-10">
                     <input class="col-sm-12" type="text" v-model="editRegister_patient.telephone" placeholder="telephone">
                   </div>
 
                 </div>
-
 
             </div>
 
@@ -64,66 +63,66 @@
                   <p>Inscription médecin</p>
                 </div>
                 <div class="row">
-                  <label class="col-sm-6 taille_2">Email</label>
-                  <label class="col-sm-6 taille_2">Specialite</label>
+                  <label class="col-sm-6 taille_2">E-mail</label>
+                  <label class="col-sm-6 taille_2">Spécialite</label>
 
                   <div class="col-sm-6">
                     <input class="col-sm-12" id="email_register_medecin" type="text" v-model="editRegister_medecin.email" placeholder="email">
                   </div>
                   <div class="col-sm-6">
                     <select  class="col-sm-12" id="spe_select" v-model="editRegister_medecin.specialite">
-                      <option value="" disabled selected>Specialite</option>
-                      <option value="allergologie">allergologie</option>
-                      <option value="andrologie">andrologie</option>
-                      <option value="anesthésiologie">anesthésiologie</option>
-                      <option value="cardiologie">cardiologie</option>
-                      <option value="chirurgie cardiaque">chirurgie cardiaque</option>
-                      <option value="chirurgie plastique">chirurgie plastique</option>
-                      <option value="chirurgie générale">chirurgie générale</option>
-                      <option value="chirurgie gynécologique">chirurgie gynécologique</option>
-                      <option value="chirurgie maxillo-faciale">chirurgie maxillo-faciale</option>
-                      <option value="chirurgie oculaire">chirurgie oculaire</option>
-                      <option value="chirurgie orale">chirurgie orale</option>
-                      <option value="chirurgie pédiatrique">chirurgie pédiatrique</option>
-                      <option value="chirurgie thoracique">chirurgie thoracique</option>
-                      <option value="chirurgie vasculaire">chirurgie vasculaire</option>
-                      <option value="chirurgie viscérale">chirurgie viscérale</option>
-                      <option value="neurochirurgie">neurochirurgie</option>
-                      <option value="dermatologie">dermatologie</option>
-                      <option value="endocrinologie">endocrinologie</option>
-                      <option value="gastro-entérologie">gastro-entérologie</option>
-                      <option value="gériatrie">gériatrie</option>
-                      <option value="gynécologie">gynécologie</option>
-                      <option value="hématologie">hématologie</option>
-                      <option value="hépatologie">hépatologie</option>
-                      <option value="immunologie">immunologie</option>
-                      <option value="infectiologie">infectiologie</option>
-                      <option value="médecine générale">médecine générale</option>
-                      <option value="médecine interne">médecine interne</option>
-                      <option value="médecine physique et de réadaptation">médecine physique et de réadaptation</option>
-                      <option value="néonatologie">néonatologie</option>
-                      <option value="néphrologie">néphrologie</option>
-                      <option value="neurologie">neurologie</option>
-                      <option value="obstétrique">obstétrique</option>
-                      <option value="odontologie">odontologie</option>
-                      <option value="oncologie">oncologie</option>
-                      <option value="ophtalmologie">ophtalmologie</option>
-                      <option value="orthopédie">orthopédie</option>
-                      <option value="otorhinolaryngologie">otorhinolaryngologie</option>
-                      <option value="pédiatrie">pédiatrie</option>
-                      <option value="pneumologie">pneumologie</option>
-                      <option value="podologie">podologie</option>
-                      <option value="psychiatrie">psychiatrie</option>
-                      <option value="radiologie">radiologie</option>
-                      <option value="rhumatologie">rhumatologie</option>
-                      <option value="urologie">urologie</option>
+                      <option value="" disabled selected>Spécialité</option>
+                      <option value="allergologie">Allergologie</option>
+                      <option value="andrologie">Andrologie</option>
+                      <option value="anesthésiologie">Anesthésiologie</option>
+                      <option value="cardiologie">Cardiologie</option>
+                      <option value="chirurgie cardiaque">Chirurgie cardiaque</option>
+                      <option value="chirurgie plastique">Chirurgie plastique</option>
+                      <option value="chirurgie générale">Chirurgie générale</option>
+                      <option value="chirurgie gynécologique">Chirurgie gynécologique</option>
+                      <option value="chirurgie maxillo-faciale">Chirurgie maxillo-faciale</option>
+                      <option value="chirurgie oculaire">Chirurgie oculaire</option>
+                      <option value="chirurgie orale">Chirurgie orale</option>
+                      <option value="chirurgie pédiatrique">Chirurgie pédiatrique</option>
+                      <option value="chirurgie thoracique">Chirurgie thoracique</option>
+                      <option value="chirurgie vasculaire">Chirurgie vasculaire</option>
+                      <option value="chirurgie viscérale">Chirurgie viscérale</option>
+                      <option value="neurochirurgie">Neurochirurgie</option>
+                      <option value="dermatologie">Dermatologie</option>
+                      <option value="endocrinologie">Endocrinologie</option>
+                      <option value="gastro-entérologie">Gastro-entérologie</option>
+                      <option value="gériatrie">Gériatrie</option>
+                      <option value="gynécologie">Gynécologie</option>
+                      <option value="hématologie">Hématologie</option>
+                      <option value="hépatologie">Hépatologie</option>
+                      <option value="immunologie">Immunologie</option>
+                      <option value="infectiologie">Infectiologie</option>
+                      <option value="médecine générale">Médecine générale</option>
+                      <option value="médecine interne">Médecine interne</option>
+                      <option value="médecine physique et de réadaptation">Médecine physique et de réadaptation</option>
+                      <option value="néonatologie">Néonatologie</option>
+                      <option value="néphrologie">Néphrologie</option>
+                      <option value="neurologie">Neurologie</option>
+                      <option value="obstétrique">Obstétrique</option>
+                      <option value="odontologie">Odontologie</option>
+                      <option value="oncologie">Oncologie</option>
+                      <option value="ophtalmologie">Ophtalmologie</option>
+                      <option value="orthopédie">Orthopédie</option>
+                      <option value="otorhinolaryngologie">Otorhinolaryngologie</option>
+                      <option value="pédiatrie">Pédiatrie</option>
+                      <option value="pneumologie">Pneumologie</option>
+                      <option value="podologie">Podologie</option>
+                      <option value="psychiatrie">Psychiatrie</option>
+                      <option value="radiologie">Radiologie</option>
+                      <option value="rhumatologie">Rhumatologie</option>
+                      <option value="urologie">Urologie</option>
                     </select>
                   </div>
 
                 </div>
 
                 <div class="row">
-                  <label class="col-sm-6 taille_2">Telephone</label>
+                  <label class="col-sm-6 taille_2">Téléphone</label>
                   <label class="col-sm-6 taille_2">Mot de passe</label>
                   <div class="col-sm-6">
                     <input  type="text" v-model="editRegister_medecin.telephone" placeholder="telephone">
@@ -134,7 +133,7 @@
                 </div>
                 <div class="row">
                   <label class="col-sm-6 taille_2">Nom</label>
-                  <label class="col-sm-6 taille_2">Prenom</label>
+                  <label class="col-sm-6 taille_2">Prénom</label>
                   <div class="col-sm-6">
                     <input type="text" v-model="editRegister_medecin.nom" placeholder="nom">
                   </div>
@@ -144,8 +143,8 @@
 
                 </div>
                 <div class="row">
-                  <label class="col-sm-6 taille_2">region</label>
-                  <label class="col-sm-6 taille_2">adresse</label>
+                  <label class="col-sm-6 taille_2">Région</label>
+                  <label class="col-sm-6 taille_2">Adresse</label>
                   <div class="col-sm-6">
                     <input type="text" v-model="editRegister_medecin.region" placeholder="region">
                   </div>
@@ -161,7 +160,7 @@
                     <button class="col-sm-12  bouton_inscription" type="submit">Je m'inscris</button>
                   </div>
                   <div class="col-sm-6">
-                    <button type="button" class=" col-sm-12 bouton_inscription" @click="openForm_register()">Je suis ne suis pas médecin</button>
+                    <button type="button" class=" col-sm-12 bouton_inscription" @click="openForm_register()">Je ne suis pas médecin</button>
                   </div>
                 </div>
               </article>

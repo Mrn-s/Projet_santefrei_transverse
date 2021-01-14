@@ -2,7 +2,7 @@
   <div id="background_page_rendez_vous">
 
     <article class="colonne_centrale container taille_3">
-      <p>ceci est la page prendre_rendez_vous</p>
+      <p>Ceci est la page prendre_rendez_vous</p>
     </article>
 </div>
 </template>

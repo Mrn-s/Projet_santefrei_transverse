@@ -1,9 +1,12 @@
 <template>
 <div id ="background_page_mes_patients">
   <div class="container-fluid">
-    <section class="row">
-      <div class="col-sm-12 taille_3">
-        <p>Retrouvez la liste de vos rendez-vous qui sont déja passés</p>
+    <section class="container">
+      <div class="row taille_5 ">
+        <div class="col-sm-12 titre_page">
+            <p>Retrouvez la liste de vos rendez-vous</p>
+        </div>
+
       </div>
     </section>
     <div class="row">
@@ -31,12 +34,12 @@
           </div>
           <div class="row">
             <section class="col-sm-12">
-              <p> <b class="titres_lignes_chaque_rdv"> description</b> : {{ r.description }} </p>
+              <p> <b class="titres_lignes_chaque_rdv"> Description</b> : {{ r.description }} </p>
             </section>
           </div>
           <div class="row">
             <section class="col-sm-12 symp taille_1">
-              <p> <b>Symptomes</b> </p>
+              <p> <b>Symptômes</b> </p>
             </section>
           </div>
 
@@ -54,20 +57,25 @@
               <p class="col-sm-12" v-if="liste_s_rdv.s_dix"> {{ liste_s_rdv.s_dix }} </p>
             </section>
           </div>
-          <div class="row">
-            <div class="col-sm-12">
-              <section class="col-sm-12" v-for=" p in p_bdd" :key="p.id" v-if=" p.id == r.patient_id">
 
-                <button class="btn_fermer" type="button" name="button" @click="changeRdv(p.id,p.nom), affichage_rdv()">Proposer un nouveau rendez-vous</button>
-              </section>
-            </div>
+        </div>
+        <div class="container btn_reprendre_rdv">
+          <div class="row">
+            <section class="col-sm-12" v-for=" p in p_bdd" :key="p.id" v-if=" p.id == r.patient_id">
+              <button class="btn_p_rdv col-sm-12 taille_1 bold" type="button" name="button" @click="changeRdv(p.id,p.nom), affichage_rdv()">Proposer un nouveau rendez-vous</button>
+            </section>
           </div>
         </div>
       </section>
     </div>
-    <div class="row taille_3">
-      <p class="col-sm-12"> Vos demandes de rendez-vous</p>
+    <div class="container">
+      <div class="row taille_4">
+        <div class="col-sm-12 titre_dmd_rdv">
+          <p > Vos demandes de rendez-vous</p>
+        </div>
+      </div>
     </div>
+
     <div class="row">
 
       <div class="col-sm-6" v-for=" r in rdv_to_p_bdd" :key="r.id" v-if="(r.accepted =='non')">
@@ -95,7 +103,7 @@
           </div>
           <div class="row">
             <section class="col-sm-12">
-              <p> <b class="titres_lignes_chaque_rdv"> description</b> : {{ r.description }} </p>
+              <p> <b class="titres_lignes_chaque_rdv"> Description</b> : {{ r.description }} </p>
             </section>
           </div>
 
@@ -104,7 +112,6 @@
 
       </div>
     </div>
-
 
   </div>
 
@@ -167,7 +174,7 @@
             </div>
 
             <div class="row ligne_rdv">
-              <button class="col-sm-6" type="submit" name="button"> Envoyer la demande de rendez-vous avec M/Mme {{this.p}}</button>
+              <button class="col-sm-6" type="submit" name="button">Envoyer la demande de rendez-vous avec M/Mme {{this.p}}</button>
 
               <button class="btn_fermer col-sm-6" type="button" name="button" @click="affichage_rdv()">fermer</button>
             </div>
@@ -230,6 +237,37 @@
 </script>
 
 <style scoped>
+
+.titre_dmd_rdv{
+  text-align: center;
+  border: var(--bleu_logo) 5px solid;
+
+  margin: 0 0 50px 0;
+}
+
+.titre_page{
+  margin: 30px 0;
+  border: var(--bleu_logo) 5px solid;
+  text-align: center;
+}
+.btn_p_rdv{
+  padding: 10px;
+  /* border: none; */
+
+border: 2px var(--bleu_logo) solid;
+  text-decoration: none;
+
+}
+.btn_p_rdv:hover{
+    background-color: var(--bleu_logo_o);
+    color:white;
+}
+
+.btn_reprendre_rdv{
+/* width: 100%; */
+margin: 5px 0 40px 0;
+}
+
   .input_description{
     height: 100px !important;
   }
@@ -258,13 +296,19 @@
     z-index: 5;
   }
   .chaque_rdv{
-    border: 1px solid black;
+    background-color: var(--bleu_logo_o);
+    color:white;
+    border: 3px solid var(--bleu_logo);
+    max-height: 300px;
+    overflow-y: scroll;
+
   }
   #background_page_mes_patients {
     height: 100%;
     max-height: 1660px;
     overflow: scroll;
     padding-bottom: 150px;
+    background-color: var(--beige_fonce_o);
     /* font-size: 1.8em; */
     /* padding: 15px; */
   }

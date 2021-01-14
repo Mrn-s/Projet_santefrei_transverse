@@ -3,9 +3,9 @@
 
     <article class="colonne_centrale container">
       <article class="row">
-        <p id="titre_colonne" class="col-sm-12 taille_5">Decouvrez l'ensemble de nos médecins</p>
+        <p id="titre_colonne" class="col-sm-12 taille_5">Découvrez l'ensemble de nos médecins</p>
         <div class="col-sm-12" id="lien_vers_connexion">
-          <router-link class="col-sm-12  taille_3" v-if="!(user_patient.id) && !(user_medecin.id)"  to='/login'> Connectez-vous et prenez rendez-vous </router-link>
+          <router-link class="col-sm-12  taille_3" v-if="!(user_patient.id) && !(user_medecin.id)"  to='/login'>Connectez-vous et prenez rendez-vous </router-link>
         </div>
       </article>
 
@@ -51,7 +51,7 @@
       <form class=" ici" @submit.prevent="prendre_rdv">
         <div class="container form_container">
             <div class="row">
-              <p class="titre_rdv col-sm-12 taille_4"> Rendez-vous avec Dr. {{ rdv_actuel }} </p>
+              <p class="titre_rdv col-sm-12 taille_4">Rendez-vous avec Dr. {{ rdv_actuel }} </p>
             </div>
             <div class="row ligne_rdv input_description">
               <textarea class="col-sm-12" v-model="editingRdv.description" placeholder="ecrivez votre message" type="text"> </textarea>
@@ -106,7 +106,7 @@
             </div>
 
             <div class="row ligne_rdv">
-              <button class="col-sm-6" type="submit" name="button"> Envoyer la demande de rendez-vous avec Dr. {{rdv_actuel}}</button>
+              <button class="col-sm-6" type="submit" name="button">Envoyer la demande de rendez-vous avec Dr. {{rdv_actuel}}</button>
 
               <button class="btn_fermer col-sm-6" type="button" name="button" @click="affichage_rdv()">fermer</button>
             </div>
@@ -234,6 +234,7 @@
 }
 #lien_vers_connexion{
   text-align: center;
+  /* text-decoration: none; */
   padding: 0 15px 25px 15px;
 }
 
@@ -262,7 +263,7 @@ box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
 #background_page_medecins{
-  background-color: var(--beige);
+  background-color: var(--bleu_logo);
   height: 100%;
   max-height: 1660px;
   padding-top: 2%;

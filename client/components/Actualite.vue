@@ -1,35 +1,40 @@
 <template>
 
 <div id="background_page_actualite">
+  <article class="container colonne_centrale container_titre">
+    <div class="row taille_5 titre_page">
+      <div class="col-sm-12 bold  ">
+         Les dernieres actualités
+      </div>
 
+    </div>
+  </article>
   <div class="container colonne_centrale">
 
     <article class="row chaque-actu" v-for="ac in les_actus">
 
       <div class="col-sm-4">
-        <div class="row">
-          <img class="img_all col-sm-12" v-bind:src="ac.photo">
+        <div class="row photo_actu">
+          <img class="  img_all col-sm-12" v-bind:src="ac.photo">
         </div>
       </div>
       <div class="col-sm-8">
         <div class="row">
-          <p class="col-sm-12 taille_3 titre"> {{ ac.titre }} </p>
+          <p class="col-sm-12 taille_3 titre bold"> {{ ac.titre }} </p>
         </div>
         <div class="row">
           <p class="col-sm-12 taille_1"> {{ ac.theme }} </p>
         </div>
         <div class="row">
-          <p class="col-sm-12 taille_2"> {{ ac.description }} </p>
+          <p class="col-sm-12 taille_1"> {{ ac.description }} </p>
         </div>
         <div class="row">
-          <p class="col-sm-12 taille_1"> {{ ac.redacteur }}</p>
+          <p class="col-sm-12 taille_1 bold"> {{ ac.redacteur }}</p>
         </div>
         <div class="row">
-          <p class="col-sm-12 taille_1"> {{ ac.sources }}</p>
+          <a class="col-sm-12 taille_1 source bold" :href="ac.sources"> Source </a>
         </div>
       </div>
-
-
 
     </article>
 
@@ -55,23 +60,48 @@ module.exports = {
 </script>
 
 <style scoped>
+.container_titre{
+  font-family: 'Times New Roman';
+  /* color:var(--bleu_logo); */
+margin-bottom: 30px;
+}
+
+.titre_page{
+  text-align: center;
+}
+
+.source{
+  text-decoration: underline;
+  color:var(--bleu_logo);
+
+}
+.photo_actu{
+  /* width: 100%; */
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
 .titre{
   text-align: center;
 }
 .chaque-actu{
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   margin:15px 0;
-  transition: transform .2s;
+  padding: 20px;
+  transition: transform .4s;
 }
 .chaque-actu:hover{
-    background-color: rgb(191, 187, 175) ;
-    transform: scale(1.01);
+    background-color: var(--beige_fonce_o);
+
+    transform: scale(1.08);
+    /* transform: translate(5px,5px); */
     /* var(--bleu_ciel_o) */
     cursor: pointer;
 }
 
 #background_page_actualite{
-  background-color: var(--beige);
+  background-color: var(--bleu_logo);
   height: 100%;
   max-height: 1660px;
   padding-top: 40px;

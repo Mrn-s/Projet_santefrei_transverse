@@ -15,14 +15,14 @@
               <div class="col-sm-12">
                 <p class="taille_3 " id="titre_section_mes_infos">Mes infos personnelles</p>
               </div>
+            </div>
 
-              </div>
             <div class="row">
                 <div class="col-sm-12">
                   <form v-if="user_patient.id" @submit.prevent="sendEditProfil">
                     <div class="row">
                       <div class="col-sm-3">
-                        <p class="taille_1">nom</p>
+                        <p class="taille_1">Nom</p>
                       </div>
 
                       <div class="col-sm-6">
@@ -32,7 +32,7 @@
 
                     <div class="row">
                       <div class="col-sm-3">
-                        <p class="taille_1">prenom</p>
+                        <p class="taille_1">Prénom</p>
                       </div>
                       <div class="col-sm-6">
                         <input name="prenom" :placeholder="user_patient.prenom" type="text" v-model="editingProfile_patient.prenom">
@@ -41,7 +41,7 @@
 
                     <div class="row">
                       <div class="col-sm-3">
-                        <p class="taille_1">email</p>
+                        <p class="taille_1">E-mail</p>
                       </div>
                       <div class="col-sm-6">
                         <input id="email" name="email" :placeholder="user_patient.email" type="text" v-model="editingProfile_patient.email">
@@ -50,7 +50,7 @@
 
                     <div class="row">
                       <div class="col-sm-3">
-                        <p class="taille_1">telephone</p>
+                        <p class="taille_1">Téléphone</p>
                       </div>
                       <div class="col-sm-6">
                         <input name="telephone" :placeholder="user_patient.telephone" type="text" v-model="editingProfile_patient.telephone">
@@ -74,7 +74,7 @@
 
                     <div class="row">
                       <div class="col-sm-3">
-                        <p class="taille_1">Prenom</p>
+                        <p class="taille_1">Prénom</p>
                       </div>
                       <div class="col-sm-6">
                         <input name="prenom" :placeholder="user_medecin.prenom" type="text" v-model="editingProfile_medecin.prenom">
@@ -83,7 +83,7 @@
 
                     <div class="row">
                       <div class="col-sm-3">
-                        <p class="taille_1">Email</p>
+                        <p class="taille_1">E-mail</p>
                       </div>
                       <div class="col-sm-6">
                         <p class="taille_1" id="med_email">{{ user_medecin.email }}</p>
@@ -92,7 +92,7 @@
 
                     <div class="row">
                       <div class="col-sm-3">
-                        <p class="taille_1">Télephone</p>
+                        <p class="taille_1">Téléphone</p>
                       </div>
                       <div class="col-sm-6">
                         <input name="telephone" :placeholder="user_medecin.telephone" type="text" v-model="editingProfile_medecin.telephone">
@@ -101,7 +101,7 @@
 
                     <div class="row">
                       <div class="col-sm-3">
-                        <p class="taille_1">Region</p>
+                        <p class="taille_1">Région</p>
                       </div>
                       <div class="col-sm-6">
                         <input name="region" :placeholder="user_medecin.region" type="text" v-model="editingProfile_medecin.region">
@@ -119,61 +119,50 @@
 
                     <div class="row">
                       <div class="col-sm-3">
-                        <p class="taille_1">Specialité</p>
+                        <p class="taille_1">Spécialité</p>
                       </div>
                       <div class="col-sm-6">
-
-                      <select id="heure_select" v-model="editingProfile_medecin.specialite">
-                        <option value="" disabled selected>{{user_medecin.specialite}}</option>
-                        <option value="allergologie">allergologie</option>
-                        <option value="andrologie">andrologie</option>
-                        <option value="anesthésiologie">anesthésiologie</option>
-                        <option value="cardiologie">cardiologie</option>
-                        <option value="chirurgie cardiaque">chirurgie cardiaque</option>
-                        <option value="chirurgie plastique">chirurgie plastique</option>
-                        <option value="chirurgie générale">chirurgie générale</option>
-                        <option value="chirurgie gynécologique">chirurgie gynécologique</option>
-                        <option value="chirurgie maxillo-faciale">chirurgie maxillo-faciale</option>
-                        <option value="chirurgie oculaire">chirurgie oculaire</option>
-                        <option value="chirurgie orale">chirurgie orale</option>
-                        <option value="chirurgie pédiatrique">chirurgie pédiatrique</option>
-                        <option value="chirurgie thoracique">chirurgie thoracique</option>
-                        <option value="chirurgie vasculaire">chirurgie vasculaire</option>
-                        <option value="chirurgie viscérale">chirurgie viscérale</option>
-                        <option value="neurochirurgie">neurochirurgie</option>
-                        <option value="dermatologie">dermatologie</option>
-                        <option value="endocrinologie">endocrinologie</option>
-                        <option value="gastro-entérologie">gastro-entérologie</option>
-                        <option value="gériatrie">gériatrie</option>
-                        <option value="gynécologie">gynécologie</option>
-                        <option value="hématologie">hématologie</option>
-                        <option value="hépatologie">hépatologie</option>
-                        <option value="immunologie">immunologie</option>
-                        <option value="infectiologie">infectiologie</option>
-                        <option value="médecine générale">médecine générale</option>
-                        <option value="médecine interne">médecine interne</option>
-                        <option value="médecine physique et de réadaptation">médecine physique et de réadaptation</option>
-                        <option value="néonatologie">néonatologie</option>
-                        <option value="néphrologie">néphrologie</option>
-                        <option value="neurologie">neurologie</option>
-                        <option value="obstétrique">obstétrique</option>
-                        <option value="odontologie">odontologie</option>
-                        <option value="oncologie">oncologie</option>
-                        <option value="ophtalmologie">ophtalmologie</option>
-                        <option value="orthopédie">orthopédie</option>
-                        <option value="otorhinolaryngologie">otorhinolaryngologie</option>
-                        <option value="pédiatrie">pédiatrie</option>
-                        <option value="pneumologie">pneumologie</option>
-                        <option value="podologie">podologie</option>
-                        <option value="psychiatrie">psychiatrie</option>
-                        <option value="radiologie">radiologie</option>
-                        <option value="rhumatologie">rhumatologie</option>
-                        <option value="urologie">urologie</option>
-                      </select>
+                        <select id="heure_select" v-model="editingProfile_medecin.specialite">
+                          <option value="" disabled selected>{{user_medecin.specialite}}</option>
+                          <option value="allergologie">Allergologie</option>
+                          <option value="andrologie">Andrologie</option>
+                          <option value="anesthésiologie">Anesthésiologie</option>
+                          <option value="cardiologie">Cardiologie</option>
+                          <option value="neurochirurgie">Neurochirurgie</option>
+                          <option value="dermatologie">Dermatologie</option>
+                          <option value="endocrinologie">Endocrinologie</option>
+                          <option value="gastro-entérologie">Gastro-entérologie</option>
+                          <option value="gériatrie">Gériatrie</option>
+                          <option value="gynécologie">Gynécologie</option>
+                          <option value="hématologie">Hématologie</option>
+                          <option value="hépatologie">Hépatologie</option>
+                          <option value="immunologie">Immunologie</option>
+                          <option value="infectiologie">Infectiologie</option>
+                          <option value="médecine générale">Médecine générale</option>
+                          <option value="médecine interne">Médecine interne</option>
+                          <option value="médecine physique et de réadaptation">Médecine rééducative</option>
+                          <option value="néonatologie">Néonatologie</option>
+                          <option value="néphrologie">Néphrologie</option>
+                          <option value="neurologie">Neurologie</option>
+                          <option value="obstétrique">Obstétrique</option>
+                          <option value="odontologie">Odontologie</option>
+                          <option value="oncologie">Oncologie</option>
+                          <option value="ophtalmologie">Ophtalmologie</option>
+                          <option value="orthopédie">Orthopédie</option>
+                          <option value="otorhinolaryngologie">=Otorhinolaryngologie</option>
+                          <option value="pédiatrie">Pédiatrie</option>
+                          <option value="pneumologie">Pneumologie</option>
+                          <option value="podologie">Podologie</option>
+                          <option value="psychiatrie">Psychiatrie</option>
+                          <option value="radiologie">Radiologie</option>
+                          <option value="rhumatologie">Rhumatologie</option>
+                          <option value="urologie">Urologie</option>
+                        </select>
                       </div>
                     </div>
+
                     <div class="row">
-                        <button type="submit" >Modifier</button>
+                      <button type="submit" >Modifier</button>
                     </div>
 
                   </form>
@@ -206,13 +195,13 @@
                      <p> <b class="titres_lignes_chaque_rdv">Heure</b> : {{ rdv_demande.heure }} </p>
                    </section>
                    <section class="col-sm-12">
-                     <p> <b class="titres_lignes_chaque_rdv"> Médecin</b> : Dr. {{ rdv_demande.medecin_id }} </p>
+                     <p> <b class="titres_lignes_chaque_rdv">Médecin</b> : Dr. {{ rdv_demande.medecin_id }} </p>
                    </section>
                    <section class="col-sm-12">
-                     <p> <b class="titres_lignes_chaque_rdv"> description</b> : {{ rdv_demande.description }} </p>
+                     <p> <b class="titres_lignes_chaque_rdv">Description</b> : {{ rdv_demande.description }} </p>
                    </section>
                    <section class="col-sm-12 symp taille_1">
-                     <p> Symptomes </p>
+                     <p> Symptômes </p>
                    </section>
                    <div class="container">
                      <section v-for ="liste_s_rdv in rdv_symptome" v-if="liste_s_rdv.id_rdv == rdv_demande.id" class="row l_sym">
@@ -248,7 +237,7 @@
                      <p> <b class="titres_lignes_chaque_rdv"> Description</b> : {{ r.description }} </p>
                    </section>
                    <section class="col-sm-12 symp taille_1">
-                     <p> <b>Symptomes</b> </p>
+                     <p> <b>Symptômes</b> </p>
                    </section>
                    <div class="container">
                      <section v-for ="liste_s_rdv in rdv_symptome" v-if="liste_s_rdv.id_rdv == r.id" class="row l_sym">
@@ -294,13 +283,13 @@
                    <p> <b class="titres_lignes_chaque_rdv">Heure</b> : {{ rdv_demande.heure }} </p>
                  </section>
                  <section class="col-sm-12">
-                   <p> <b class="titres_lignes_chaque_rdv"> Médecin</b> : Dr. {{ rdv_demande.medecin_id }} </p>
+                   <p> <b class="titres_lignes_chaque_rdv">Médecin</b> : Dr. {{ rdv_demande.medecin_id }} </p>
                  </section>
                  <section class="col-sm-12">
-                   <p> <b class="titres_lignes_chaque_rdv"> description</b> : {{ rdv_demande.description }} </p>
+                   <p> <b class="titres_lignes_chaque_rdv">Description</b> : {{ rdv_demande.description }} </p>
                  </section>
                  <section class="col-sm-12 symp taille_1">
-                   <p> Symptomes </p>
+                   <p>Symptômes</p>
                  </section>
                  <div class="container">
                    <section v-for ="liste_s_rdv in rdv_symptome" v-if="liste_s_rdv.id_rdv == rdv_demande.id" class="row l_sym">
@@ -319,7 +308,7 @@
                </section>
                <section class="row chaque_rdv" v-for=" r in rdv_bdd" :key="r.id" v-if="(r.medecin_id == user_medecin.nom) && user_medecin.id && (r.accepted == 'non')">
                  <section class="col-sm-12 taille_1">
-                   <p> Rendez-vous numéro : {{ r.id }} </p>
+                   <p>Rendez-vous numéro : {{ r.id }}</p>
                  </section>
                  <section class="col-sm-12">
                    <p> <b class="titres_lignes_chaque_rdv">Date</b> : {{ r.date }} </p>
@@ -328,13 +317,13 @@
                    <p> <b class="titres_lignes_chaque_rdv">Heure</b> : {{ r.heure }} </p>
                  </section>
                  <section class="col-sm-12" v-for=" p in p_bdd" :key="p.id" v-if=" p.id == r.patient_id">
-                   <p> <b class="titres_lignes_chaque_rdv"> Nom du patient</b> : M/Mme. {{ p.nom }} {{p.prenom}} </p>
+                   <p> <b class="titres_lignes_chaque_rdv">Nom du patient</b> : M/Mme. {{ p.nom }} {{p.prenom}} </p>
                  </section>
                  <section class="col-sm-12">
-                   <p> <b class="titres_lignes_chaque_rdv"> description</b> : {{ r.description }} </p>
+                   <p> <b class="titres_lignes_chaque_rdv">Description</b> : {{ r.description }} </p>
                  </section>
                  <section class="col-sm-12 symp taille_1">
-                   <p> Symptomes </p>
+                   <p>Symptômes</p>
                  </section>
                  <div class="container">
                    <section v-for ="liste_s_rdv in rdv_symptome" v-if="liste_s_rdv.id_rdv == r.id" class="row l_sym">
@@ -363,12 +352,12 @@
                  <div class="row">
                    <div class="col-sm-12">
                        <!-- <p v-if="user_patient.id" class="taille_3" id="titre_section_mes_rdv_demandes">Mes rendez-vous demandés</p> -->
-                       <p class="taille_3" id="titre_section_mes_rdv_demandes">reception des rendez-vous</p>
+                       <p class="taille_3" id="titre_section_mes_rdv_demandes">Réception des rendez-vous</p>
                    </div>
                  </div>
                  <div class="row">
                    <div class="col-sm-12">
-                     <button type="button" name="button">trier par date</button>
+                     <button class="btn_profil" type="button" name="button">Trier par date</button>
                    </div>
                  </div>
 
@@ -382,11 +371,11 @@
                    <section class="col-sm-12">
                      <p> <b class="titres_lignes_chaque_rdv">Heure</b> : {{ rdv_demande.heure }} </p>
                    </section>
-                   <section class="col-sm-12" v-for="m in m_bdd" v-if="m.id = rdv_demande.medecin_id">
-                     <p> <b class="titres_lignes_chaque_rdv"> Médecin</b> : Dr. {{ m.nom }} </p>
+                   <section class="col-sm-12" v-for="m in m_bdd" v-if="m.id == rdv_demande.medecin_id">
+                     <p> <b class="titres_lignes_chaque_rdv">Médecin</b> : Dr. {{ m.nom }} </p>
                    </section>
                    <section class="col-sm-12">
-                     <p> <b class="titres_lignes_chaque_rdv"> description</b> : {{ rdv_demande.description }} </p>
+                     <p> <b class="titres_lignes_chaque_rdv">Description</b> : {{ rdv_demande.description }} </p>
                    </section>
                    <section class="col-sm-6 btn_accepter_refuser">
                      <button class="col-sm-12" type="button" @click="accepter_rdv_from_m(rdv_demande.id)" name="button">Accepter</button>
@@ -612,13 +601,15 @@
     }
 
   .btn_profil{
-    background-color: var(--vert_o2);
+    background-color: var(--bleu_logo_o);
+    font-size: 1.2em;
+    padding: 4px 12px;
     color:white;
     transition-duration: 0.5s;
   }
 
   .btn_profil:hover{
-    background-color: var(--vert_o);
+    background-color: var(--bleu_logo);
   }
 
 </style>

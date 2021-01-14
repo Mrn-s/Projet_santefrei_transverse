@@ -14,31 +14,49 @@
 
       <section v-if ="user_patient.id || user_medecin.id" class="section_principale container">
 
-        <section class="container" v-if="questionnaire_form">
+        <section class="container laa" v-if="questionnaire_form">
 
           <section v-if ="user_patient.id"  class="container-fluid" id="section_symptomes">
 
             <article class="row" id="titre_section_symptome">
-              <p class="taille_4 col-sm-12"> Ajoutez vos symptomes à vos rendez-vous et gagnez du temps</p>
+              <p class="taille_4 col-sm-12"> Ajoutez vos symptômes à vos rendez-vous et gagnez du temps</p>
             </article>
-            <section id="typeSymptome" class=" row d-flex justify-content-center">
-              <div class=" col-sm-2">
-                <button class="col-sm-12 btn-13 custom-btn-1 bold" @click="changeTypeSymptome('type_1')">Type 1</button>
+            <section id="typeSymptome" class=" row d-flex justify-content-center onglet_types_symptomes">
+              <div class=" col-sm-2 btn-132 custom-btn-1 ">
+                <button class=" onglet_symp_btn taille_1 " @click="changeTypeSymptome('cardiologie')"> <b> Cardiologie </b></button>
               </div>
-              <div class=" col-sm-2">
-                <button class="col-sm-12 btn-13 custom-btn-1 bold" @click="changeTypeSymptome('type_2')">Type 2</button>
+              <div class=" col-sm-2 btn-132 custom-btn-1 ">
+                <button class=" onglet_symp_btn taille_1  " @click="changeTypeSymptome('symptômes généraux')"> <b>Autre </b></button>
               </div>
-              <div class=" col-sm-2">
-                <button class="col-sm-12 btn-13 custom-btn-1 bold" @click="changeTypeSymptome('type_3')">Type 3</button>
+              <div class=" col-sm-2 btn-132 custom-btn-1 ">
+                <button class=" onglet_symp_btn taille_1 " @click="changeTypeSymptome('troubles digestifs')"><b>Troubles digestifs</b></button>
               </div>
-              <div class=" col-sm-2">
-                <button class="col-sm-12 btn-13 custom-btn-1 bold" @click="changeTypeSymptome('type_4')">Type 4</button>
+              <div class=" col-sm-2 btn-132 custom-btn-1 ">
+                <button class=" onglet_symp_btn taille_1 " @click="changeTypeSymptome('dermatologie')"><b>Dermatologie</b></button>
               </div>
-              <div class=" col-sm-2">
-                <button class="col-sm-12 btn-13 custom-btn-1 bold" @click="changeTypeSymptome('type_5')">Type 5</button>
+              <div class=" col-sm-2  btn-132 custom-btn-1 ">
+                <button class=" onglet_symp_btn taille_1  " @click="changeTypeSymptome('musculaire')"><b>Musculaire</b></button>
               </div>
-              <div class=" col-sm-2">
-                <button class="col-sm-12 btn-13 custom-btn-1 bold" @click="changeTypeSymptome('type_6')">Type 6</button>
+              <div class=" col-sm-2 btn-132 custom-btn-1 ">
+                <button class=" onglet_symp_btn taille_1 " @click="changeTypeSymptome('troubles liés au nez et à la gorge')"><b>Nez ou gorge</b></button>
+              </div>
+              <div class=" col-sm-2 btn-132 custom-btn-1 ">
+                <button class=" onglet_symp_btn taille_1 " @click="changeTypeSymptome('psychiatrie')"><b>Psychiatrie</b></button>
+              </div>
+              <div class=" col-sm-2 btn-132 custom-btn-1 ">
+                <button class=" onglet_symp_btn taille_1 " @click="changeTypeSymptome('cardiologie')"><b>Cardiologie</b></button>
+              </div>
+              <div class=" col-sm-2 btn-132 custom-btn-1 ">
+                <button class=" onglet_symp_btn taille_1 " @click="changeTypeSymptome('pneumologie')"><b>Problèmes respiratoire</b></button>
+              </div>
+              <div class=" col-sm-2 btn-132 custom-btn-1 ">
+                <button class="onglet_symp_btn taille_1  " @click="changeTypeSymptome('oreilles')"><b>Oreilles</b></button>
+              </div>
+              <div class=" col-sm-2 btn-132 custom-btn-1 ">
+                <button class=" onglet_symp_btn taille_1 " @click="changeTypeSymptome('bouche')"><b>Bouche</b></button>
+              </div>
+              <div class=" col-sm-2 btn-132 custom-btn-1 ">
+                <button class=" onglet_symp_btn taille_1 " @click="changeTypeSymptome('vision')"><b>Vue</b></button>
               </div>
             </section>
             <article class="row">
@@ -51,7 +69,7 @@
                       <p class="bold col-sm-12 taille_2">{{ s.name }}</p>
                       <p class="col-sm-12 taille_1">{{ s.description }}</p>
                       <div class="col-sm-12">
-                        <button class="btn-14 custom-btn ressens-btn" @click="addToPanierSymptomes(s.type,s.id,s.name)" type="button" name="button">Je ressens ce symptome</button>
+                        <button class="btn-14 custom-btn ressens-btn" @click="addToPanierSymptomes(s.type,s.id,s.name)" type="button" name="button">Je ressens ce symptôme</button>
                       </div>
                     </div>
                   </article>
@@ -61,18 +79,20 @@
 
               <article id="colonne_droite" class="col-sm-4">
                 <div class="taille_4 col-sm-12 titre_colonne_droite">
-                  Vos symptomes
+                  Vos symptômes
                 </div>
 
                 <div class="container">
-                  <p class="row ligne_colonne_droite taile_2"> Ajoutez jusqu'à 10 symptomes différents</p>
-                  <p class="row ligne_colonne_droite taille_2"> Nombre de symptomes : {{ panier_symptomes.nb_symptomes }}</p>
+                  <p class="row ligne_colonne_droite taille_1"> Ajoutez jusqu'à 10 symptômes différents</p>
+                  <p class="row ligne_colonne_droite taille_2"> Nombre de symptômes : {{ panier_symptomes.nb_symptomes }}</p>
                   <div class="row icii">
                     <article v-for="s in panier_symptomes.symptomes" :key="s.id" class="container chaque_symptome_panier">
                       <div class="row infos_chaque_symptome_panier taille_1">
-                        <p class="col-sm-12">{{ s.nom }}</p>
-                        <p class="col-sm-12">type : {{ s.type }}</p>
-                        <p class="col-sm-12">id : {{ s.id }}</p>
+                        <p class="col-sm-12">Catégorie : {{ s.type }}</p>
+
+                        <p class="col-sm-12 bold">{{ s.nom }}</p>
+
+                        <!-- <p class="col-sm-12">id : {{ s.id }}</p> -->
                       </div>
 
                       <div class="row">
@@ -85,7 +105,7 @@
                   <div class="row ligne_colonne_droite" id ="rdv_choix_div">
                     <select  v-model="editListe_symptomes.rdv" id="rdv_choix">
                       <option  value="" disabled selected>Choisissez un rendez-vous</option>
-                      <option  v-for="r in rdv_bdd" v-if="r.patient_id == user_patient.id" v-bind:value="r.id">Rdv numero {{ r.id }}</option>
+                      <option  v-for="r in rdv_bdd" v-if="r.patient_id == user_patient.id" v-bind:value="r.id">Rdv numéro {{ r.id }}</option>
                     </select>
                   </div>
                   <div class="row ligne_colonne_droite taille_1" v-for="r in rdv_bdd" v-if="r.id == editListe_symptomes.rdv">
@@ -136,8 +156,6 @@
               <button id ="btn_retour" type="button" name="button" @click="affichage_questionnaire(), reset_reponses()">retour</button>
           </div>
 
-
-
           <article class="row"  v-for="q in questionnaires" v-if="q.id == Questionnaire_actuel">
 
             <article class="container ">
@@ -148,14 +166,14 @@
                 <p class="taille_2 sous_titre_questionnaire col-sm-12"> Evaluez à quel point vous ressentez ce qui est décrit</p>
               </div>
 
-            <!-- <form @submit.prevent="addReponseQuestionnaire"> -->
-              <article class="taille_1 row questions_article"  v-for="question in q.questions">
-                <p class="questions_question col-sm-12">  {{ question.qu }}</p>
-                <!-- <div class="col-sm-6"> -->
-                <!-- <div class="col-sm-1">
-                  choisissez
 
-                </div> -->
+              <article class="taille_1 row questions_article"  v-for="question in q.questions">
+                <p class="questions_question col-sm-12">  Question {{ question.id_q }}</p>
+                  <div class="col-sm-12 qq">
+                    <p>{{ question.qu}} </p>
+
+                  </div>
+
                   <div class="col-sm-2">
                   Pas d'accord
                   </div>
@@ -181,7 +199,7 @@
                 <p> les reponses : {{r_q}}</p>
               </div>
               <div class="row">
-                <button class="taille_2" id="btn_valider" @click="envoyer_reponse_questionnaire()" >Valider</button>
+                <button class="taille_2" id="btn_valider" @click="envoyer_reponse_questionnaire()"> Valider</button>
               </div>
 
 
@@ -223,7 +241,7 @@
         },
         questionnaire_form: true,
         Questionnaire_actuel: "",
-        symptomeType: "type_1",
+        symptomeType: "trouble des hormones",
         reponse_questionnaire:{ type: Array, default: [] }
       }
     },
@@ -281,6 +299,46 @@
 </script>
 
 <style scoped>
+.laa{
+  padding: 0 !important;
+}
+.qq{
+  margin: 10px 0;
+  background-color: var(--beige_fonce_o);
+  color:var(--bleu_logo);
+
+}
+
+.onglet_symp_div:hover{
+  color:white !important;
+}
+.onglet_types_symptomes{
+  border-top: 4px var(--bleu_logo_o) solid;
+  border-bottom: 4px var(--bleu_logo_o) solid;
+
+}
+
+.onglet_symp:hover{
+
+  color:white;
+  height: 100%;
+  border: none;
+
+}
+.onglet_symp_btn{
+  background-color: transparent;
+  border: none;
+  padding: 20px 0;
+  height: 100%;
+  width: 100%;
+
+}
+.onglet_symp_btn:hover{
+
+  color:white;
+
+}
+
 
   #btn_retour{
     padding: 10px 30px;
@@ -322,31 +380,57 @@
   }
 
   .titre_colonne_droite{
-    /* width: 100%; */
+    border: var(--bleu_logo) 3px solid;
+    color:white;
+    background-color: var(--bleu_logo_o);
     text-align: center;
   }
 
   .icii{
-    max-height: 380px;
+    max-height: 400px;
     overflow-y: scroll;
   }
   .chaque_symptome_panier{
-    /* border: 2px black solid; */
     margin: 20px 0;
-    /* padding: 10px; */
-
     color: #fff;
   }
   .infos_chaque_symptome_panier{
-    color: black;
-    background-color: var(--bleu_ciel_o);
+    color: white;
+    padding: 20px;
+    background-color: var(--bleu_logo_o);
+  }
+
+  .btn-132 {
+    z-index: 1;
+    padding: 0 !important;
+
+  }
+
+  .btn-132:after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 0;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    background: var(--bleu_logo);
+    transition: all 0.4s ease;
+  }
+
+  .btn-132:hover {
+    color: white!important;
+  }
+
+  .btn-132:hover:after {
+    top: auto;
+    bottom: 0;
+    height: 100%;
   }
 
 
   .custom-btn {
-    /* padding: 10px 25px; */
-    /* font-weight: 500; */
-    /* background: transparent; */
+
     outline: none !important;
     cursor: pointer;
     transition: all 0.4s ease;
@@ -379,8 +463,7 @@
   .btn-14:hover {
     color: #fff  ;
     font-weight: bold;
-    /* transform: translate(5px,5px);
-    -webkit-transform: translate(0px,-7px); */
+
   }
   .btn-14:hover:after {
     left: 0;
@@ -416,7 +499,6 @@
 
   #titre_section_symptome{
     text-align: center;
-    /* margin: 10px 0 60px 0; */
     padding-top: 15px;
     margin-bottom: 40px;
   }
@@ -433,7 +515,6 @@
     transform: translate(0px,-8px);
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
     transition: all 0.5s cubic-bezier(.25,.8,.25,1);
-    /* background-color: var(--beige_fonce_o); */
     }
 
     .card-2 {
@@ -444,11 +525,9 @@
     .card-2:hover {
     background-color: var(--bleu_logo);
     transform: translate(0px,-7px);
-    /* -webkit-transform: translate(-5px,-2px); */
     color: var(--beige);
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
     transition: all 0.5s cubic-bezier(.25,.8,.25,1);
-    /* background-color: var(--beige_fonce_o); */
     }
 
     .ressens-btn{
@@ -465,9 +544,7 @@
       padding: 20px 0;
     }
     .section_principale{
-
       margin-top: 20px;
-      padding:20px;
       text-align: center;
     }
     .lien_connexion{
@@ -483,18 +560,16 @@
       transition: all 1s;
       background-color: var(--bleu_logo_o);
       color: white;
-      /* text-decoration: underline white 5px; */
     }
 
     #colonne_droite{
       margin: 10px 0;
-      border-left:1px black solid;
-      border-right:1px black solid;
+      border-left:5px var(--bleu_logo) solid;
+      border-right:5px var(--bleu_logo) solid;
 
     }
 
     #background_page_questionnaire{
-      /* margin: 0; */
       font-family: "Times News Roman";
       background-image: url("../images/background_questionnaire.png");
       background-repeat: no-repeat;
@@ -523,7 +598,6 @@
       background-color: var(--rouge_clair);
       color: white;
       border: 1px solid #da251f;
-      /*transition: transform .2s;*/
       transition: all 150ms linear;
     }
 
@@ -543,7 +617,6 @@
 
     .symptome_dans_rdv:hover{
       background-color:#30AD23;
-
     }
 
 </style>

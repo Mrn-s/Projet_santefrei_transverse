@@ -24,72 +24,6 @@ const spe = [
     description: ''
   },
   {
-    id: 5,
-    nom: 'chirurgie cardiaque',
-    photo: '',
-    description: ''
-  },
-  {
-    id: 6,
-    nom: 'chirurgie plastique',
-    photo: '',
-    description: ''
-  },
-  {
-    id: 7,
-    nom: 'chirurgie générale',
-    photo: '',
-    description: ''
-  },
-  {
-    id: 8,
-    nom: 'chirurgie gynécologique',
-    photo: '',
-    description: ''
-  },
-  {
-    id: 9,
-    nom: 'chirurgie maxillo-faciale',
-    photo: '',
-    description: ''
-  },
-  {
-    id: 10,
-    nom: 'chirurgie oculaire',
-    photo: '',
-    description: ''
-  },
-  {
-    id: 11,
-    nom: 'chirurgie orale',
-    photo: '',
-    description: ''
-  },
-  {
-    id: 12,
-    nom: 'chirurgie pédiatrique',
-    photo: '',
-    description: ''
-  },
-  {
-    id: 13,
-    nom: 'chirurgie thoracique',
-    photo: '',
-    description: ''
-  },
-  {
-    id: 14,
-    nom: 'chirurgie vasculaire',
-    photo: '',
-    description: ''
-  },
-  {
-    id: 15,
-    nom: 'chirurgie viscérale',
-    photo: '',
-    description: ''
-  },
-  {
     id: 16,
     nom: 'neurochirurgie',
     photo: '',
@@ -152,12 +86,6 @@ const spe = [
   {
     id: 26,
     nom: 'dermatologie',
-    photo: '',
-    description: ''
-  },
-  {
-    id: 27,
-    nom: 'médecine générale',
     photo: '',
     description: ''
   },

@@ -8,7 +8,7 @@
                 </div>
               </div>
               <div class="row">
-                <label class="col-sm-6 taille_3">Email</label>
+                <label class="col-sm-6 taille_3">E-mail</label>
                 <label class="col-sm-6 taille_3">Mot de passe</label>
                 <div class="col-sm-6">
                   <input class="col-sm-12" type="text" id="email" v-model="editLogin.email" placeholder="Entrer votre email" name="username" required>
@@ -34,7 +34,7 @@
             </div>
             <div class="row">
               <div class="col-sm-12">
-                <p class="taille_2 bold" id="text_remerciements"> Nous aimerions remercier l'ensemble du personnel soignant pour son devouement inéstimable face à la COVID19. Nous vous remercions tout autant d'utiliser notre platforme qui constitue un véritable pont entre malades et médecins. </p>
+                <p class="taille_2 bold" id="text_remerciements"> Nous aimerions remercier l'ensemble du personnel soignant pour son dévouement inéstimable face à la COVID19. Nous vous remercions tout autant d'utiliser notre plateforme qui constitue un véritable pont entre malades et médecins. </p>
               </div>
             </div>
 
