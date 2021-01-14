@@ -39,7 +39,6 @@
                   </div>
                 </article>
 
-
           </section>
 
           <section class ="ligne container">

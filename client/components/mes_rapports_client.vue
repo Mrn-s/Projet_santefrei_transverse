@@ -5,13 +5,31 @@
       <p>ceci est la page mes rapports</p>
       <p>cette page doit contenir les rapports du patient actuellement connecté</p>
       <p> ils doivent être triables par date ou importance par date et consultables à tout moment par le patient </p>
+      <div class="row" v-for="re in all_repsonses">
+        <p> {{re.id}} - {{re.reponses}}</p>
+      </div>
+
     </article>
 </div>
 </template>
 
 <script>
 module.exports = {
+  components: {
+  },
+  props: {
+    all_repsonses: { type: Array, default: [] }
+  },
+  data () {
+    return {
+
+    }
+  },
+  methods: {
+
+  }
 }
+
 </script>
 
 <style scoped>

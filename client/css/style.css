@@ -38,7 +38,7 @@
   --cyan_o2:rgba(81, 169, 171,0.80);
   --jaune_o: rgba(232,197,66,0.7);
   --beige_fonce_o: rgba(242,237,219,0.82);
-  --vert_o: rgba(9,55,31,0.85);
+  --vert_o: rgba(9,55,31,0.70);
   --vert_o2: rgba(9,55,31,0.65);
   --vert_clair:rgba(154, 188, 157,0.92);
   --vert_clair_o:rgba(154, 188, 157,0.2);
@@ -54,13 +54,13 @@
   font-size: 1.2em;
 }
 .taille_2{
-  font-size: 1.6em;
+  font-size: 1.5em;
 }
 .taille_3{
   font-size: 2em;
 }
 .taille_4{
-  font-size:2.4em;
+  font-size:2.5em;
 }
 .taille_5{
   font-size:3em;

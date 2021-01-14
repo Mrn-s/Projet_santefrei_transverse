@@ -169,7 +169,7 @@ const spe = [
   },
   {
     id: 29,
-    nom: 'médecine de réadaptation',
+    nom: 'médecine rééducative',
     photo: '',
     description: ''
   },

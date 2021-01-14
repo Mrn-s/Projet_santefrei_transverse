@@ -11,15 +11,16 @@
 
       </section>
 
+
       <section v-if ="user_patient.id || user_medecin.id" class="section_principale container">
 
         <section class="container" v-if="questionnaire_form">
 
           <section v-if ="user_patient.id"  class="container-fluid" id="section_symptomes">
-            <article class="row" id="titre_section_symptome">
-              <p class="taille_4 col-sm-12"> Trouvez vos symptomes et prennez rdv avec votre médecin</p>
-            </article>
 
+            <article class="row" id="titre_section_symptome">
+              <p class="taille_4 col-sm-12"> Ajoutez vos symptomes à vos rendez-vous et gagnez du temps</p>
+            </article>
             <section id="typeSymptome" class=" row d-flex justify-content-center">
               <div class=" col-sm-2">
                 <button class="col-sm-12 btn-13 custom-btn-1 bold" @click="changeTypeSymptome('type_1')">Type 1</button>
@@ -42,10 +43,10 @@
             </section>
             <article class="row">
 
-              <article id="colonne_gauche" class="col-sm-9">
+              <article id="colonne_gauche" class="col-sm-8">
 
                 <article class="row">
-                  <article v-for="s in l_symptomes" v-if="s.type == symptomeType" class="symptome col-sm-4">
+                  <article v-for="s in l_symptomes" v-if="s.type == symptomeType" class="symptome col-sm-6">
                     <div class="chaque_s row card-2">
                       <p class="bold col-sm-12 taille_2">{{ s.name }}</p>
                       <p class="col-sm-12 taille_1">{{ s.description }}</p>
@@ -58,17 +59,17 @@
 
               </article>
 
-              <article id="colonne_droite" class="col-sm-3">
-                <div class="taille_2 col-sm-12 titre_colonne_droite">
+              <article id="colonne_droite" class="col-sm-4">
+                <div class="taille_4 col-sm-12 titre_colonne_droite">
                   Vos symptomes
                 </div>
 
                 <div class="container">
-                  <p class="row ligne_colonne_droite"> Ajoutez jusqu'à 10 symptomes différents</p>
-                  <p class="row ligne_colonne_droite"> Nombre de symptomes : {{ panier_symptomes.nb_symptomes }}</p>
+                  <p class="row ligne_colonne_droite taile_2"> Ajoutez jusqu'à 10 symptomes différents</p>
+                  <p class="row ligne_colonne_droite taille_2"> Nombre de symptomes : {{ panier_symptomes.nb_symptomes }}</p>
                   <div class="row icii">
                     <article v-for="s in panier_symptomes.symptomes" :key="s.id" class="container chaque_symptome_panier">
-                      <div class="row infos_chaque_symptome_panier">
+                      <div class="row infos_chaque_symptome_panier taille_1">
                         <p class="col-sm-12">{{ s.nom }}</p>
                         <p class="col-sm-12">type : {{ s.type }}</p>
                         <p class="col-sm-12">id : {{ s.id }}</p>
@@ -81,8 +82,8 @@
                     </article>
                   </div>
 
-                  <div class="row ligne_colonne_droite">
-                    <select  v-model="editListe_symptomes.rdv">
+                  <div class="row ligne_colonne_droite" id ="rdv_choix_div">
+                    <select  v-model="editListe_symptomes.rdv" id="rdv_choix">
                       <option  value="" disabled selected>Choisissez un rendez-vous</option>
                       <option  v-for="r in rdv_bdd" v-if="r.patient_id == user_patient.id" v-bind:value="r.id">Rdv numero {{ r.id }}</option>
                     </select>
@@ -94,11 +95,11 @@
                     </div>
 
                   </div>
-                  <div class="row ligne_colonne_droite">
-                    <button class="col-sm-12 symptome_dans_rdv" @click="add_to_rdv(editListe_symptomes.rdv)" type="button" name="button"> <span>Mettre ces symptomes à mon rendez-vous</span> </button>
+                  <div class="row ligne_colonne_droite taille_1">
+                    <button class="col-sm-12 symptome_dans_rdv" @click="add_to_rdv(editListe_symptomes.rdv)" type="button" name="button"> <span>Ajouter ces symptomes à mon rendez-vous</span> </button>
 
                   </div>
-                  <div class="row ligne_colonne_droite">
+                  <div class="row ligne_colonne_droite taille_2">
                     <p class="col-sm-12"> Attention : ceux-ci remplaceront entièrement les précédents</p>
                   </div>
                 </div>
@@ -131,27 +132,58 @@
         </section>
 
         <section class="container le_questionnaire" v-else>
+          <div class="row taille_2">
+              <button id ="btn_retour" type="button" name="button" @click="affichage_questionnaire(), reset_reponses()">retour</button>
+          </div>
 
-          <button class="row" type="button" name="button" @click="affichage_questionnaire()">retour</button>
+
 
           <article class="row"  v-for="q in questionnaires" v-if="q.id == Questionnaire_actuel">
 
             <article class="container ">
+              <div class="row">
+                <p class="taille_4 titre_questionnaire col-sm-12">{{ q.titre }}</p>
+              </div>
+              <div class="row">
+                <p class="taille_2 sous_titre_questionnaire col-sm-12"> Evaluez à quel point vous ressentez ce qui est décrit</p>
+              </div>
 
-              <p class="taille_3 titre_questionnaire row">{{ q.titre }}</p>
-              <form @submit.prevent="addReponseQuestionnaire">
-              <article class="taille_1 row"  v-for="question in q.questions">
-                <p class="questions_questionnaire col-sm-7">  {{ question }}</p>
-                  <div v-for="r in l_reponse" :key="r" class="">
-                    <input type="radio" :name="r" :value="r">
-                    <label :for="r"></label>
+            <!-- <form @submit.prevent="addReponseQuestionnaire"> -->
+              <article class="taille_1 row questions_article"  v-for="question in q.questions">
+                <p class="questions_question col-sm-12">  {{ question.qu }}</p>
+                <!-- <div class="col-sm-6"> -->
+                <!-- <div class="col-sm-1">
+                  choisissez
+
+                </div> -->
+                  <div class="col-sm-2">
+                  Pas d'accord
+                  </div>
+                  <div class="col-sm-2">
+                    <button class="col-sm-12" type="button" name="button" @click="add_to_reponse(question.id_q,1)"> 1 </button>
+                  </div>
+                  <div class="col-sm-2">
+                    <button class="col-sm-12" type="button" name="button" @click="add_to_reponse(question.id_q,2)"> 2 </button>
+                  </div>
+                  <div class="col-sm-2">
+                    <button class="col-sm-12" type="button" name="button" @click="add_to_reponse(question.id_q,3)"> 3 </button>
+                  </div>
+                  <div class="col-sm-2">
+                    <button class="col-sm-12" type="button" name="button" @click="add_to_reponse(question.id_q,4)"> 4 </button>
+                  </div>
+
+                  <div class="col-sm-2">
+                  D'accord
                   </div>
 
               </article>
-              <div>
-                <button type="submit">Valider</button>
+              <div class="row">
+                <p> les reponses : {{r_q}}</p>
               </div>
-            </form>
+              <div class="row">
+                <button class="taille_2" id="btn_valider" @click="envoyer_reponse_questionnaire()" >Valider</button>
+              </div>
+
 
               <p class="taille_1 description_questionnaire row">{{ q.description }}</p>
               <button v-if="user_medecin.id" type="button" name="button"> Modifier le questionnaire</button>
@@ -164,6 +196,7 @@
         </section>
 
       </section>
+
   </div>
 </template>
 
@@ -176,15 +209,11 @@
       questionnaires: { type: Array, default: [] },
       l_symptomes : { type : Array, default: [] },
       panier_symptomes: { type: Object },
-      rdv_bdd: { type: Array, default: [] }
+      rdv_bdd: { type: Array, default: [] },
+      r_q: {type: Array, default: []  }
     },
     data () {
       return {
-        l_r :{
-          id:'',
-          liste:['t','b','a'],
-          nom:'t'
-        },
         editListe_symptomes: {
           id: '',
           nom:'',
@@ -194,15 +223,25 @@
         },
         questionnaire_form: true,
         Questionnaire_actuel: "",
-        symptomeType: "type_1"
+        symptomeType: "type_1",
+        reponse_questionnaire:{ type: Array, default: [] }
       }
     },
     methods:{
+      envoyer_reponse_questionnaire(){
+        this.$emit('send_response_ques', this.Questionnaire_actuel)
+      },
+      reset_reponses(){
+        this.$emit('reset_reponses_of_q')
+      },
+      add_to_reponse(q_id,re){
+        // alert(" dans la vue" + re)
+        this.$emit('add_reponse_of_q',q_id, re)
+      },
       add_to_rdv(id_rdv){
         let content ={
           id_rdv: id_rdv
         }
-        alert(content.id_rdv)
       this.$emit('add-to-rdv-s', content)
 
       },
@@ -242,6 +281,38 @@
 </script>
 
 <style scoped>
+
+  #btn_retour{
+    padding: 10px 30px;
+  }
+
+  #btn_valider{
+    margin: 30px 0 5px 0;
+
+  }
+
+  .questions_article{
+    margin: 15px 0;
+    padding: 22px;
+    border-bottom: solid 1px black;
+  }
+
+  .questions_question{
+    border: 2px black solid;
+    background-color: var(--bleu_logo_o);
+    color: white;
+    margin: 22px 0;
+  }
+
+  #rdv_choix_div{
+    margin: 35px 0;
+  }
+
+  #rdv_choix{
+    width: 100%;
+    padding: 10px;
+  }
+
   .chaque_questionnaire{
     letter-spacing: 1px;
   }
@@ -267,7 +338,8 @@
     color: #fff;
   }
   .infos_chaque_symptome_panier{
-    background-color: rgb(191, 187, 175);
+    color: black;
+    background-color: var(--bleu_ciel_o);
   }
 
 
@@ -344,128 +416,134 @@
 
   #titre_section_symptome{
     text-align: center;
+    /* margin: 10px 0 60px 0; */
+    padding-top: 15px;
+    margin-bottom: 40px;
   }
 
   .card-1 {
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  transition: all 0.5s cubic-bezier(.25,.8,.25,1);
-  }
 
-  .card-1:hover {
-  background-color: var(--bleu_logo);
-  color: var(--beige);
-  transform: translate(0px,-8px);
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-  transition: all 0.5s cubic-bezier(.25,.8,.25,1);
-  /* background-color: var(--beige_fonce_o); */
-  }
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.5s cubic-bezier(.25,.8,.25,1);
+    }
 
-  .card-2 {
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  transition: all 1s cubic-bezier(.25,.8,.25,1);
-  }
+    .card-1:hover {
+    background-color: var(--bleu_logo);
+    color: var(--beige);
+    transform: translate(0px,-8px);
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    transition: all 0.5s cubic-bezier(.25,.8,.25,1);
+    /* background-color: var(--beige_fonce_o); */
+    }
 
-  .card-2:hover {
-  background-color: var(--bleu_logo);
-  transform: translate(0px,-7px);
-  /* -webkit-transform: translate(-5px,-2px); */
-  color: var(--beige);
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-  transition: all 0.5s cubic-bezier(.25,.8,.25,1);
-  /* background-color: var(--beige_fonce_o); */
-  }
+    .card-2 {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 1s cubic-bezier(.25,.8,.25,1);
+    }
 
-  .ressens-btn{
-    border: 1px solid #fff;
-    background-color: var(--beige_fonce);
-  }
-  .chaque_s{
-    margin: 10px 0px;
-    padding: 20px 0;
-  }
+    .card-2:hover {
+    background-color: var(--bleu_logo);
+    transform: translate(0px,-7px);
+    /* -webkit-transform: translate(-5px,-2px); */
+    color: var(--beige);
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    transition: all 0.5s cubic-bezier(.25,.8,.25,1);
+    /* background-color: var(--beige_fonce_o); */
+    }
 
-  .chaque_q{
-    margin: 15px 10px;
-    padding: 20px 0;
-  }
-  .section_principale{
+    .ressens-btn{
+      border: 1px solid #fff;
+      background-color: var(--beige_fonce);
+    }
+    .chaque_s{
+      margin: 10px 0px;
+      padding: 20px 0;
+    }
 
-    margin-top: 20px;
-    padding:20px;
-    text-align: center;
-  }
-  .lien_connexion{
-    text-decoration: none;
-    padding: 20px 0;
-    color:var(--bleu_logo);
-    transition: all 1s;
-    font-weight: bold;
-    border: var(--bleu_logo) 5px solid;
-  }
-  .lien_connexion:hover{
-    transform: translate(0,-20px);
-    transition: all 1s;
-    background-color: var(--bleu_logo_o);
-    color: white;
-    /* text-decoration: underline white 5px; */
-  }
+    .chaque_q{
+      margin: 15px 10px;
+      padding: 20px 0;
+    }
+    .section_principale{
 
-  #colonne_droite{
-    margin: 10px 0;
-    border-left:1px black solid;
-    border-right:1px black solid;
+      margin-top: 20px;
+      padding:20px;
+      text-align: center;
+    }
+    .lien_connexion{
+      text-decoration: none;
+      padding: 20px 0;
+      color:var(--bleu_logo);
+      transition: all 1s;
+      font-weight: bold;
+      border: var(--bleu_logo) 5px solid;
+    }
+    .lien_connexion:hover{
+      transform: translate(0,-20px);
+      transition: all 1s;
+      background-color: var(--bleu_logo_o);
+      color: white;
+      /* text-decoration: underline white 5px; */
+    }
 
-  }
+    #colonne_droite{
+      margin: 10px 0;
+      border-left:1px black solid;
+      border-right:1px black solid;
 
-  #background_page_questionnaire{
-    /* margin: 0; */
-    font-family: "Times News Roman";
-    background-image: url("../images/background_questionnaire.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-    height: 100%;
-    max-height: 1660px;
-    padding-bottom: 124px;
-    padding-top: 40px;
-    overflow-y: scroll;
-  }
+    }
 
-  .titre_questionnaire{
-    font-weight: bold;
-  }
-  #titre_questionnaire_page{
-    margin-top: 150px;
-    text-align: center;
-  }
+    #background_page_questionnaire{
+      /* margin: 0; */
+      font-family: "Times News Roman";
+      background-image: url("../images/background_questionnaire.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
+      height: 100%;
+      max-height: 1660px;
+      padding-bottom: 124px;
+      padding-top: 40px;
+      overflow-y: scroll;
+    }
 
-  .suppr_symptome{
-    background-color: var(--rouge_clair);
-    color: white;
-    border: 1px solid #da251f;
-    /*transition: transform .2s;*/
-    transition: all 150ms linear;
-  }
+    .titre_questionnaire{
+      font-weight: bold;
+      text-align: center;
+    }
+    .sous_titre_questionnaire{
+      text-align: center;
+    }
+    #titre_questionnaire_page{
+      margin-top: 150px;
+      text-align: center;
+    }
 
-  .suppr_symptome:hover{
-    background-color: var(--rouge);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    /*transform: scale(1.03);*/
-    transition: all 150ms linear;
-  }
+    .suppr_symptome{
+      background-color: var(--rouge_clair);
+      color: white;
+      border: 1px solid #da251f;
+      /*transition: transform .2s;*/
+      transition: all 150ms linear;
+    }
 
-  .symptome_dans_rdv{
-    background-color:#11772D;
-    border-color: #30AD23;
-    color: white;
-    transition-duration: 0.5s;
-  }
+    .suppr_symptome:hover{
+      background-color: var(--rouge);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      /*transform: scale(1.03);*/
+      transition: all 150ms linear;
+    }
 
-  .symptome_dans_rdv:hover{
-    background-color:#30AD23;
+    .symptome_dans_rdv{
+      background-color:#11772D;
+      border-color: #30AD23;
+      color: white;
+      transition-duration: 0.5s;
+    }
 
-  }
+    .symptome_dans_rdv:hover{
+      background-color:#30AD23;
 
-
+    }
 
 </style>

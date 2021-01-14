@@ -19,7 +19,7 @@ const questionnaires_l = [
     id: 3,
     titre: 'Questionnaire nº 3',
     duree:'20',
-    questions:["Question 1", "Question 2", "Question 3", "Question 4", "Question 5", "Question 6"],
+    questions:[{ qu: "Question 1", id_q: 1}, {qu: "Question 2", id_q: 2}, {qu: "Question 3", id_q: 3}, {qu: "Question 4", id_q: 4}, {qu: "Question 5", id_q: 5}, {qu: "Question 6", id_q: 6}],
     photo: '',
     description:'Description du questionnaire 3'
   },
@@ -37,7 +37,7 @@ const questionnaires_l = [
     duree:'10',
     questions:["Question 1", "Question 2", "Question 3", "Question 4", "Question 5"],
     photo: '',
-    description:'Description du questionnaire 1'
+    description:'Description du questionnaire 5'
   },
   {
     id: 6,
@@ -45,7 +45,7 @@ const questionnaires_l = [
     duree:'15',
     questions:["Question 1", "Question 2", "Question 3", "Question 4", "Question 5"],
     photo: '',
-    description:'Description du questionnaire 2'
+    description:'Description du questionnaire 6'
   },
   {
     id: 7,
@@ -53,15 +53,15 @@ const questionnaires_l = [
     duree:'20',
     questions:["Question 1", "Question 2", "Question 3", "Question 4", "Question 5", "Question 6"],
     photo: '',
-    description:'Description du questionnaire 3'
+    description:'Description du questionnaire 7'
   },
   {
     id: 8,
     titre: 'Questionnaire nº 8',
     duree:'25',
-    questions:["Question 1", "Question 2", "Question 3", "Question 4"],
+    questions:["Question 1", "Question 2", "Question 3", "Question 4", "Question 5", "Question 6", "Question 7", "Question 8"],
     photo: '',
-    description:'Description du questionnaire 4'
+    description:'Description du questionnaire 8'
   },
   {
     id: 9,
@@ -69,7 +69,7 @@ const questionnaires_l = [
     duree:'10',
     questions:["Question 1", "Question 2", "Question 3", "Question 4", "Question 5"],
     photo: '',
-    description:'Description du questionnaire 1'
+    description:'Description du questionnaire 9'
   },
   {
     id: 10,
@@ -77,7 +77,7 @@ const questionnaires_l = [
     duree:'15',
     questions:["Question 1", "Question 2", "Question 3", "Question 4", "Question 5"],
     photo: '',
-    description:'Description du questionnaire 2'
+    description:'Description du questionnaire 10'
   },
   {
     id: 11,
@@ -85,15 +85,15 @@ const questionnaires_l = [
     duree:'20',
     questions:["Question 1", "Question 2", "Question 3", "Question 4", "Question 5", "Question 6"],
     photo: '',
-    description:'Description du questionnaire 3'
+    description:'Description du questionnaire 11'
   },
   {
     id: 12,
     titre: 'Questionnaire nº 12',
     duree:'25',
-    questions:["Question 1", "Question 2", "Question 3", "Question 4"],
+    questions:["Question 1", "Question 2", "Question 3", "Question 4", "Question 5", "Question 6", "Question 7", "Question 8", "Question 9" , "Question 10"],
     photo: '',
-    description:'Description du questionnaire 4'
+    description:'Description du questionnaire 12'
   }
 ]
 module.exports = questionnaires_l

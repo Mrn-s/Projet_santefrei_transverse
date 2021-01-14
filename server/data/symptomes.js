@@ -31,55 +31,55 @@ const symptomes = [
   },
   {
     id: 6,
-    name: '6',
+    name: 'Œdème',
     type:"type_2",
     description:'Infection de la gorge'
   },
   {
     id: 7,
-    name: '7',
+    name: 'Constipation',
     type:"type_2",
     description:'Contraction musculaire soudaine, involontaire et douloureuse duurant quelues secondes ou plusieurs minutes',
   },
   {
     id: 8,
-    name: '8',
+    name: 'Nausées',
     type:"type_2",
     description:'Infection des fosses nasales, de la bouche et de la gorge'
   },
   {
     id: 9,
-    name: '9',
+    name: 'Anorexie',
     type:"type_2",
     description:'Contraction musculaire soudaine, involontaire et douloureuse duurant quelues secondes ou plusieurs minutes',
   },
   {
     id: 10,
-    name: '10',
+    name: 'Sueurs nocturnes',
     type:"type_3",
     description:'Infection des fosses nasales, de la bouche et de la gorge'
   },
   {
     id: 11,
-    name: '11',
+    name: 'Amaigrissement',
     type:"type_3",
     description:'Contraction musculaire soudaine, involontaire et douloureuse duurant quelues secondes ou plusieurs minutes',
   },
   {
     id: 12,
-    name: '12',
+    name: 'toux sèche',
     type:"type_3",
     description:'Infection des fosses nasales, de la bouche et de la gorge'
   },
   {
     id: 13,
-    name: '13',
+    name: 'toux grasse',
     type:"type_3",
     description:'Contraction musculaire soudaine, involontaire et douloureuse duurant quelues secondes ou plusieurs minutes',
   },
   {
     id: 14,
-    name: '14',
+    name: 'maux de tête',
     type:"type_4",
     description:'Infection des fosses nasales, de la bouche et de la gorge'
   }

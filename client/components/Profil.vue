@@ -183,7 +183,7 @@
         </div>
         <div class="row">
          <div class="col-sm-7 c_rdv">
-             <div id="mes-rendez-vous"  class="container">
+             <div class="container mes-rendez-vous">
                  <div class="row">
                    <div class="col-sm-12">
                        <p class="taille_3" id="titre_section_mes_rdv">Mes rendez-vous</p>
@@ -241,8 +241,8 @@
                    <section class="col-sm-12">
                      <p> <b class="titres_lignes_chaque_rdv">Heure</b> : {{ r.heure }} </p>
                    </section>
-                   <section class="col-sm-12">
-                     <p> <b class="titres_lignes_chaque_rdv"> Nom du patient</b> : M/Mme. {{ r.patient_id }} </p>
+                   <section class="col-sm-12" v-for=" p in p_bdd" :key="p.id" v-if=" p.id == r.patient_id">
+                     <p> <b class="titres_lignes_chaque_rdv"> Nom du patient</b> : M/Mme. {{ p.nom }} {{p.prenom}} </p>
                    </section>
                    <section class="col-sm-12">
                      <p> <b class="titres_lignes_chaque_rdv"> Description</b> : {{ r.description }} </p>
@@ -268,8 +268,9 @@
 
              </div>
          </div>
+
          <div class="col-sm-5 c_rdv">
-           <div id="mes-rendez-vous" class="container">
+           <div class="container mes-rendez-vous">
                <div class="row">
                  <div class="col-sm-12">
                      <!-- <p v-if="user_patient.id" class="taille_3" id="titre_section_mes_rdv_demandes">Mes rendez-vous demandés</p> -->
@@ -326,8 +327,8 @@
                  <section class="col-sm-12">
                    <p> <b class="titres_lignes_chaque_rdv">Heure</b> : {{ r.heure }} </p>
                  </section>
-                 <section class="col-sm-12">
-                   <p> <b class="titres_lignes_chaque_rdv"> Nom du patient</b> : M/Mme. {{ r.patient_id }} </p>
+                 <section class="col-sm-12" v-for=" p in p_bdd" :key="p.id" v-if=" p.id == r.patient_id">
+                   <p> <b class="titres_lignes_chaque_rdv"> Nom du patient</b> : M/Mme. {{ p.nom }} {{p.prenom}} </p>
                  </section>
                  <section class="col-sm-12">
                    <p> <b class="titres_lignes_chaque_rdv"> description</b> : {{ r.description }} </p>
@@ -357,6 +358,64 @@
                  </section>
                </section>
            </div>
+
+           <div class="container mes-rendez-vous" v-if="user_patient.id " >
+                 <div class="row">
+                   <div class="col-sm-12">
+                       <!-- <p v-if="user_patient.id" class="taille_3" id="titre_section_mes_rdv_demandes">Mes rendez-vous demandés</p> -->
+                       <p class="taille_3" id="titre_section_mes_rdv_demandes">reception des rendez-vous</p>
+                   </div>
+                 </div>
+                 <div class="row">
+                   <div class="col-sm-12">
+                     <button type="button" name="button">trier par date</button>
+                   </div>
+                 </div>
+
+                 <section class="row chaque_rdv" v-for=" rdv_demande in rdv_to_p_bdd" v-if="(user_patient.id == parseInt(rdv_demande.patient_id,10)) && (rdv_demande.accepted == 'non') "  >
+                   <section class="col-sm-12 taille_1">
+                     <p> Rendez-vous numéro : {{ rdv_demande.id }} </p>
+                   </section>
+                   <section class="col-sm-12">
+                     <p> <b class="titres_lignes_chaque_rdv">Date</b> : {{ rdv_demande.date }} </p>
+                   </section>
+                   <section class="col-sm-12">
+                     <p> <b class="titres_lignes_chaque_rdv">Heure</b> : {{ rdv_demande.heure }} </p>
+                   </section>
+                   <section class="col-sm-12" v-for="m in m_bdd" v-if="m.id = rdv_demande.medecin_id">
+                     <p> <b class="titres_lignes_chaque_rdv"> Médecin</b> : Dr. {{ m.nom }} </p>
+                   </section>
+                   <section class="col-sm-12">
+                     <p> <b class="titres_lignes_chaque_rdv"> description</b> : {{ rdv_demande.description }} </p>
+                   </section>
+                   <section class="col-sm-6 btn_accepter_refuser">
+                     <button class="col-sm-12" type="button" @click="accepter_rdv_from_m(rdv_demande.id)" name="button">Accepter</button>
+                   </section>
+                   <section class="col-sm-6 btn_accepter_refuser">
+                     <button class="col-sm-12" type="button" @click="refuser_rdv_from_m(rdv_demande.id)" name="button">Refuser</button>
+                   </section>
+                 </section>
+
+                 <!-- <section class="row chaque_rdv" v-for=" rdv_demande in rdv_to_p_bdd" v-if="(user_medecin.id == parseInt(rdv_demande.medecin_id,10)) && (rdv_demande.accepted == 'non') "  >
+                   <section class="col-sm-12 taille_1">
+                     <p> Rendez-vous numéro : {{ rdv_demande.id }} </p>
+                   </section>
+                   <section class="col-sm-12">
+                     <p> <b class="titres_lignes_chaque_rdv">Date</b> : {{ rdv_demande.date }} </p>
+                   </section>
+                   <section class="col-sm-12">
+                     <p> <b class="titres_lignes_chaque_rdv">Heure</b> : {{ rdv_demande.heure }} </p>
+                   </section>
+                   <section class="col-sm-12" v-for=" p in p_bdd" :key="p.id" v-if=" p.id == rdv_demande.patient_id">
+                     <p> <b class="titres_lignes_chaque_rdv"> Nom du patient</b> : M/Mme. {{ p.nom }} {{p.prenom}} </p>
+                   </section>
+                   <section class="col-sm-12">
+                     <p> <b class="titres_lignes_chaque_rdv"> description</b> : {{ rdv_demande.description }} </p>
+                   </section>
+
+                 </section> -->
+           </div>
+
          </div>
         </div>
 
@@ -370,10 +429,13 @@
     components: {
     },
     props: {
+      rdv_to_p_bdd: { type: Array, default: [] },
       user_patient: {type: Object },
       user_medecin: {type: Object },
       rdv_bdd: { type: Array, default: [] },
-      rdv_symptome : { type: Array, default: [] }
+      rdv_symptome : { type: Array, default: [] },
+      p_bdd : { type: Array, default: [] },
+      m_bdd:{ type: Array, default: [] }
     },
     data () {
       return {
@@ -397,6 +459,19 @@
       }
     },
     methods: {
+      accepter_rdv_from_m(r_id){
+        let rdv_id = {
+          id: r_id
+        }
+        this.$emit('accepter_rdv_from_m', rdv_id)
+      },
+      refuser_rdv_from_m(r_id){
+
+        let rdv_id = {
+          id: r_id
+        }
+        this.$emit('refuser_rdv_from_m', rdv_id)
+      },
       accepter_rdv(r_id){
         let rdv_id = {
           id: r_id
@@ -504,7 +579,7 @@
     font-size: 3.9em;
   }
 
-  #mes-rendez-vous{
+  .mes-rendez-vous{
     border: 1px white solid;
     background-color: var(--beige_fonce);
     margin-top: 50px;

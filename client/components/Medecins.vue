@@ -20,26 +20,7 @@
           <p id="titre_spe" class="col-sm-12">{{ medSpe }}</p>
         </article>
         <article class="row">
-          <!-- <article class="col-sm-3 la " v-for="m in les_medecins" v-if="m.specialite == medSpe">
 
-              <div class="card-1 container infos_medecin">
-                <div class="row">
-                  <img class="img_all" v-bind:src="m.photo">
-                </div>
-                <div class="row nom_adresse_numero_region_medecin">
-                  <p class="nom_medecin col-sm-12 taille_3"> {{ m.nom }} </p>
-                  <p class="col-sm-12 taille_2"> {{ m.adresse }} </p>
-                  <p class="col-sm-12 taille_2"> {{ m.numero }} </p>
-                  <p class="col-sm-12 taille_2"> {{ m.region }} </p>
-                </div>
-              </div>
-
-              <div v-if="user_patient.id && !rdv_form" class="container">
-                <div class="row">
-                    <button class="col-sm-12 taille_1 btn-rdv" @click="changeRdv(m.nom), affichage_rdv()">Prendre rendez-vous</button>
-                </div>
-              </div>
-          </article> -->
           <article class="col-sm-3  chaque_medecin " v-for="m in m_bdd" :key="m.id" v-if="m.specialite == medSpe">
 
             <div class="card-1 container infos_medecin">
@@ -48,8 +29,9 @@
               </div>
               <div class="row nom_adresse_numero_region_medecin">
                 <p class="nom_medecin col-sm-12 taille_3"> {{ m.nom }} </p>
+
+                <p class="col-sm-12 taille_2"> {{ m.telephone }} </p>
                 <p class="col-sm-12 taille_2"> {{ m.adresse }} </p>
-                <p class="col-sm-12 taille_2"> {{ m.numero }} </p>
                 <p class="col-sm-12 taille_2"> {{ m.region }} </p>
               </div>
               <div v-if="user_patient.id && !rdv_form" class="row">
@@ -217,8 +199,6 @@
   border-left: 2px solid black;
   color: white;
   margin: 0 100px;
-  /* var(--cyan_o2); */
-  /* #DBEEE6 */
 }
 .menu_specialite{
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
@@ -262,7 +242,8 @@
 }
 
 .chaque_medecin{
-  margin: 13px 0;
+  margin: 13px 0 30px 0;
+
 }
 
 .card-1 {
@@ -288,9 +269,7 @@ box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   padding-bottom: 9%;
   overflow-y: scroll;
 }
-/* .ici{
-      overflow-y: scroll;
-} */
+
 .animate
 {
 	transition: all 0.1s;
@@ -313,10 +292,10 @@ box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 .blue
 {
 	background-color:var(--bleu_logo);
-  /* var(--cyan_o) */
+
   color:#fff !important;
 	border-bottom: 5px solid var(--vert_o);
-	/* text-shadow: 0px -2px #2980B9; */
+
 }
 
 .action-button:active

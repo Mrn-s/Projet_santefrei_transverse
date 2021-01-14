@@ -6,6 +6,11 @@
 
     <article class="row chaque-actu" v-for="ac in les_actus">
 
+      <div class="col-sm-4">
+        <div class="row">
+          <img class="img_all col-sm-12" v-bind:src="ac.photo">
+        </div>
+      </div>
       <div class="col-sm-8">
         <div class="row">
           <p class="col-sm-12 taille_3 titre"> {{ ac.titre }} </p>
@@ -24,12 +29,12 @@
         </div>
       </div>
 
-      <div class="col-sm-4">
-        <img class="img_all" v-bind:src="ac.photo">
-      </div>
+
 
     </article>
+
   </div>
+
 </div>
 
 </template>
