@@ -13,7 +13,7 @@
           <div class="col-sm-12">
             <div class="row">
               <div class="col-sm-12">
-                <p class="taille_3 " id="titre_section_mes_infos">Mes infos personnelles</p>
+                <p class="taille_4 " id="titre_section_mes_infos">Mes infos personnelles</p>
               </div>
             </div>
 
@@ -28,6 +28,9 @@
                       <div class="col-sm-6">
                         <input name="nom" :placeholder="user_patient.nom" type="text" v-model="editingProfile_patient.nom">
                       </div>
+                      <div class="col-sm-3">
+
+                      </div>
                     </div>
 
                     <div class="row">
@@ -36,6 +39,9 @@
                       </div>
                       <div class="col-sm-6">
                         <input name="prenom" :placeholder="user_patient.prenom" type="text" v-model="editingProfile_patient.prenom">
+                      </div>
+                      <div class="col-sm-3">
+
                       </div>
                     </div>
 
@@ -46,6 +52,9 @@
                       <div class="col-sm-6">
                         <input id="email" name="email" :placeholder="user_patient.email" type="text" v-model="editingProfile_patient.email">
                       </div>
+                      <div class="col-sm-3">
+
+                      </div>
                     </div>
 
                     <div class="row">
@@ -54,6 +63,9 @@
                       </div>
                       <div class="col-sm-6">
                         <input name="telephone" :placeholder="user_patient.telephone" type="text" v-model="editingProfile_patient.telephone">
+                      </div>
+                      <div class="col-sm-3">
+
                       </div>
                     </div>
                     <div class="row">
@@ -70,6 +82,9 @@
                       <div class="col-sm-6">
                         <input name="nom" :placeholder="user_medecin.nom" type="text" v-model="editingProfile_medecin.nom">
                       </div>
+                      <div class="col-sm-3">
+
+                      </div>
                     </div>
 
                     <div class="row">
@@ -79,6 +94,9 @@
                       <div class="col-sm-6">
                         <input name="prenom" :placeholder="user_medecin.prenom" type="text" v-model="editingProfile_medecin.prenom">
                       </div>
+                      <div class="col-sm-3">
+
+                      </div>
                     </div>
 
                     <div class="row">
@@ -86,7 +104,7 @@
                         <p class="taille_1">E-mail</p>
                       </div>
                       <div class="col-sm-6">
-                        <p class="taille_1" id="med_email">{{ user_medecin.email }}</p>
+                        <p class="taille_1 bold" id="med_email">{{ user_medecin.email }}</p>
                       </div>
                     </div>
 
@@ -97,6 +115,9 @@
                       <div class="col-sm-6">
                         <input name="telephone" :placeholder="user_medecin.telephone" type="text" v-model="editingProfile_medecin.telephone">
                       </div>
+                      <div class="col-sm-3">
+
+                      </div>
                     </div>
 
                     <div class="row">
@@ -106,6 +127,9 @@
                       <div class="col-sm-6">
                         <input name="region" :placeholder="user_medecin.region" type="text" v-model="editingProfile_medecin.region">
                       </div>
+                      <div class="col-sm-3">
+
+                      </div>
                     </div>
 
                     <div class="row">
@@ -114,6 +138,9 @@
                       </div>
                       <div class="col-sm-6">
                         <input name="adresse" :placeholder="user_medecin.adresse" type="text" v-model="editingProfile_medecin.adresse">
+                      </div>
+                      <div class="col-sm-3">
+
                       </div>
                     </div>
 
@@ -159,6 +186,9 @@
                           <option value="urologie">Urologie</option>
                         </select>
                       </div>
+                      <div class="col-sm-3">
+
+                      </div>
                     </div>
 
                     <div class="row">
@@ -183,7 +213,7 @@
                      <button type="button" name="button" class="btn_profil">Trier par date</button>
                    </div>
                  </div>
-                 <!-- section gauche pour les patient -->
+                
                  <section class="row chaque_rdv" v-for=" rdv_demande in user_patient.rdv_patient" v-if="user_patient.id && (rdv_demande.accepted =='oui')">
                    <section class="col-sm-12 taille_1">
                      <p> Rendez-vous numéro : {{ rdv_demande.id }} </p>
@@ -198,7 +228,7 @@
                      <p> <b class="titres_lignes_chaque_rdv">Médecin</b> : Dr. {{ rdv_demande.medecin_id }} </p>
                    </section>
                    <section class="col-sm-12">
-                     <p> <b class="titres_lignes_chaque_rdv">Description</b> : {{ rdv_demande.description }} </p>
+                     <p> <b class="titres_lignes_chaque_rdv">Description</b> : </p> <p> {{ rdv_demande.description }} </p>
                    </section>
                    <section class="col-sm-12 symp taille_1">
                      <p> Symptômes </p>
@@ -219,7 +249,7 @@
                    </div>
 
                  </section>
-                 <!-- section gauche pour les médecins -->
+
                  <section class="row chaque_rdv" v-for=" r in rdv_bdd" :key="r.id" v-if="(r.medecin_id == user_medecin.nom) && user_medecin.id  && (r.accepted =='oui') ">
                    <section class="col-sm-12 taille_1">
                      <p> Rendez-vous numéro : {{ r.id }} </p>
@@ -234,7 +264,7 @@
                      <p> <b class="titres_lignes_chaque_rdv"> Nom du patient</b> : M/Mme. {{ p.nom }} {{p.prenom}} </p>
                    </section>
                    <section class="col-sm-12">
-                     <p> <b class="titres_lignes_chaque_rdv"> Description</b> : {{ r.description }} </p>
+                     <p> <b class="titres_lignes_chaque_rdv"> Description</b> : </p> <p> {{ r.description }} </p>
                    </section>
                    <section class="col-sm-12 symp taille_1">
                      <p> <b>Symptômes</b> </p>
@@ -286,7 +316,7 @@
                    <p> <b class="titres_lignes_chaque_rdv">Médecin</b> : Dr. {{ rdv_demande.medecin_id }} </p>
                  </section>
                  <section class="col-sm-12">
-                   <p> <b class="titres_lignes_chaque_rdv">Description</b> : {{ rdv_demande.description }} </p>
+                   <p> <b class="titres_lignes_chaque_rdv">Description</b> : </p> <p>  {{ rdv_demande.description }} </p>
                  </section>
                  <section class="col-sm-12 symp taille_1">
                    <p>Symptômes</p>
@@ -320,7 +350,7 @@
                    <p> <b class="titres_lignes_chaque_rdv">Nom du patient</b> : M/Mme. {{ p.nom }} {{p.prenom}} </p>
                  </section>
                  <section class="col-sm-12">
-                   <p> <b class="titres_lignes_chaque_rdv">Description</b> : {{ r.description }} </p>
+                   <p> <b class="titres_lignes_chaque_rdv">Description </b> : </p> <p>  {{ r.description }} </p>
                  </section>
                  <section class="col-sm-12 symp taille_1">
                    <p>Symptômes</p>
@@ -340,10 +370,10 @@
                    </section>
                  </div>
                  <section class="col-sm-6 btn_accepter_refuser">
-                   <button class="col-sm-12" type="button" @click="accepter_rdv(r.id)" name="button">Accepter</button>
+                   <button class="col-sm-12" type="button" @click="accepter_rdv(r.id)" onclick="window.location.reload();" name="button">Accepter</button>
                  </section>
                  <section class="col-sm-6 btn_accepter_refuser">
-                   <button class="col-sm-12" type="button" @click="refuser_rdv(r.id)" name="button">Refuser</button>
+                   <button class="col-sm-12" type="button" @click="refuser_rdv(r.id)" onclick="window.location.reload();" name="button">Refuser</button>
                  </section>
                </section>
            </div>
@@ -375,34 +405,16 @@
                      <p> <b class="titres_lignes_chaque_rdv">Médecin</b> : Dr. {{ m.nom }} </p>
                    </section>
                    <section class="col-sm-12">
-                     <p> <b class="titres_lignes_chaque_rdv">Description</b> : {{ rdv_demande.description }} </p>
+                     <p> <b class="titres_lignes_chaque_rdv">Description</b> : </p> <p>  {{ rdv_demande.description }} </p>
                    </section>
                    <section class="col-sm-6 btn_accepter_refuser">
-                     <button class="col-sm-12" type="button" @click="accepter_rdv_from_m(rdv_demande.id)" name="button">Accepter</button>
+                     <button class="col-sm-12" type="button" onclick="window.location.reload();"  @click="accepter_rdv_from_m(rdv_demande.id)" name="button">Accepter</button>
                    </section>
                    <section class="col-sm-6 btn_accepter_refuser">
-                     <button class="col-sm-12" type="button" @click="refuser_rdv_from_m(rdv_demande.id)" name="button">Refuser</button>
+                     <button class="col-sm-12" type="button" onclick="window.location.reload();"  @click="refuser_rdv_from_m(rdv_demande.id)" name="button">Refuser</button>
                    </section>
                  </section>
 
-                 <!-- <section class="row chaque_rdv" v-for=" rdv_demande in rdv_to_p_bdd" v-if="(user_medecin.id == parseInt(rdv_demande.medecin_id,10)) && (rdv_demande.accepted == 'non') "  >
-                   <section class="col-sm-12 taille_1">
-                     <p> Rendez-vous numéro : {{ rdv_demande.id }} </p>
-                   </section>
-                   <section class="col-sm-12">
-                     <p> <b class="titres_lignes_chaque_rdv">Date</b> : {{ rdv_demande.date }} </p>
-                   </section>
-                   <section class="col-sm-12">
-                     <p> <b class="titres_lignes_chaque_rdv">Heure</b> : {{ rdv_demande.heure }} </p>
-                   </section>
-                   <section class="col-sm-12" v-for=" p in p_bdd" :key="p.id" v-if=" p.id == rdv_demande.patient_id">
-                     <p> <b class="titres_lignes_chaque_rdv"> Nom du patient</b> : M/Mme. {{ p.nom }} {{p.prenom}} </p>
-                   </section>
-                   <section class="col-sm-12">
-                     <p> <b class="titres_lignes_chaque_rdv"> description</b> : {{ rdv_demande.description }} </p>
-                   </section>
-
-                 </section> -->
            </div>
 
          </div>
@@ -553,6 +565,7 @@
 
   #titre_section_mes_infos, #titre_section_mes_rdv_demandes{
     text-align: center;
+    padding: 20px 0;
     color:var(--bleu_logo);
   }
   #titre_section_mes_rdv{

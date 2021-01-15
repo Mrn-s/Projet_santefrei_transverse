@@ -76,17 +76,6 @@
                       <option value="andrologie">Andrologie</option>
                       <option value="anesthésiologie">Anesthésiologie</option>
                       <option value="cardiologie">Cardiologie</option>
-                      <option value="chirurgie cardiaque">Chirurgie cardiaque</option>
-                      <option value="chirurgie plastique">Chirurgie plastique</option>
-                      <option value="chirurgie générale">Chirurgie générale</option>
-                      <option value="chirurgie gynécologique">Chirurgie gynécologique</option>
-                      <option value="chirurgie maxillo-faciale">Chirurgie maxillo-faciale</option>
-                      <option value="chirurgie oculaire">Chirurgie oculaire</option>
-                      <option value="chirurgie orale">Chirurgie orale</option>
-                      <option value="chirurgie pédiatrique">Chirurgie pédiatrique</option>
-                      <option value="chirurgie thoracique">Chirurgie thoracique</option>
-                      <option value="chirurgie vasculaire">Chirurgie vasculaire</option>
-                      <option value="chirurgie viscérale">Chirurgie viscérale</option>
                       <option value="neurochirurgie">Neurochirurgie</option>
                       <option value="dermatologie">Dermatologie</option>
                       <option value="endocrinologie">Endocrinologie</option>
@@ -99,7 +88,7 @@
                       <option value="infectiologie">Infectiologie</option>
                       <option value="médecine générale">Médecine générale</option>
                       <option value="médecine interne">Médecine interne</option>
-                      <option value="médecine physique et de réadaptation">Médecine physique et de réadaptation</option>
+                      <option value="médecine physique et de réadaptation">Médecine rééducative</option>
                       <option value="néonatologie">Néonatologie</option>
                       <option value="néphrologie">Néphrologie</option>
                       <option value="neurologie">Neurologie</option>

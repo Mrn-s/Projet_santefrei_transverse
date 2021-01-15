@@ -178,7 +178,6 @@ router.post('/accepter_le_rdv', async (req, res) => {
   res.send()
 })
 
-
 router.post('/refuser_le_rdv_from_m', async (req, res) => {
   // console.log("api 1")
   const r_id = req.body.id
@@ -260,7 +259,6 @@ router.get('/getLes_responses_bdd', async (req, res) => {
 
   res.status(200).json(content)
 })
-
 
 router.get('/GetPanierSymptomes', (req, res) => {
   res.json(req.session.panier_symptomes)

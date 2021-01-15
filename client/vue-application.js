@@ -76,7 +76,7 @@ var app = new Vue({
     demande_de_rdv_med:null,
     demande_de_rdv_med_to_p:null,
     // symptomeTypes: ['type_1','type_2','type_3','type_4','type_5','type_6'],
-    symptomeTypes: ['cardiologie','troubles digestifs','pneumologie','problèmes sanguins','troubles liés au nez et à la gorge','problèmes cérébraux', 'psychiatrie', 'oreilles', 'symptômes généraux', 'dermatologie', 'musculaire', 'trouble des hormones','bouche','vision'],
+    symptomeTypes: ['cardiologie','troubles digestifs','pneumologie','problèmes sanguins','troubles liés au nez et à la gorge','problèmes cérébraux', 'psychiatrie', 'oreilles', 'dermatologie', 'musculaire', 'trouble des hormones','bouche','vision' , 'symptômes généraux'],
     liste_medecins_bdd: null,
     liste_patients_bdd: null,
     rdv_symptome:null,
@@ -139,6 +139,7 @@ var app = new Vue({
     this.user_medecin.demande_de_rdv = res_medecin.data.demande_de_rdv
     this.user_medecin.demande_de_rdv_to_p = res_medecin.data.demande_de_rdv_to_p
   },
+
   methods: {
 
     async add_to_rdv_s (rdv_id){
@@ -235,28 +236,15 @@ var app = new Vue({
     },
 
     async add_reponse_of_q(id,r){
-      // alert("vue app " + r)
-      // alert (this.reponses_questions.includes([id,r]))
-      if (!(this.reponses_questions.includes([id,r]))){
+      // if(this.reponses_questions.indexOf([id,r]) == -1){
+      //   for (i in this.reponses_questions){
+      //     if(i[0] == id){
+      //       delete this.reponses_questions[id]
+      //     }
+      //   }
+     this.reponses_questions.push([id,r])
+   // }
 
-      var liste_id = []
-      for (i in this.reponses_questions){
-
-        liste_id.push(i[0])
-      }
-      // alert(liste_id)
-      if(liste_id.includes(id)){
-        for (couple in this.reponses_questions){
-          if (couple[0] == id){
-            couple[1] = r
-          }
-        }
-      }
-      else{
-            this.reponses_questions.push([id,r])
-      }
-
-    }
   },
 
     async reset_reponses(){
@@ -301,8 +289,8 @@ var app = new Vue({
         asAlertMsg({
           type: "success",
           title: "Validé",
-          message: "Votre rendez-vous a été prit en compte M./Mme. " + this.user_patient.nom,
-          timer: 2300
+          message: "Votre rendez-vous a été pris en compte M./Mme. " + this.user_patient.nom,
+          timer: 2500
         })
         router.push('/questionnaire')
     },
@@ -320,8 +308,8 @@ var app = new Vue({
         asAlertMsg({
           type: "success",
           title: "Validé",
-          message: "Votre rendez-vous a été prit en compte DR. " + this.user_medecin.nom,
-          timer: 2300
+          message: "Votre rendez-vous a été pris en compte DR. " + this.user_medecin.nom,
+          timer: 2500
         })
         // router.push('/questionnaire')
     },
@@ -382,12 +370,12 @@ var app = new Vue({
         // alert("alert 1")
         await axios.post('/api/register_medecin/','adresse=' + user_medecin.adresse + '&region=' + user_medecin.region + '&nom=' + user_medecin.nom + '&email=' + user_medecin.email + '&password=' + user_medecin.password +  '&prenom=' + user_medecin.prenom + '&specialite=' + user_medecin.specialite + '&telephone=' + user_medecin.telephone)
         // alert("alert 1")
-        asAlertMsg({
-          type: "success",
-          title: "Validé",
-          message: "Votre compte a bien été créé Dr. " + user_medecin.nom,
-          timer: 2100
-        })
+        // asAlertMsg({
+        //   type: "success",
+        //   title: "Validé",
+        //   message: "Votre compte a bien été créé Dr. " + user_medecin.nom,
+        //   timer: 2100
+        // })
         router.push('/login')
 
       } catch (e) {

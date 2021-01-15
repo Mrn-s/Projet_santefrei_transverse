@@ -28,7 +28,7 @@
                 <img class="img_all" src="https://img.icons8.com/material-sharp/96/000000/user-male-circle.png">
               </div>
               <div class="row nom_adresse_numero_region_medecin">
-                <p class="nom_medecin col-sm-12 taille_3"> {{ m.nom }} </p>
+                <p class="nom_medecin col-sm-12 taille_3">Dr.{{ m.nom }} </p>
 
                 <p class="col-sm-12 taille_2"> {{ m.telephone }} </p>
                 <p class="col-sm-12 taille_2"> {{ m.adresse }} </p>
@@ -105,10 +105,15 @@
 
             </div>
 
-            <div class="row ligne_rdv">
-              <button class="col-sm-6" type="submit" name="button">Envoyer la demande de rendez-vous avec Dr. {{rdv_actuel}}</button>
+            <div class="row ligne_rdv taille_1">
+              <div class="col-sm-6">
+                      <button class=" envoyer_dmd col-sm-12" type="submit" name="button">Envoyer la demande de rendez-vous au Dr. {{rdv_actuel}}</button>
+              </div>
+              <div class="col-sm-6">
+                    <button class="fermer_dmd col-sm-12" type="button" name="button" @click="affichage_rdv()">fermer</button>
+              </div>
 
-              <button class="btn_fermer col-sm-6" type="button" name="button" @click="affichage_rdv()">fermer</button>
+
             </div>
           </div>
         </form>
@@ -173,6 +178,22 @@
 </script>
 
 <style scoped>
+.envoyer_dmd, .fermer_dmd{
+  padding: 10px 0;
+}
+.fermer_dmd:hover{
+  color: white;
+  background-color: var(--rouge);
+}
+.envoyer_dmd:hover{
+  color: white;
+  background-color: var(--vert_o);
+}
+
+#heure_select, #select_date{
+  padding: 20px;
+}
+
 .input_description{
   height: 100px !important;
 }
@@ -194,10 +215,11 @@
 }
 
 .ici{
-  background-color: var(--bleu_logo_o);
-  border-right: 2px solid black;
-  border-left: 2px solid black;
-  color: white;
+  background-color: var(--beige_fonce);
+  /* border-right: 20px solid var(--bleu_logo); */
+  /* border-left: 20px solid white; */
+  border: 8px solid var(--bleu_logo_o);
+  color: var(--bleu_logo);
   margin: 0 100px;
 }
 .menu_specialite{
@@ -206,9 +228,9 @@
   overflow-y: scroll;
 }
 
-.btn_fermer{
+/* .btn_fermer{
   width: 40%;
-}
+} */
 .nom_adresse_numero_region_medecin{
   margin: 15px 0;
 }
@@ -229,7 +251,7 @@
 }
 .rdv{
   position: absolute;
-  top:30%;
+  top:20%;
   z-index: 5;
 }
 #lien_vers_connexion{
@@ -243,13 +265,14 @@
 }
 
 .chaque_medecin{
-  margin: 13px 0 30px 0;
+  margin: 13px 0 40px 0;
 
 }
 
 .card-1 {
 box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+
 }
 
 .card-1:hover {
@@ -313,6 +336,7 @@ box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 
 .btn-rdv {
   color: #000;
+
 }
 .btn-rdv:hover {
   color: #fff;

@@ -11,7 +11,6 @@
 
       </section>
 
-
       <section v-if ="user_patient.id || user_medecin.id" class="section_principale container">
 
         <section class="container laa" v-if="questionnaire_form">
@@ -25,9 +24,7 @@
               <div class=" col-sm-2 btn-132 custom-btn-1 ">
                 <button class=" onglet_symp_btn taille_1 " @click="changeTypeSymptome('cardiologie')"> <b> Cardiologie </b></button>
               </div>
-              <div class=" col-sm-2 btn-132 custom-btn-1 ">
-                <button class=" onglet_symp_btn taille_1  " @click="changeTypeSymptome('symptômes généraux')"> <b>Autre </b></button>
-              </div>
+
               <div class=" col-sm-2 btn-132 custom-btn-1 ">
                 <button class=" onglet_symp_btn taille_1 " @click="changeTypeSymptome('troubles digestifs')"><b>Troubles digestifs</b></button>
               </div>
@@ -58,6 +55,9 @@
               <div class=" col-sm-2 btn-132 custom-btn-1 ">
                 <button class=" onglet_symp_btn taille_1 " @click="changeTypeSymptome('vision')"><b>Vue</b></button>
               </div>
+              <div class=" col-sm-2 btn-132 custom-btn-1 ">
+                <button class=" onglet_symp_btn taille_1 " @click="changeTypeSymptome('symptômes généraux')"> <b>Autre </b></button>
+              </div>
             </section>
             <article class="row">
 
@@ -83,27 +83,27 @@
                 </div>
 
                 <div class="container">
-                  <p class="row ligne_colonne_droite taille_1"> Ajoutez jusqu'à 10 symptômes différents</p>
-                  <p class="row ligne_colonne_droite taille_2"> Nombre de symptômes : {{ panier_symptomes.nb_symptomes }}</p>
+
+                  <p class="row ligne_colonne_droite  nb_sym"> Nombre de symptômes  : <b class="nbs">{{ panier_symptomes.nb_symptomes }} </b> (10 max)</p>
                   <div class="row icii">
                     <article v-for="s in panier_symptomes.symptomes" :key="s.id" class="container chaque_symptome_panier">
-                      <div class="row infos_chaque_symptome_panier taille_1">
+                      <div class="row infos_chaque_symptome_panier taille_2">
                         <p class="col-sm-12">Catégorie : {{ s.type }}</p>
 
-                        <p class="col-sm-12 bold">{{ s.nom }}</p>
+                        <p class="col-sm-12 n_s">{{ s.nom }}</p>
 
-                        <!-- <p class="col-sm-12">id : {{ s.id }}</p> -->
+
                       </div>
 
                       <div class="row">
-                        <button class="col-sm-12 suppr_symptome" type="button" name="button" @click="removeFromPanier_symptomes(s.id, s.type, s.nom)"> Supprimer </button>
+                        <button class="col-sm-12 suppr_symptome taille_1" type="button" name="button" @click="removeFromPanier_symptomes(s.id, s.type, s.nom)"> Supprimer </button>
                       </div>
 
                     </article>
                   </div>
 
                   <div class="row ligne_colonne_droite" id ="rdv_choix_div">
-                    <select  v-model="editListe_symptomes.rdv" id="rdv_choix">
+                    <select  v-model="editListe_symptomes.rdv" class="taille_1" id="rdv_choix">
                       <option  value="" disabled selected>Choisissez un rendez-vous</option>
                       <option  v-for="r in rdv_bdd" v-if="r.patient_id == user_patient.id" v-bind:value="r.id">Rdv numéro {{ r.id }}</option>
                     </select>
@@ -115,7 +115,7 @@
                     </div>
 
                   </div>
-                  <div class="row ligne_colonne_droite taille_1">
+                  <div class="row ligne_colonne_droite taille_2">
                     <button class="col-sm-12 symptome_dans_rdv" @click="add_to_rdv(editListe_symptomes.rdv)" type="button" name="button"> <span>Ajouter ces symptomes à mon rendez-vous</span> </button>
 
                   </div>
@@ -127,6 +127,57 @@
               </article>
 
             </article>
+
+          </section>
+
+          <section v-if ="user_medecin.id" id="section_envois_q" class="container-fluid">
+            <article class="row" id="titre_section_symptome">
+              <p class="taille_4 col-sm-12"> Consultez les questionnaires de vos patients</p>
+            </article>
+            <div class="row">
+
+              <div class="col-sm-6 " v-for="re in all_repsonses" :key="re.id_du_patient">
+
+                  <div class="container res">
+
+                    <div class="row">
+                        <div class="col-sm-12 taille_3 entete" v-for="p in p_bdd" v-if="p.id == re.id_patient">
+                            <p>M. {{p.nom}}</p>
+                            <p>Questionnaire nº {{re.id_questionnaire}}</p>
+                            <p>Identifiant questionnaire : {{ re.id}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12 ques" v-for="questio in questionnaires" v-if="questio.id == re.id_questionnaire">
+                        <div class="col-sm-12 chaque_qq">
+                          <p class="taille_2 bold  col-sm-12"> question 1 : {{questio.questions[0].qu}} </p>
+                          <p class="taille_1  col-sm-12">votre réponse : 1 < <b class="ma_rep">{{re.reponses.split(',')[1]}}</b> < 4 </p>
+                        </div>
+                        <div class="col-sm-12 chaque_qq">
+                          <p class="taille_2  col-sm-12 bold"> question 2 : {{questio.questions[1].qu}} </p>
+                          <p class="taille_1 col-sm-12">votre réponse : 1 < <b class="ma_rep">{{re.reponses.split(',')[3]}}</b> < 4</p>
+                        </div>
+                        <div class="col-sm-12 chaque_qq">
+                          <p class="taille_2  col-sm-12 bold"> question 3 : {{questio.questions[2].qu}} </p>
+                          <p class="taille_1  col-sm-12">votre réponse : 1 < <b class="ma_rep">{{re.reponses.split(',')[5]}}</b> < 4</p>
+                        </div>
+                        <div class="col-sm-12 chaque_qq">
+                          <p class="taille_2  col-sm-12 bold">question 4 : {{questio.questions[3].qu}}</p>
+                          <p class="taille_1  col-sm-12">votre réponse : 1 < <b class="ma_rep">{{re.reponses.split(',')[7]}}</b> < 4</p>
+                        </div>
+                        <div class="col-sm-12 chaque_qq">
+                          <p class="taille_2  col-sm-12 bold">question 5 : {{questio.questions[4].qu}}</p>
+                          <p class="taille_1  col-sm-12">votre réponse : 1 < <b class="ma_rep">{{re.reponses.split(',')[9]}}</b> < 4</p>
+                        </div>
+                        <div class="col-sm-12 chaque_qq">
+                          <p class="taille_2  col-sm-12 bold">question 6 : {{questio.questions[5].qu}} </p>
+                          <p class="taille_1  col-sm-12">votre réponse : 1 < <b class="ma_rep">{{re.reponses.split(',')[11]}}</b> < 4</p>
+                        </div>
+                      </div>
+                    </div>
+                 </div>
+              </div>
+            </div>
 
           </section>
 
@@ -162,10 +213,9 @@
               <div class="row">
                 <p class="taille_4 titre_questionnaire col-sm-12">{{ q.titre }}</p>
               </div>
-              <div class="row">
-                <p class="taille_2 sous_titre_questionnaire col-sm-12"> Evaluez à quel point vous ressentez ce qui est décrit</p>
+              <div class="taille_2 sous_titre_questionnaire col-sm-12">
+                 Evaluez à quel point vous ressentez ce qui est décrit, en y repondant <b> dans l'ordre <b>
               </div>
-
 
               <article class="taille_1 row questions_article"  v-for="question in q.questions">
                 <p class="questions_question col-sm-12">  Question {{ question.id_q }}</p>
@@ -221,6 +271,7 @@
 <script>
   module.exports = {
     props: {
+      p_bdd : { type: Array, default: [] },
       les_medecins: { type: Array, default: [] },
       user_medecin: { type: Object },
       user_patient: { type: Object },
@@ -228,7 +279,8 @@
       l_symptomes : { type : Array, default: [] },
       panier_symptomes: { type: Object },
       rdv_bdd: { type: Array, default: [] },
-      r_q: {type: Array, default: []  }
+      r_q: {type: Array, default: []  },
+      all_repsonses: { type: Array, default: [] }
     },
     data () {
       return {
@@ -241,7 +293,7 @@
         },
         questionnaire_form: true,
         Questionnaire_actuel: "",
-        symptomeType: "trouble des hormones",
+        symptomeType: "symptômes généraux",
         reponse_questionnaire:{ type: Array, default: [] }
       }
     },
@@ -299,45 +351,90 @@
 </script>
 
 <style scoped>
-.laa{
-  padding: 0 !important;
+.ques{
+  max-height: 600px;
+  overflow-y: scroll;
 }
-.qq{
-  margin: 10px 0;
-  background-color: var(--beige_fonce_o);
-  color:var(--bleu_logo);
-
-}
-
-.onglet_symp_div:hover{
-  color:white !important;
-}
-.onglet_types_symptomes{
-  border-top: 4px var(--bleu_logo_o) solid;
-  border-bottom: 4px var(--bleu_logo_o) solid;
-
-}
-
-.onglet_symp:hover{
-
+.entete{
+  padding-top: 30px ;
   color:white;
-  height: 100%;
-  border: none;
+}
+.res{
+  border: 2px black solid;
+  background-color: var(--bleu_logo_o);
 
 }
-.onglet_symp_btn{
-  background-color: transparent;
-  border: none;
-  padding: 20px 0;
-  height: 100%;
-  width: 100%;
-
+.chaque_qq{
+  background-color: var(--beige_fonce);
+  margin: 40px 0;
+  padding: 10px;
+  color:black;
 }
-.onglet_symp_btn:hover{
 
-  color:white;
-
+.ma_rep{
+  background-color: var(--bleu_logo_o);
+  color: white;
+  font-size: 1.4em;
+  padding: 0 4px;
 }
+  .symptome{
+    /* height: 100 !important; */
+  }
+
+  .n_s{
+    border: transparent 3px solid;
+  }
+  .n_s:hover{
+   /* transform: translate(0px,-5px); */
+   border: white 3px solid;
+   cursor: default;
+   /* transition: all 0.8s; */
+  }
+  .nbs{
+    padding: 0 6px;
+  }
+  .nb_sym{
+    font-size: 1.3em;
+  }
+  .laa{
+    padding: 0 !important;
+  }
+  .qq{
+    margin: 10px 0;
+    background-color: var(--beige_fonce_o);
+    color:var(--bleu_logo);
+
+  }
+
+  .onglet_symp_div:hover{
+    color:white !important;
+  }
+  .onglet_types_symptomes{
+    border-top: 4px var(--bleu_logo_o) solid;
+    border-bottom: 4px var(--bleu_logo_o) solid;
+
+  }
+
+  .onglet_symp:hover{
+
+    color:white;
+    height: 100%;
+    border: none;
+
+  }
+  .onglet_symp_btn{
+    background-color: transparent;
+    border: none;
+    padding: 20px 0;
+    height: 100%;
+    width: 100%;
+
+  }
+  .onglet_symp_btn:hover{
+
+    color:white;
+
+  }
 
 
   #btn_retour{
@@ -479,6 +576,11 @@
     border: solid black 1px;
   }
 
+#section_envois_q{
+  /* background-color: var(--beige_fonce_o); */
+  /* border: 1px solid black; */
+  /* margin-top: 50px; */
+}
   #section_questionnaires{
     background-color: var(--beige_fonce_o);
     border: 1px solid black;
@@ -491,6 +593,7 @@
   }
   #titre_section_questionnaire{
     text-align: center;
+    font-family: "Times News Roman";
   }
 
   #typeSymptome{
@@ -498,6 +601,7 @@
   }
 
   #titre_section_symptome{
+    font-family: "Times News Roman";
     text-align: center;
     padding-top: 15px;
     margin-bottom: 40px;
@@ -577,7 +681,7 @@
       background-attachment: fixed;
       height: 100%;
       max-height: 1660px;
-      padding-bottom: 124px;
+      padding-bottom: 160px;
       padding-top: 40px;
       overflow-y: scroll;
     }

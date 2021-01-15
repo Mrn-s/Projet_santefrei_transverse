@@ -6,10 +6,9 @@
         <div class="col-sm-12 titre_page">
             <p>Retrouvez la liste de vos rendez-vous</p>
         </div>
-
       </div>
     </section>
-    <div class="row">
+    <div class="row colo">
       <section class="col-sm-4 " v-for=" r in rdv_bdd" :key="r.id" v-if="(r.medecin_id == user_medecin.nom) && (r.accepted =='oui') ">
         <div class="container chaque_rdv">
           <div class="row">
@@ -68,15 +67,18 @@
         </div>
       </section>
     </div>
-    <div class="container">
-      <div class="row taille_4">
+
+    <div class="container-fluid vos_dmd_rdv">
+
+    </div>
+    <div class="container ">
+      <div class="row taille_5">
         <div class="col-sm-12 titre_dmd_rdv">
-          <p > Vos demandes de rendez-vous</p>
+          <p> Vos rendez-vous demandés aux patients</p>
         </div>
       </div>
     </div>
-
-    <div class="row">
+    <div class="row colo">
 
       <div class="col-sm-6" v-for=" r in rdv_to_p_bdd" :key="r.id" v-if="(r.accepted =='non')">
 
@@ -173,10 +175,15 @@
 
             </div>
 
-            <div class="row ligne_rdv">
-              <button class="col-sm-6" type="submit" name="button">Envoyer la demande de rendez-vous avec M/Mme {{this.p}}</button>
+            <div class="row ligne_rdv taille_1">
+              <div class="col-sm-6">
+                <button class="col-sm-12 envoyer_dmd" type="submit" name="button">Envoyer la demande de rendez-vous avec M/Mme {{this.p}}</button>
+              </div>
+              <div class="col-sm-6">
+                <button class="fermer_dmd col-sm-12" type="button" name="button" @click="affichage_rdv()">fermer</button>
+              </div>
 
-              <button class="btn_fermer col-sm-6" type="button" name="button" @click="affichage_rdv()">fermer</button>
+
             </div>
           </div>
         </form>
@@ -237,6 +244,18 @@
 </script>
 
 <style scoped>
+#heure_select, #select_date{
+  padding: 20px;
+}
+.colo{
+  min-height: 200px;
+}
+
+.vos_dmd_rdv{
+  margin-top: 60px;
+  padding: 40px 0 0 0;
+  border-top: 15px var(--bleu_logo) solid;
+}
 
 .titre_dmd_rdv{
   text-align: center;
@@ -283,16 +302,29 @@ margin: 5px 0 40px 0;
   }
 
   .ici{
-    background-color: var(--bleu_logo_o);
-    border-right: 2px solid black;
-    border-left: 2px solid black;
-    color: white;
+    background-color: var(--beige_fonce);
+    /* border-right: 2px solid black;
+    border-left: 2px solid black; */
+    color: var(--bleu_logo);
+    border: 8px solid var(--bleu_logo_o);
     margin: 0 100px;
+  }
+
+  .envoyer_dmd, .fermer_dmd{
+    padding: 10px 0;
+  }
+  .fermer_dmd:hover{
+    color: white;
+    background-color: var(--rouge);
+  }
+  .envoyer_dmd:hover{
+    color: white;
+    background-color: var(--vert_o);
   }
 
   .rdv{
     position: absolute;
-    top:30%;
+    top:20%;
     z-index: 5;
   }
   .chaque_rdv{

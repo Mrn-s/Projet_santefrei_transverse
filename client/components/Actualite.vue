@@ -31,8 +31,11 @@
         <div class="row">
           <p class="col-sm-12 taille_1 bold"> {{ ac.redacteur }}</p>
         </div>
-        <div class="row">
-          <a class="col-sm-12 taille_1 source bold" :href="ac.sources"> Source </a>
+        <div class="row s_div">
+          <div class="col-sm-12">
+            <a class=" taille_1 source bold" :href="ac.sources"> Consulter la source </a>
+          </div>
+
         </div>
       </div>
 
@@ -73,7 +76,11 @@ margin-bottom: 30px;
 .source{
   text-decoration: underline;
   color:var(--bleu_logo);
-
+  padding: 10px;
+}
+.source:hover{
+  background-color: var(--bleu_logo_o);
+  color:white;
 }
 .photo_actu{
   /* width: 100%; */
@@ -105,7 +112,7 @@ margin-bottom: 30px;
   height: 100%;
   max-height: 1660px;
   padding-top: 40px;
-  padding-bottom: 124px;
+  padding-bottom: 150px;
   overflow-y: scroll;
 }
 
